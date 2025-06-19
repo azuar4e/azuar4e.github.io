@@ -3,8 +3,39 @@
 # See: https://gohugo.io/content-management/multilingual/#configure-languages
 # -------------------------------------------------------------------------------------
 
-weight = 1
-languageCode = "en"
 languageName = "English"
-hasCJKLanguage = false
-copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+languageCode = "en"
+contentDir = "content/en"
+weight = 1
+
+[[menu.main]]
+identifier = "archives"
+name = "Archives"
+url = "/archives/"
+weight = 1
+[menu.main.params]
+icon = "fa-solid fa-archive"
+
+[[menu.main]]
+identifier = "categories"
+name = "Categories"
+url = "/categories/"
+weight = 2
+[menu.main.params]
+icon = "fa-solid fa-folder-tree"
+
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 100
+[menu.main.params]
+icon = "fa-solid fa-quote-left"
+
+[[menu.main]]
+identifier = "tags"
+name = "Tags"
+url = "/tags/"
+weight = 3
+[menu.main.params]
+icon = "fa-solid fa-tags"
