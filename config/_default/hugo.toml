@@ -26,6 +26,24 @@ enableEmoji = true
 # the main sections of a site
 mainSections = []
 
+[languages]
+
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    contentDir = "content/en"
+    weight = 1
+    hasCJKLanguage = false
+    copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+
+  [languages.es]
+    languageName = "Español"
+    languageCode = "es"
+    contentDir = "content/es"
+    weight = 2
+    hasCJKLanguage = false
+    copyright = "Este trabajo está bajo una licencia Creative Commons Atribución-NoComercial 4.0 Internacional."
+
 # # -------------------------------------------------------------------------------------
 # # Hugo Configuration
 # # See: https://gohugo.io/getting-started/configuration/

@@ -1,5 +1,11 @@
-# About Me
-
+---
+title: About Me
+subtitle: azuar4e
+date: 2023-11-15T00:00:00+01:00
+comment: false
+twemoji: false
+lightgallery: false
+---
 
 {{< center-quote >}}
 Learning every day, sharing what I discover\
@@ -48,10 +54,3 @@ const philosophy = {
 For technical questions or collaborations:
 
 📮 Email: `angelazuara444@gmail.com` (please specify the reason)
-
-
----
-
-> Author: <no value>  
-> URL: http://localhost:1313/en/about/  
-
