@@ -1,0 +1,6 @@
+weight = 2
+    languageCode = "es"
+    languageName = "Español"
+    hasCJKLanguage = false
+    copyright = "Este trabajo está bajo una licencia Creative Commons Atribución-NoComercial 4.0 Internacional."
+    contentDir = "content/es"

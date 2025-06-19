@@ -1,0 +1,60 @@
+# -------------------------------------------------------------------------------------
+# Hugo Configuration
+# See: https://gohugo.io/getting-started/configuration/
+# -------------------------------------------------------------------------------------
+
+# website title
+title = "azuar4e"
+# Hostname (and path) to the root
+baseURL = "https://azuar4e.github.io/"
+# theme list
+theme = ["FixIt"]
+defaultContentLanguage = "en"
+# languageCode = "en"
+# languageName = "English"
+defaultContentLanguageInSubdir = true
+hasCJKLanguage = false
+[pagination]
+  pagerSize = 12
+copyright = ""
+# whether to use robots.txt
+enableRobotsTXT = true
+# whether to use git commit log
+enableGitInfo = true
+# whether to use emoji code
+enableEmoji = true
+# the main sections of a site
+mainSections = []
+
+# # -------------------------------------------------------------------------------------
+# # Hugo Configuration
+# # See: https://gohugo.io/getting-started/configuration/
+# # -------------------------------------------------------------------------------------
+
+# # website title
+# title = "azuar4e"
+# # Hostname (and path) to the root
+# baseURL = "https://azuar4e.github.io/"
+# # theme list
+# theme = ["FixIt"]
+# defaultContentLanguage = "en"
+# hasCJKLanguage = false
+# timeZone = "Europe/Madrid"
+# newContentEditor = "code"
+# enableEmoji = true
+# enableGitInfo = true
+# enableRobotsTXT = true
+
+# buildDrafts = false
+# summaryLength = 150
+# titleCaseStyle = "ap"
+# capitalizeListTitles = false
+
+# ignoreLogs = [
+#   "error-get-remote-image",
+#   "error-get-remote-json",
+#   "error-get-gh-repo",
+#   "error-remote-getjson",
+#   "error-missing-instagram-accesstoken",
+#   "warning-dev-version"
+# ]

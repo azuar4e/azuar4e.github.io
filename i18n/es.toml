@@ -1,0 +1,221 @@
+# Translations for Spanish
+# Traducciones para español
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === init ===
+[init]
+configurationError = "Error de configuración\nAún no ha configurado correctamente el parámetro de versión de FixIt. Consulte https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
+compatibilityError = "Error de compatibilidad ({{ .From }} -> {{ .To }}):\nTiene una actualización incompatible. Consulte https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "Está utilizando una versión de desarrollo de FixIt. Considere usar una versión estable.\nConsulte https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "El entorno actual es \"desarrollo\". El \"sistema de comentarios\", \"PWA\", \"CDN\", \"huella digital\" y \"análisis\" estarán deshabilitados."
+quicklyUpgrade = "Actualización rápida use el comando: "
+# === init ===
+
+# === baseof ===
+[baseof]
+backToTop = "Volver arriba"
+viewComments = "Ver comentarios"
+noscript = "Este sitio web funciona mejor con JavaScript habilitado."
+# === baseof ===
+
+# === Taxonomy ===
+[archives]
+other = "Total {{ .Count }} artículos"
+
+[allSome]
+other = "Todo {{ .Some }}"
+
+[category]
+other = "Categoría"
+
+[categories]
+other = "Categorías"
+
+[collection]
+other = "Colección"
+
+[collections]
+other = "Colecciones"
+
+[tag]
+other = "Etiqueta"
+
+[tags]
+other = "Etiquetas"
+
+[posts]
+other = "Artículos"
+# === Taxonomy ===
+
+# === Section ===
+[section]
+recentlyUpdated = "Actualizado recientemente"
+
+[section.totalWordCount]
+one = "Una palabra"
+other = "Total {{ .Count }} palabras"
+
+[section.archiveCounter]
+one = "Solo un artículo"
+other = "Total {{ .Count }} artículos"
+# === Section ===
+
+# === Pagination ===
+[pagination]
+more = "Más"
+# === Pagination ===
+
+# === partials/header.html ===
+[header]
+selectLanguage = "Selecciona el lenguage"
+noMoretTranslations = "No hay más traducciones"
+switchTheme = "Cambia el tema"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[footer]
+poweredBySome = "Provisto por {{ .Hugo }} | Tema - {{ .Theme }}"
+siteUV = "Total de visitantes"
+sitePV = "Total de visitas"
+siteRunning = "El sitio se está ejecutando ..."
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[comment]
+valineLang = "en" # Español no soportado por Valine
+valinePlaceholder = "Tu comentario ..."
+facebookLanguageCode = "es_MX"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[assets]
+search = "Buscar"
+searchPlaceholder = "Busca títulos o contenido..."
+searchIn = "Buscar en {{ . }}"
+gotoResultsPage = "Ir a la página de resultados de búsqueda ..."
+clear = "Limpiar"
+cancel = "Cancelar"
+noResultsFound = "No se encontraron resultados"
+copyToClipboard = "Copiar al portapapeles"
+editLockTitle = "Bloquear bloque de código editable"
+editUnLockTitle = "Desbloquear bloque de código editable"
+cookieconsentMessage = "Este sitio web utiliza Cookies para mejorar su experiencia."
+cookieconsentDismiss = "De acuerdo"
+cookieconsentLink = "Aprende más"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "Compartir en"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[single]
+contents = "Contenido"
+pin = "Fijar en la parte superior"
+repost = "Repostear"
+publishedOnDate = "publicado el {{ .Date }}"
+views = "vistas"
+comments = "Comentarios"
+author = "Autor"
+updatedOnDate = "Actualizado el {{ .Date }}"
+readMarkdown = "Leer Markdown"
+viewSource = "Ver fuente"
+editThisPage = "Editar esta página"
+reportIssue = "Reportar problema"
+openInEditor = "Abrir en el editor"
+back = "Regresar"
+home = "Inicio"
+readMore = "Leer más"
+expirationReminder = "Este artículo se actualizó por última vez el {{ .Date }}, es posible que el contenido no esté actualizado."
+encryptedAbstract = "Este artículo ha sido encriptado, por lo que su contenido bruto es invisible!"
+encryptedMessage = "Por favor, ingrese la contraseña"
+password = "Contraseña"
+enterBtn = "Entrar"
+encryptyAgain = "Encriptar de nuevo"
+relatedContent = "Contenido relacionado"
+
+[single.includedIn]
+categories = "incluido en {{ .Categories }}"
+collections = "incluido en {{ .Collections }}"
+both = "incluido en {{ .Categories }} y {{ .Collections }}"
+
+[single.wordCount]
+one = "Una palabra"
+other = "{{ .Count }} palabras"
+
+[single.fuzzyWordCount]
+other = "Aproximadamente {{ .Count }} palabras"
+
+[single.readingTime]
+one = "Un minuto"
+other = "{{ .Count }} minutos"
+
+[single.reward]
+donate = "Donar"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "Página no encontrada"
+
+[pageNotFoundText]
+other = "La página que estás buscando no existe. Lo siento."
+# === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "desconectado"
+
+[offlineText]
+other = "No está conectado a Internet, solo estarán disponibles las páginas almacenadas en caché."
+# === offline ===
+
+# === GitHub Alert ===
+[alert]
+note = "Nota"
+tip = "Consejo"
+important = "Importante"
+warning = "Advertencia"
+caution = "Precaución"
+# === GitHub Alert ===
+
+# === Task lists ===
+[taskList]
+" " = "No verificado"
+"x" = "Verificado"
+"/" = "En progreso"
+"-" = "Cancelado"
+"<" = "Programado"
+">" = "Reprogramado"
+"!" = "Importante"
+"?" = "Pregunta"
+# === Task lists ===
+
+# === shortcodes/admonition.html ===
+[admonition]
+note = "Nota"
+abstract = "Resumen"
+info = "Información"
+todo = "Por hacer"
+tip = "Consejo"
+success = "Éxito"
+question = "Pregunta"
+warning = "Advertencia"
+failure = "Fallo"
+danger = "Peligro"
+bug = "Error"
+example = "Ejemplo"
+quote = "Cita"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[version]
+new = "NUEVO"
+changed = "MODIFICADO"
+deleted = "ELIMINADO"
+# === shortcodes/version.html ===

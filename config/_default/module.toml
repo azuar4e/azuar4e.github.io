@@ -1,0 +1,8 @@
+# -------------------------------------------------------------------------------------
+# Modules Configure
+# See: https://gohugo.io/hugo-modules/configuration/#module-config-imports
+# -------------------------------------------------------------------------------------
+
+[hugoVersion]
+  extended = true
+  min = "0.146.0"
