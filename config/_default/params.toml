@@ -51,7 +51,7 @@
   [gitInfo]
     # e.g. "https://github.com/hugo-fixit/docs"
     repo = "https://github.com/azuar4e/azuara-blog"
-    branch = "docs"
+    branch = "main"
     # the content directory path relative to the root of the repository
     dir = "content"
     # the issue template for reporting issue of the posts
@@ -117,8 +117,6 @@
     desktopMode = "sticky"
     # FixIt 0.2.13 | CHANGED mobile header mode ["sticky", "normal", "auto"]
     mobileMode = "auto"
-    showRepoLink = true
-    repoLink = "https://github.com/azuar4e/azuara-blog"
 
     # Header title config
     [header.title]
@@ -527,8 +525,8 @@
 
   # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
   [githubCorner]
-    enable = false
-    permalink = "https://github.com/hugo-fixit/FixIt"
+    enable = true
+    permalink = "https://github.com/azuar4e/azuara-blog"
     title = "View source on GitHub"
     position = "right" # ["left", "right"]
 

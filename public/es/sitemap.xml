@@ -2,10 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/es/</loc>
+    <lastmod>2025-06-17T12:30:24+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://localhost:1313/en/"/>
     <xhtml:link rel="alternate" hreflang="es" href="http://localhost:1313/es/"/>
+  </url>
+  <url>
+    <loc>http://localhost:1313/es/posts/583bc6c/</loc>
+    <lastmod>2025-06-17T12:30:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:1313/en/posts/583bc6c/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="http://localhost:1313/es/posts/583bc6c/"/>
+  </url>
+  <url>
+    <loc>http://localhost:1313/es/posts/</loc>
+    <lastmod>2025-06-17T12:30:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:1313/en/posts/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="http://localhost:1313/es/posts/"/>
+  </url>
+  <url>
+    <loc>http://localhost:1313/es/about/</loc>
+    <lastmod>2023-11-15T00:00:00+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:1313/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="http://localhost:1313/es/about/"/>
   </url>
   <url>
     <loc>http://localhost:1313/es/categories/</loc>

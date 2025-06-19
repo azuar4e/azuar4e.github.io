@@ -13,18 +13,24 @@
     <lastmod>2025-06-17T12:30:24+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="http://localhost:1313/es/posts/583bc6c/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:1313/en/posts/583bc6c/"/>
   </url>
   <url>
     <loc>http://localhost:1313/en/posts/</loc>
     <lastmod>2025-06-17T12:30:24+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="http://localhost:1313/es/posts/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:1313/en/posts/"/>
   </url>
   <url>
     <loc>http://localhost:1313/en/about/</loc>
     <lastmod>2023-11-15T00:00:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="http://localhost:1313/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:1313/en/about/"/>
   </url>
   <url>
     <loc>http://localhost:1313/en/categories/</loc>
