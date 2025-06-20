@@ -68,8 +68,6 @@ python _gco.py ../tdl/src/test/resources/ficheroboreal.txt
 
 This will generate the processor outputs, ``cuartetos.txt`` (quadruples), and the final object code ``codobj.ens``. To execute the ``.ens`` file, you need to download the symbolic assembler, assemble the code, and run it using the ENS2001 virtual machine provided by the course.
 
-![image](https://github.com/user-attachments/assets/fd1847b4-8939-49d7-a02b-44e4a0d7d814)
-
 
 ## Tools
 

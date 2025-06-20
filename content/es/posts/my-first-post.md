@@ -71,8 +71,6 @@ python _gco.py ../tdl/src/test/resources/ficheroboreal.txt
 
 Esto nos generará todos los archivos del procesador, el fichero `cuartetos.txt` y el fichero `codobj.ens`. Para ejecutar el `.ens` debemos descargarnos el ensamblador, facilitado en la sección de herramientas, ensamblarlo y ejecutarlo.
 
-![image](https://github.com/user-attachments/assets/fd1847b4-8939-49d7-a02b-44e4a0d7d814)
-
 
 ---
 
