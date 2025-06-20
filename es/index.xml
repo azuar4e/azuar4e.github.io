@@ -29,7 +29,6 @@
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">python _gco.py ../tdl/src/test/resources/ficheroboreal.txt&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Esto nos generará todos los archivos del procesador, el fichero &lt;code>cuartetos.txt&lt;/code> y el fichero &lt;code>codobj.ens&lt;/code>. Para ejecutar el &lt;code>.ens&lt;/code> debemos descargarnos el ensamblador, facilitado en la sección de herramientas, ensamblarlo y ejecutarlo.&lt;/p>
-&lt;p>&lt;a class="lightgallery" href="https://github.com/user-attachments/assets/fd1847b4-8939-49d7-a02b-44e4a0d7d814" title="image" data-thumbnail="https://github.com/user-attachments/assets/fd1847b4-8939-49d7-a02b-44e4a0d7d814" data-sub-html="&lt;h2>image&lt;/h2>">&lt;img loading="lazy" src='https://github.com/user-attachments/assets/fd1847b4-8939-49d7-a02b-44e4a0d7d814' alt="image">&lt;/a>&lt;/p>
 &lt;hr>
 &lt;h3 class="heading-element" id="herramientas">&lt;span>0.1 Herramientas&lt;/span>
  &lt;a href="#herramientas" class="heading-mark">
