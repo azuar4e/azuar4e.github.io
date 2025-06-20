@@ -56,23 +56,23 @@ mvn install:install-file -Dfile=".\lib\ts-lib.jar" -DgroupId=tslib -DartifactId=
 
 To execute the processor:
 
-```bash
+```powershell
 java -jar ./target/tdl-1.0-SNAPSHOT-jar-with-dependencies.jar ./path/to/borealFile.txt
 ```
 
 To run the translator, navigate to the gco/ folder and run:
 
-``` bash
+```shell
 python _gco.py ../tdl/src/test/resources/ficheroboreal.txt
 ```
 
-This will generate the processor outputs, cuartetos.txt (quadruples), and the final object code codobj.ens. To execute the .ens file, you need to download the symbolic assembler, assemble the code, and run it using the ENS2001 virtual machine provided by the course.
+This will generate the processor outputs, ``cuartetos.txt`` (quadruples), and the final object code ``codobj.ens``. To execute the ``.ens`` file, you need to download the symbolic assembler, assemble the code, and run it using the ENS2001 virtual machine provided by the course.
+
+![image](https://github.com/user-attachments/assets/fd1847b4-8939-49d7-a02b-44e4a0d7d814)
+
 
 ## Tools
 
 Both the language processor and the symbolic assembler to compile the ENS2001 object code can be downloaded here:
 
 👉 https://dlsiis.fi.upm.es/traductores/Herramientas.html
-
-
----
