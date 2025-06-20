@@ -1,3 +1,4 @@
+
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration
 # See: https://fixit.lruihao.cn/documentation/basics/#theme-configuration
@@ -46,7 +47,7 @@
     email = "angelazuara444@gmail.com"
     link = "https://www.linkedin.com/in/angel-azuara/"
     avatar = "/images/avatar.jpg"
-
+  
   # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
   [gitInfo]
     # e.g. "https://github.com/hugo-fixit/docs"
