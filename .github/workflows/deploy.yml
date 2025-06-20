@@ -1,0 +1,89 @@
+name: Hugo build and deploy
+on:
+  schedule:
+    # Rebuid the site every day at 00:00 UTC to update the projects data
+    - cron: '0 0 * * *'
+  push:
+    branches: [ main ]
+    paths:
+      - 'assets/**'
+      - 'config/**'
+      - 'content/**'
+      - 'data/**'
+      - 'static/**'
+      - 'themes/**'
+      - 'go.mod'
+      - 'go.sum'
+  workflow_run:
+    workflows: ['Update theme components']
+    types:
+      - completed
+  workflow_dispatch:
+jobs:
+  Actions-Hugo-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          ssh-key: ${{ secrets.SYNC_CONTENT }}
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Install
+        run: npm install
+
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-hugo-resources
+        with:
+          path: resources
+          key: ${{ env.cache-name }}
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "^1.20.0"
+      - run: go version
+
+      - name: Cache Go Modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ vars.HUGO_VERSION || 'latest' }}
+          extended: true
+
+      - name: Build
+        env:
+          HUGO_PARAMS_GHTOKEN: ${{ secrets.HUGO_PARAMS_GHTOKEN }}
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.GP_DEPLOY_KEY }}
+          external_repository: Lruihao/lruihao.github.io
+          publish_branch: main
+          publish_dir: ./public
+          user_name: 'Cell[bot]'
+          user_email: 'lrhx@users.noreply.github.com'
+          commit_message: ':rocket: ${{ github.event.head_commit.message }}'
+          force_orphan: false  # once a year
+
+      - name: Update Algolia index
+        env:
+          ALGOLIA_APP_ID: MTJNHU0JVB
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+          ALGOLIA_INDEX_NAME: 'index'
+          ALGOLIA_INDEX_FILE: './public/search.json'
+        run: npm run algolia
+

@@ -1,0 +1,14 @@
+  # CDN config for third-party library files
+  [cdn]
+    # CDN data file name, disabled by default ["jsdelivr.yml", "unpkg.yml", ...]
+    # located in "themes/FixIt/assets/data/cdn/" directory
+    # you can store your own data files in the same path under your project: "assets/data/cdn/"
+    data = ""
+
+[analytics]
+    enable = false
+    [analytics.umami]
+      data_website_id = ""
+      src = ""
+      data_host_url = ""
+      data_domains = ""

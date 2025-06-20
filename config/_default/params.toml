@@ -50,7 +50,7 @@
   # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
   [gitInfo]
     # e.g. "https://github.com/hugo-fixit/docs"
-    repo = "https://github.com/azuar4e/azuara-blog"
+    repo = "https://github.com/azuar4e/azuar4e.github.io"
     branch = "main"
     # the content directory path relative to the root of the repository
     dir = "content"
@@ -161,7 +161,7 @@
     # whether to show the author
     author = true
     # Site creation year
-    since = ""
+    since = 2025
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
     gov = ""
     # ICP info only in China (HTML format is supported)
@@ -175,18 +175,19 @@
       themeLogo = true
     # FixIt 0.2.17 | CHANGED Site creation time
     [footer.siteTime]
-      enable = false
+      enable = true
       animate = true
       icon = "fa-solid fa-heartbeat"
       pre = ""
-      value = "" # e.g. "2021-12-18T16:15:22+08:00"
+      value = "2025-06-20T00:00:00+02:00" # e.g. "2021-12-18T16:15:22+08:00"
     # FixIt 0.2.17 | NEW footer lines order, optional values: ["first", 0, 1, 2, 3, 4, 5, "last"]
     [footer.order]
-      powered = 0
-      copyright = 0
-      statistics = 0
-      visitor = 0
-      beian = 0
+      powered = 1
+      copyright = 2
+      statistics = 3
+      visitor = 4
+      beian = 5
+
 
   # FixIt 0.3.0 | NEW Archives page config (all pages of posts type)
   [archives]
@@ -231,7 +232,7 @@
 
   # FixIt 0.2.17 | NEW TagCloud config for tags page
   [tagcloud]
-    enable = false
+    enable = true
     min = 14 # Minimum font size in px
     max = 32 # Maximum font size in px
     peakCount = 10 # Maximum count of posts per tag
@@ -247,7 +248,7 @@
 
       avatarURL = "/images/avatar.jpg"
 
-      avatarMenu = ""
+      avatarMenu = "about"
 
       title = "Angel Azuara Eizaguirre"
 
@@ -264,7 +265,7 @@
     [home.posts]
       enable = true
       # special amount of posts in each home posts page
-      paginate = 6
+      paginate = 10
 
   # FixIt 0.2.16 | CHANGED Social config about the author
   [social]
@@ -460,45 +461,6 @@
     # thumbnail URL
     thumbnailUrl = ""
 
-  # Analytics config
-  [analytics]
-    enable = false
-    # Google Analytics
-    [analytics.google]
-      id = ""
-      # whether to anonymize IP
-      anonymizeIP = true
-    # Fathom Analytics
-    [analytics.fathom]
-      id = ""
-      # server url for your tracker if you're self hosting
-      server = ""
-    # FixIt 0.3.16 | NEW Baidu Analytics
-    [analytics.baidu]
-      id = ""
-    # FixIt 0.3.16 | NEW Umami Analytics
-    [analytics.umami]
-      data_website_id = ""
-      src = ""
-      data_host_url = ""
-      data_domains = ""
-    # FixIt 0.3.16 | NEW Plausible Analytics
-    [analytics.plausible]
-      data_domain = ""
-      src = ""
-    # FixIt 0.3.16 | NEW Cloudflare Analytics
-    [analytics.cloudflare]
-      token = ""
-    # FixIt 0.3.16 | NEW Splitbee Analytics
-    [analytics.splitbee]
-      enable = false
-      # no cookie mode
-      no_cookie = true
-      # respect the do not track setting of the browser
-      do_not_track = true
-      # token(optional), more info on https://splitbee.io/docs/embed-the-script
-      data_token = ""
-
   # Cookie consent config
   [cookieconsent]
     enable = true
@@ -508,12 +470,6 @@
       dismiss = ""
       link = ""
 
-  # CDN config for third-party library files
-  [cdn]
-    # CDN data file name, disabled by default ["jsdelivr.yml", "unpkg.yml", ...]
-    # located in "themes/FixIt/assets/data/cdn/" directory
-    # you can store your own data files in the same path under your project: "assets/data/cdn/"
-    data = ""
 
   # Compatibility config
   [compatibility]
@@ -526,7 +482,7 @@
   # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
   [githubCorner]
     enable = true
-    permalink = "https://github.com/azuar4e/azuara-blog"
+    permalink = "https://github.com/azuar4e/azuar4e.github.io"
     title = "View source on GitHub"
     position = "right" # ["left", "right"]
 
@@ -542,18 +498,18 @@
   [backToTop]
     enable = true
     # Scroll percent label in b2t button
-    scrollpercent = false
+    scrollpercent = true
 
   # FixIt 0.2.16 | NEW Reading progress bar
   [readingProgress]
-    enable = false
+    enable = true
     # Available values: ["left", "right"]
     start = "left"
     # Available values: ["top", "bottom"]
     position = "top"
     reversed = false
-    light = ""
-    dark = ""
+    light = "#8581dd"
+    dark = "#fff"
     height = "2px"
   
   # FixIt 0.2.17 | NEW Progress bar in the top during page loading.
@@ -680,7 +636,7 @@
     # FixIt 0.2.18 | CHANGED whether to enable lightgallery
     # set to true, images in the content will be shown as the gallery if the image has a title, e.g. ![alt](src "title")
     # set to "force", images in the content will be forced to shown as the gallery regardless of the image has a title or not, e.g. ![alt](src)
-    lightgallery = false
+    lightgallery = "force"
     # whether to enable the ruby extended syntax
     ruby = true
     # whether to enable the fraction extended syntax
@@ -703,7 +659,7 @@
     pageStyle = "normal"
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support
     # If true, save the reading progress when closing the page.
-    autoBookmark = false
+    autoBookmark = true
     # FixIt 0.2.17 | NEW whether to enable wordCount
     wordCount = true
     # FixIt 0.2.17 | NEW whether to enable readingTime
@@ -713,9 +669,9 @@
     # FixIt 0.2.18 | NEW whether to enable instant.page
     instantPage = false
     # FixIt 0.3.0 | NEW whether to enable collection list at the sidebar
-    collectionList = false
+    collectionList = true
     # FixIt 0.3.0 | NEW whether to enable collection navigation at the end of the post
-    collectionNavigation = false
+    collectionNavigation = true
 
     # FixIt 0.2.15 | NEW Repost config
     [page.repost]
@@ -732,12 +688,12 @@
       # FixIt 0.2.13 | NEW position of TOC ["left", "right"]
       position = "right"
       # FixIt 0.3.12 | NEW supersede `markup.tableOfContents` settings
-      ordered = false
+      ordered = true
       startLevel = 2
       endLevel = 6
     # FixIt 0.2.13 | NEW Display a message at the beginning of an article to warn the reader that its content might be expired
     [page.expirationReminder]
-      enable = false
+      enable = true
       # Display the reminder if the last modified time is more than 90 days ago
       reminder = 90
       # Display warning if the last modified time is more than 180 days ago
@@ -746,12 +702,10 @@
       closeComment = false
     # FixIt 0.3.0 | NEW page heading config
     [page.heading]
-      # FixIt 0.3.3 | NEW whether to capitalize automatic text of headings
-      capitalize = false
       # FixIt 0.3.12 | CHANGED must set `page.toc.ordered` to true
       [page.heading.number]
         # whether to enable auto heading numbering
-        enable = false
+        enable = true
         # FixIt 0.3.3 | NEW only enable in main section pages (default is posts)
         onlyMainSection = true
         [page.heading.number.format]
@@ -763,7 +717,7 @@
           h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
     # FixIt 0.2.16 | CHANGED KaTeX mathematical formulas (https://katex.org)
     [page.math]
-      enable = true
+      enable = false
       # default inline delimiter is $ ... $ and \( ... \)
       inlineLeftDelimiter = ""
       inlineRightDelimiter = ""
@@ -781,9 +735,9 @@
       # whether to show the copy button of the code wrapper
       copy = true
       # FixIt 0.2.13 | NEW whether to show the edit button of the code wrapper
-      edit = true
+      edit = false
       # the maximum number of lines of displayed code by default
-      maxShownLines = 10
+      maxShownLines = 50
     # Mapbox GL JS config (https://docs.mapbox.com/mapbox-gl-js)
     [page.mapbox]
       # access token of Mapbox GL JS
@@ -802,7 +756,7 @@
       fullscreen = true
     # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
     [page.related]
-      enable = false
+      enable = true
       count = 5
       # FixIt 0.3.20 | NEW position of related content, optional values: ["aside", "footer"]
       position = ["aside", "footer"]
@@ -824,13 +778,13 @@
     [page.share]
       enable = true
       Twitter = true
-      Facebook = true
-      Linkedin = false
-      Whatsapp = false
+      Facebook = false
+      Linkedin = true
+      Whatsapp = true
       Pinterest = false
       Tumblr = false
       HackerNews = false
-      Reddit = false
+      Reddit = true
       VK = false
       Buffer = false
       Xing = false
@@ -838,7 +792,7 @@
       Instapaper = false
       Pocket = false
       Flipboard = false
-      Weibo = true
+      Weibo = false
       Myspace = false
       Blogger = false
       Baidu = false
@@ -847,148 +801,7 @@
       Skype = false
       Trello = false
       Mix = false
-    # FixIt 0.2.15 | CHANGED Comment config
-    [page.comment]
-      enable = false
-      # FixIt 0.2.13 | NEW Artalk comment config (https://artalk.js.org/)
-      [page.comment.artalk]
-        enable = false
-        server = "https://yourdomain"
-        site = "默认站点"
-        # FixIt 0.3.3 | NEW whether use backend configuration
-        useBackendConf = false
-        placeholder = ""
-        noComment = ""
-        sendBtn = ""
-        editorTravel = true
-        flatMode = "auto"
-        # FixIt 0.2.17 | CHANGED enable lightgallery support
-        lightgallery = false
-        locale = "" # FixIt 0.2.15 | NEW
-        # FixIt 0.2.18 | NEW
-        emoticons = ""
-        nestMax = 2
-        nestSort = "DATE_ASC" # ["DATE_ASC", "DATE_DESC", "VOTE_UP_DESC"]
-        vote = true
-        voteDown = false
-        uaBadge = true
-        listSort = true
-        imgUpload = true
-        preview = true
-        versionCheck = true
-      # Disqus comment config (https://disqus.com)
-      [page.comment.disqus]
-        enable = false
-        # Disqus shortname to use Disqus in posts
-        shortname = ""
-      # Gitalk comment config (https://github.com/gitalk/gitalk)
-      [page.comment.gitalk]
-        enable = false
-        owner = ""
-        repo = ""
-        clientId = ""
-        clientSecret = ""
-      # Valine comment config (https://github.com/xCss/Valine)
-      [page.comment.valine]
-        enable = false
-        appId = ""
-        appKey = ""
-        placeholder = ""
-        avatar = "mp"
-        meta = ['nick','mail','link']
-        requiredFields = []
-        pageSize = 10
-        lang = ""
-        visitor = true
-        recordIP = true
-        highlight = true
-        enableQQ = false
-        serverURLs = ""
-        # emoji data file name, default is "google.yml"
-        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
-        # located in "themes/FixIt/assets/lib/valine/emoji/" directory
-        # you can store your own data files in the same path under your project:
-        # "assets/lib/valine/emoji/"
-        emoji = ""
-        commentCount = true # FixIt 0.2.13 | NEW
-      # FixIt 0.2.16 | CHANGED Waline comment config (https://waline.js.org)
-      [page.comment.waline]
-        enable = false
-        serverURL = ""
-        pageview = false # FixIt 0.2.15 | NEW
-        emoji = ["//unpkg.com/@waline/emojis@1.1.0/weibo"]
-        meta = ["nick", "mail", "link"]
-        requiredMeta = []
-        login = "enable"
-        wordLimit = 0
-        pageSize = 10
-        imageUploader = false # FixIt 0.2.15 | NEW
-        highlighter = false # FixIt 0.2.15 | NEW
-        comment = false # FixIt 0.2.15 | NEW
-        texRenderer = false # FixIt 0.2.16 | NEW
-        search = false # FixIt 0.2.16 | NEW
-        recaptchaV3Key = "" # FixIt 0.2.16 | NEW
-        turnstileKey = "" # FixIt 0.3.8 | NEW
-        reaction = false # FixIt 0.2.18 | NEW
-      # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
-      [page.comment.facebook]
-        enable = false
-        width = "100%"
-        numPosts = 10
-        appId = ""
-        languageCode = ""
-      # Telegram comments config (https://comments.app)
-      [page.comment.telegram]
-        enable = false
-        siteID = ""
-        limit = 5
-        height = ""
-        color = ""
-        colorful = true
-        dislikes = false
-        outlined = false
-      # Commento comment config (https://commento.io)
-      [page.comment.commento]
-        enable = false
-      # Utterances comment config (https://utteranc.es)
-      [page.comment.utterances]
-        enable = false
-        # owner/repo
-        repo = ""
-        issueTerm = "pathname"
-        label = ""
-        lightTheme = "github-light"
-        darkTheme = "github-dark"
-      # FixIt 0.2.13 | NEW Twikoo comment config (https://twikoo.js.org/)
-      [page.comment.twikoo]
-        enable = false
-        envId = ""
-        region = ""
-        path = ""
-        visitor = true
-        commentCount = true
-        # FixIt 0.2.17 | CHANGED enable lightgallery support
-        lightgallery = false
-        # FixIt 0.2.17 | NEW enable Katex support
-        katex = false
-      # FixIt 0.2.14 | NEW Giscus comments config
-      [page.comment.giscus]
-        enable = false
-        repo = ""
-        repoId = ""
-        category = ""
-        categoryId = ""
-        mapping = ""
-        origin = "https://giscus.app" # FixIt NEW | 0.3.7 Or set it to your self-hosted domain
-        strict = "0" # FixIt NEW | 0.2.18
-        term = ""
-        reactionsEnabled = "1"
-        emitMetadata = "0"
-        inputPosition = "bottom" # ["top", "bottom"]
-        lang = ""
-        lightTheme = "light"
-        darkTheme = "dark"
-        lazyLoad = true
+
     # Third-party library config
     [page.library]
       [page.library.css]
@@ -1007,5 +820,5 @@
       images = []
       # Publisher info
       [page.seo.publisher]
-        name = ""
-        logoUrl = ""
+        name = "azuar4e"
+        logoUrl = "/images/avatar.jpg"
