@@ -11,7 +11,7 @@ lightgallery: false
 Aprendiendo cada día, compartiendo lo que descubro\
 Creando, experimentando y documentando el proceso
 
-_— Mi filosofía_
+_— Mi filosofía —_
 {{< /center-quote >}}
 
 ## Sobre mí
