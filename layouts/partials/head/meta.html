@@ -24,7 +24,7 @@
 
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
-<meta name="algolia-site-verification"  content="29F202E210DA1A76" />
+
 
 {{- with .Site.Params.app.themeColor -}}
   {{- $color := . -}}
@@ -53,3 +53,5 @@
     <meta name="fediverse:creator" content="{{ $email }}" />
   {{- end -}}
 {{- end -}}
+
+<meta name="algolia-site-verification"  content="29F202E210DA1A76" />
