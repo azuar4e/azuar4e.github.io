@@ -94,7 +94,7 @@
     # whether to use the absolute URL based on the baseURL in search index
     absoluteURL = false
     [search.algolia]
-      index = "myblog"
+      index = "miblog_algolia_articles"
       appID = "L5YIFQ7E5O"
       searchKey = "4730818b3e23ce341fdbb2edbce34eda"
 
