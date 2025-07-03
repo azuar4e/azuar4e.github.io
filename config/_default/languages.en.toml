@@ -39,3 +39,18 @@ url = "/tags/"
 weight = 3
 [menu.main.params]
 icon = "fa-solid fa-tags"
+
+[params.search]
+  enable = true
+  type = "algolia"
+  contentLength = 4000
+  placeholder = ""
+  maxResultLength = 10
+  snippetLength = 50
+  highlightTag = "em"
+  absoluteURL = false
+
+  [params.search.algolia]
+    index = "miblog_algolia_pages_en"
+    appID = "L5YIFQ7E5O"
+    searchKey = "4730818b3e23ce341fdbb2edbce34eda"
