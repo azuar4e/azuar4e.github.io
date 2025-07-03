@@ -46,6 +46,6 @@ icon = "fa-solid fa-tags"
   absoluteURL = false
 
   [params.search.algolia]
-    index = "miblog_algolia_pages_es"
+    index = "miblog_algolia_articles_es"
     appID = "L5YIFQ7E5O"
     searchKey = "4730818b3e23ce341fdbb2edbce34eda"
