@@ -43,7 +43,7 @@ icon = "fa-solid fa-tags"
   maxResultLength = 10
   snippetLength = 50
   highlightTag = "em"
-  absoluteURL = false
+  absoluteURL = true
 
   [params.search.algolia]
     index = "miblog_algolia_es"
