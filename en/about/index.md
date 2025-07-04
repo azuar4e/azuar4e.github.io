@@ -1,7 +1,12 @@
 # About Me
 
 
+{{< center-quote >}}
+Learning every day, sharing what I discover\
+Creating, experimenting, and documenting the process
 
+_— My philosophy_
+{{< /center-quote >}}
 
 ## About Me
 
@@ -27,7 +32,16 @@ This blog documents my learning journey, focused on:
 
 You can follow my updates via [GitHub](https://github.com/azuar4e) or [RSS](/index.xml).
 
-
+{{< style "min-height: 200px;" >}}
+{{< typeit code=javascript speed=20 >}}
+// My development approach
+const philosophy = {
+  learn: "Continuous learning",
+  build: "Practical projects",
+  share: "Open knowledge"
+};
+{{< /typeit >}}
+{{< /style >}}
 
 ## Contact
 
