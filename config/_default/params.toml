@@ -77,22 +77,22 @@
       dark = "#252627"
 
   # Search config
-  # [search]
-  #   enable = true
-  #   # type of search engine ["algolia", "fuse", "cse", "post-chat"]
-  #   type = "algolia"
-  #   # max index length of the chunked content
-  #   contentLength = 4000
-  #   # placeholder of the search bar
-  #   placeholder = ""
-  #   # max number of results length
-  #   maxResultLength = 10
-  #   # snippet length of the result
-  #   snippetLength = 50
-  #   # HTML tag name of the highlight part in results
-  #   highlightTag = "em"
-  #   # whether to use the absolute URL based on the baseURL in search index
-  #   absoluteURL = false
+  [search]
+    enable = true
+    # type of search engine ["algolia", "fuse", "cse", "post-chat"]
+    type = "algolia"
+    # max index length of the chunked content
+    contentLength = 4000
+    # placeholder of the search bar
+    placeholder = ""
+    # max number of results length
+    maxResultLength = 10
+    # snippet length of the result
+    snippetLength = 50
+    # HTML tag name of the highlight part in results
+    highlightTag = "em"
+    # whether to use the absolute URL based on the baseURL in search index
+    absoluteURL = false
   #   [search.algolia]
   #     index = "miblog_algolia_pages"
   #     appID = "L5YIFQ7E5O"
