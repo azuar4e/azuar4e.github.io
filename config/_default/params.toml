@@ -102,13 +102,13 @@
   # FixIt 0.3.16 | NEW Custom Search Engine (CSE)
   [cse]
     # Search Engine: ["google", "bing"]
-    engine = ""
+    engine = "google"
     # Search results page URL (layout: search)
     resultsPage = "/search/"
     # Google: https://programmablesearchengine.google.com/
     # Google Custom Search Engine Context
     [cse.google]
-      cx = ""
+      cx = "5302555ac1e96428f"
     # Bing (Unsupported): https://www.customsearch.ai/
     [cse.bing]
 
