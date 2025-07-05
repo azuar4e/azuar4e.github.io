@@ -6,4 +6,4 @@ Only one article
 
 Only one article
 
-- 06-17 [My First Post](https://azuar4e.github.io/en/posts/583bc6c/ "2025-06-17 12:30:24")
+- 06-17 [My First Post](https://azuar4e.github.io/en/posts/tdl/ "2025-06-17 12:30:24")

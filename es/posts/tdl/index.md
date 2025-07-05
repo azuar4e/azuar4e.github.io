@@ -44,5 +44,5 @@ Tanto el procesador de lenguajes como los ensambladores simbólicos para ensambl
 ---
 
 > Autor: [Angel Azuara Eizaguirre](https://www.linkedin.com/in/angel-azuara/)  
-> URL: https://azuar4e.github.io/es/posts/583bc6c/  
+> URL: https://azuar4e.github.io/es/posts/tdl/  
 

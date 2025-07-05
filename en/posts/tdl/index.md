@@ -39,5 +39,5 @@ Both the language processor and the symbolic assembler to compile the ENS2001 ob
 ---
 
 > Author: [Angel Azuara Eizaguirre](https://www.linkedin.com/in/angel-azuara/)  
-> URL: https://azuar4e.github.io/en/posts/583bc6c/  
+> URL: https://azuar4e.github.io/en/posts/tdl/  
 
