@@ -1,6 +1,7 @@
 ---
 title: Mi Primer Post
 subtitle:
+description: Un proyecto universitario de la asignatura Traductores de Lenguajes.
 date: 2025-06-17T12:30:24+02:00
 draft: false
 # author:
