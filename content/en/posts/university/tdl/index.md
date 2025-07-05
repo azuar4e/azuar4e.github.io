@@ -1,6 +1,7 @@
 ---
 title: My First Post
 subtitle:
+description: An university project for the course Language Translators.
 date: 2025-06-17T12:30:24+02:00
 draft: false
 # author:
