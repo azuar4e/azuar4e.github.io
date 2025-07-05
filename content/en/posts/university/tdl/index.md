@@ -2,7 +2,6 @@
 title: My First Post
 subtitle:
 date: 2025-06-17T12:30:24+02:00
-slug: 583bc6c
 draft: false
 # author:
 #   name:
