@@ -40,16 +40,6 @@ weight = 3
 [menu.main.params]
 icon = "fa-solid fa-tags"
 
-[params.search]
-  enable = true
-  type = "algolia"
-  contentLength = 4000
-  placeholder = ""
-  maxResultLength = 10
-  snippetLength = 50
-  highlightTag = "em"
-  absoluteURL = true
-
   [params.search.algolia]
     index = "miblog_algolia_en"
     appID = "L5YIFQ7E5O"
