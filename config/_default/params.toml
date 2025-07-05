@@ -610,14 +610,10 @@
   profile = [
     "custom/profile.html",
   ]
-  aside = [
-    "custom/aside.html",
-  ]
+  aside = []
   comment = []
   footer = []
-  widgets = [
-    "custom/wechat-box.html",
-  ]
+  widgets = []
   assets = [
     "custom/use-assets.html",
     "inject/shortcode-caniuse.html",
@@ -626,9 +622,7 @@
     "inject/cmpt-translate.html",
   ]
   postFooterBefore = []
-  postFooterAfter = [
-    "custom/post-footer-after.html"
-  ]
+  postFooterAfter = []
 
 
   # FixIt 0.2.15 | NEW Developer options
