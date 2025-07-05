@@ -140,13 +140,11 @@
 
   # FixIt 0.2.18 | NEW Breadcrumb config
   [breadcrumb]
-    enable = false
-    sticky = false
+    enable = true
+    sticky = true
     showHome = false
-    # FixIt 0.3.13 | NEW
     separator = "/"
-    capitalize = true
-
+  capitalize = true
   # FixIt 0.3.10 | NEW Post navigation config
   [navigation]
     # whether to show the post navigation in section pages scope
@@ -191,11 +189,11 @@
 
 
   # FixIt 0.3.0 | NEW Archives page config (all pages of posts type)
-  [archives]
-    # special amount of posts in archives page
-    paginate = 20
-    # date format (month and day)
-    dateFormat = "01-02"
+  # [archives]
+  #   # special amount of posts in archives page
+  #   paginate = 20
+  #   # date format (month and day)
+  #   dateFormat = "01-02"
 
   # Section page config (all pages in section)
   [section]
@@ -228,6 +226,7 @@
     archives = true
     section = true
     list = true
+    rss = false
     days = 30
     maxCount = 10
 
@@ -476,7 +475,7 @@
   [compatibility]
     # whether to use Polyfill.io on cdnjs to be compatible with older browsers
     # https://cdnjs.cloudflare.com/polyfill
-    polyfill = false
+    polyfill = true
     # whether to use object-fit-images to be compatible with older browsers
     objectFit = false
 
@@ -516,7 +515,7 @@
   # FixIt 0.2.17 | NEW Progress bar in the top during page loading.
   # For more information: https://github.com/CodeByZach/pace
   [pace]
-    enable = false
+    enable = true
     # All available colors:
     # ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
     color = "blue"
@@ -561,7 +560,7 @@
   # FixIt 0.3.17 | NEW Summary AI config
   # See https://ai.zhheo.com/docs/summary.html
   [postSummary]
-    enable = false
+    enable = true
     # If you set `postChat.key`, you don't need to set `postSummary.key`
     key = ""
     title = ""
@@ -569,7 +568,7 @@
     theme = ""
     postURL = ""
     blacklist = ""
-    wordLimit = 1000
+    wordLimit = 5000
     typingAnimate = true
     beginningText = ""
     loadingText = true
@@ -595,30 +594,88 @@
   # FixIt 0.3.12 | NEW Custom partials config
   # Custom partials must be stored in the /layouts/partials/ directory.
   # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
-  [customPartials]
-    head = []
-    menuDesktop = []
-    menuMobile = []
-    profile = []
-    aside = []
-    comment = []
-    footer = []
-    widgets = []
-    assets = []
-    postTocBefore = []
-    postTocAfter = []
-    postContentBefore = []
-    postContentAfter = []
-    postFooterBefore = []
-    postFooterAfter = []
+[customPartials]
+  head = [
+    "inject/component-projects.html",
+    "inject/fixit-docs-bookmark.html",
+    "inject/shortcode-rewards.html",
+    "custom/page-style.html",
+  ]
+  menuDesktop = [
+    "inject/translate-menu-desktop.html",
+  ]
+  menuMobile = [
+    "inject/translate-menu-mobile.html",
+  ]
+  profile = [
+    "custom/profile.html",
+  ]
+  aside = [
+    "custom/aside.html",
+  ]
+  comment = []
+  footer = []
+  widgets = [
+    "custom/wechat-box.html",
+  ]
+  assets = [
+    "custom/use-assets.html",
+    "inject/shortcode-caniuse.html",
+    "inject/cmpt-flyfish.html",
+    "inject/cmpt-mdevtools.html",
+    "inject/cmpt-translate.html",
+  ]
+  postFooterBefore = []
+  postFooterAfter = [
+    "custom/post-footer-after.html"
+  ]
+
 
   # FixIt 0.2.15 | NEW Developer options
   # Select the scope named `public_repo` to generate personal access token,
   # Configure with environment variable `HUGO_PARAMS_GHTOKEN=xxx`, see https://gohugo.io/functions/os/getenv/#examples
   [dev]
-    enable = false
+    enable = true
     # Check for updates
     c4u = false
+
+  [projectsAdapters]
+    enable = true
+    # Whether to show only public repos
+    onlyPublic = true
+    # Default categories and collections
+    categories = ["GitHub"]
+    collections = ["project"]
+    # Ignore repos in the ignore list
+    ignoreList = []
+    [projectsAdapters.params]
+      [projectsAdapters.params.postChat]
+          upLoadWeb = true
+        [projectsAdapters.params.postSummary]
+          enable = true
+
+# Auto translation configuration
+# See: https://github.com/xnx3/translate/
+  [autoTranslate]
+    enable = true
+    # Translation service provider
+    service = 'translate.service'
+    # Target languages for translation
+    languages = [
+      'english',
+      'spanish',
+    ]
+    # Elements to ignore in translation
+    ignoreID = []
+    ignoreClass = []
+    ignoreTag = []
+    ignoreSelector = []
+    ignoreText = [
+      'Cell+',
+    ]
+    detectLocalLanguage = true
+    cdn = ""
+    enterprise = true
 
   # Page config
   [page]
