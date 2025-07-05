@@ -35,7 +35,5 @@ weight = 3
 [menu.main.params]
 icon = "fa-solid fa-tags"
 
-  [params.search.algolia]
-    index = "miblog_algolia_es"
-    appID = "L5YIFQ7E5O"
-    searchKey = "4730818b3e23ce341fdbb2edbce34eda"
+[params.search.algolia]
+  index = "miblog_algolia_es"
