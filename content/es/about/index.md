@@ -2,58 +2,72 @@
 title: Sobre mí
 subtitle: azuar4e
 date: 2023-11-15T00:00:00+01:00
+tags:
+  - hola mundo
 comment: false
 twemoji: false
 lightgallery: false
 ---
 
 {{< center-quote >}}
-Aprendiendo cada día, compartiendo lo que descubro\
-Creando, experimentando y documentando el proceso
+Todas vuestras cosas sean hechas con amor.
 
-_— Mi filosofía —_
+_— 1 Corintios 16:14_
 {{< /center-quote >}}
 
 ## Sobre mí
 
-> Cuanto más aprendo, más me doy cuenta de lo mucho que me queda por descubrir.
+¡Hola a todos! 👋
 
-Apasionado por la tecnología, desarrollo de software y compartir conocimiento.
+Mi nombre es Ángel y soy un estudiante de Ingeniería Informática de cuarto año, centrado en el desarrollo y la gestión de entornos cloud.
+
 
 - 👨‍💻 Desarrollador de software
-- 📚 Especializado en Cloud Computing e Infraestructura
-- :(fa-brands fa-github): Mi GitHub: [azuar4e](https://github.com/azuar4e)
+- ☁️ Interesado en Cloud Computing e Infraestructura
+- :(fa-brands fa-github):  Mi GitHub: [azuar4e](https://github.com/azuar4e)
 
-## Mi actividad en GitHub
 
-![GitHub Activity Chart de azuar4e](https://ghchart.rshah.org/azuar4e)
+En mi tiempo libre, además de seguir aprendiendo, me gusta entrenar, leer y descubrir música.  
+Si te interesa, aquí tienes mi perfil de [Spotify](https://open.spotify.com/user/angelazuara444?si=ce1ed5f9f35942ae).
+
+Aquí dejo uno de mis álbumes favoritos:
+
+{{< spotify album 3b4E89rxzZQ9zkhgKpj8N4 >}}
 
 ## Sobre este blog
 
-Este blog documenta mi viaje de aprendizaje, con enfoque en:
-- Cloud Computing
-- Infraestructura como código
-- Automatización
-- Desarrollo backend
+La idea de este blog es documentar mi camino de aprendizaje en tecnología, explicando los conceptos de forma clara y accesible, tanto para quienes están empezando como para quienes ya tienen experiencia.
 
-Puedes seguir mis actualizaciones vía [GitHub](https://github.com/azuar4e) o [RSS](/index.xml).
+### Temas tratados
+
+- ☁️ Infraestructura en la nube (AWS, GCP, Azure)
+- 🐳 Contenedores y orquestación (Docker, Kubernetes)
+- 🧠 Arquitectura y buenas prácticas
+- 🛠️ Proyectos personales y universitarios
+
+Puedes seguir mis publicaciones aquí o en [GitHub](https://github.com/azuar4e).
+
 
 {{< style "min-height: 200px;" >}}
-{{< typeit code=javascript speed=20 >}}
-// Mi enfoque de desarrollo
-const philosophy = {
-  learn: "Continuous learning",
-  build: "Practical projects",
-  share: "Open knowledge"
-};
+{{< typeit code=go speed=20 >}}
+// Cosas que intento aplicar cada día
+const actitud := {
+  "aprender algo nuevo",
+  "disfrutar el proceso",
+  "agradecer cada día",
+  "sonreír a la vida"
+}
+
 {{< /typeit >}}
 {{< /style >}}
 
 ## Contacto
 
-Para consultas técnicas o colaboraciones:
+Para cualquier consulta, propuesta o asunto relacionado con el contenido del blog, siéntete libre de escribirme a:
 
-📮 Email: `angelazuara444@gmail.com` (por favor indica el motivo)
+📮 **Email**: `angelazuara444@gmail.com` _(por favor indica el motivo)_
+
+📱 **Twitter (X)**: [micuenta](link) _(por MD)_
 
 ---
 
