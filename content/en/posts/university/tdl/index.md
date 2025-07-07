@@ -1,43 +1,15 @@
 ---
-title: My First Post
+title: Language Translator
 subtitle:
 description: An university project for the course Language Translators.
 date: 2025-06-17T12:30:24+02:00
+tags:
+    - Java
+    - Python
 draft: false
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
-# description:
-# keywords:
-# license:
-# comment: false
-# weight: 0
-# tags:
-#   - draft
-# categories:
-#   - draft
-# hiddenFromHomePage: false
-# hiddenFromSearch: false
-# hiddenFromRelated: false
-# hiddenFromFeed: false
-# summary:
-# resources:
-#   - name: featured-image
-#     src: featured-image.jpg
-#   - name: featured-image-preview
-#     src: featured-image-preview.jpg
-# toc: true
-# math: false
-# lightgallery: false
-# password:
-# message:
-# repost:
-#   enable: true
-#   url:
-
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
+categories:
+    - University
+    - Personal Projects
 ---
 
 <!--more-->
