@@ -1,9 +1,120 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>azuar4e</title><link>https://azuar4e.github.io/es/</link><description>azuar4e</description><generator>Hugo 0.147.8 &amp; FixIt v0.3.21-b2e6f70a</generator><language>es</language><managingEditor>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</managingEditor><webMaster>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</webMaster><lastBuildDate>Tue, 17 Jun 2025 12:30:24 +0200</lastBuildDate><atom:link href="https://azuar4e.github.io/es/index.xml" rel="self" type="application/rss+xml"/><item><title>Mi Primer Post</title><link>https://azuar4e.github.io/es/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/tdl/</guid><description>&lt;h2 class="heading-element" id="tdl">&lt;span>TDL&lt;/span>
- &lt;a href="#tdl" class="heading-mark">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>azuar4e</title><link>https://azuar4e.github.io/es/</link><description>azuar4e</description><generator>Hugo 0.147.8 &amp; FixIt v0.3.21-b2e6f70a</generator><language>es</language><managingEditor>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</managingEditor><webMaster>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</webMaster><lastBuildDate>Tue, 17 Jun 2025 12:30:24 +0200</lastBuildDate><atom:link href="https://azuar4e.github.io/es/index.xml" rel="self" type="application/rss+xml"/><item><title>Traductor de Lenguajes</title><link>https://azuar4e.github.io/es/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/tdl/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>11 Introducción&lt;/span>
+ &lt;a href="#introducci%c3%b3n" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h2>&lt;p>Proyecto universitario de la asignatura &lt;a href="https://dlsiis.fi.upm.es/traductores/index.html"target="_blank" rel="external nofollow noopener noreferrer">Traductores de Lenguajes&lt;/a>. La parte del &lt;strong>Procesador de lenguajes&lt;/strong>, que es el encargado de verificar que el fichero fuente no tiene errores, está escrito en java, hecho por Xiaoyuan Xu, Yuliang Wang y Caijie Wu, a excepción todo lo involucrado en la &lt;strong>generación de código intermedio&lt;/strong>, y adaptado a &lt;strong>maven&lt;/strong> por nosotros.&lt;/p>
-&lt;p>Implementacion de un &lt;strong>traductor de lenguajes&lt;/strong> sobre un procesador de lenguajes facilitado por la asignatura. El traductor genera, en base a un archivo de codigo escrito en &lt;a href="https://dlsiis.fi.upm.es/traductores/IntroBoreal.html"target="_blank" rel="external nofollow noopener noreferrer">Lenguaje Boreal&lt;/a>, un archivo con el &lt;strong>codigo intermedio&lt;/strong> en el formato de un &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/formato_fichero_cuartetos.pdf"target="_blank" rel="external nofollow noopener noreferrer">fichero de cuartetos&lt;/a>. A parte de este, se &lt;strong>generan los archivos del procesador&lt;/strong> (tabla de simbolos, parse, errores y tokens). A continuación, el generador de código objeto, en base al fichero de cuartetos, genera un archivo &lt;code>.ens&lt;/code> en lenguaje &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/ENS2001.pdf"target="_blank" rel="external nofollow noopener noreferrer">ENS2001&lt;/a>.&lt;/p>
+&lt;/h2>&lt;p>Este es un proyecto universitario para la asignatura &lt;a href="https://dlsiis.fi.upm.es/traductores/index.html"target="_blank" rel="external nofollow noopener noreferrer">Traductores de Lenguajes&lt;/a>. El traductor genera, a partir de un archivo de código escrito en el &lt;a href="https://dlsiis.fi.upm.es/traductores/IntroBoreal.html"target="_blank" rel="external nofollow noopener noreferrer">Lenguaje Boreal&lt;/a>, un archivo &lt;code>.ens&lt;/code> con el &lt;strong>código objeto&lt;/strong> del programa, en lenguaje &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/ENS2001.pdf"target="_blank" rel="external nofollow noopener noreferrer">ENS2001&lt;/a>.&lt;/p>
+&lt;p>El proyecto se divide en &lt;strong>dos partes principales&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Procesador de Lenguajes&lt;/strong>, escrito en &lt;em>Java&lt;/em>, proporcionado por la asignatura y extendido por nosotros.&lt;/li>
+&lt;li>&lt;strong>Traductor de Lenguajes&lt;/strong>, desarrollado desde cero en &lt;em>Python&lt;/em>.&lt;/li>
+&lt;/ul>
+&lt;h2 class="heading-element" id="información-adicional">&lt;span>12 Información adicional&lt;/span>
+ &lt;a href="#informaci%c3%b3n-adicional" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>En esta sección se detallan los pasos necesarios para instalar dependencias, compilar el proyecto y ejecutar cada componente.&lt;/p>
+&lt;h2 class="heading-element" id="procesador-de-lenguajes">&lt;span>13 Procesador de Lenguajes&lt;/span>
+ &lt;a href="#procesador-de-lenguajes" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>El procesador de lenguajes es el responsable de validar que un fichero fuente no tenga errores de tipo &lt;strong>léxico&lt;/strong>, &lt;strong>sintáctico&lt;/strong> o &lt;strong>semántico&lt;/strong>.&lt;/p>
+&lt;p>Este módulo se divide en &lt;strong>tres etapas&lt;/strong>:&lt;/p>
+&lt;h3 class="heading-element" id="analizador-léxico">&lt;span>13.1 Analizador léxico&lt;/span>
+ &lt;a href="#analizador-l%c3%a9xico" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Para los &lt;strong>errores léxicos&lt;/strong>, utilizamos un &lt;strong>autómata&lt;/strong> que divide todo el contenido del programa en &lt;strong>tokens&lt;/strong>.&lt;br>
+Un token puede ser cualquier cosa: un &lt;code>for&lt;/code>, un &lt;code>;&lt;/code>, el nombre de una variable, etc.&lt;/p>
+&lt;p>Un error léxico ocurre cuando se recibe un símbolo inesperado.
+Por ejemplo, después de una asignación se espera una cadena, número, etc.; si en su lugar aparece un &lt;code>;&lt;/code>, se consideraría un error léxico.&lt;/p>
+&lt;h3 class="heading-element" id="analizador-sintáctico">&lt;span>13.2 Analizador sintáctico&lt;/span>
+ &lt;a href="#analizador-sint%c3%a1ctico" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Para los &lt;strong>errores sintácticos&lt;/strong>, se analizan las estructuras del lenguaje mediante reglas gramaticales. Estos errores aparecen cuando la secuencia de tokens no sigue la sintaxis esperada. Aquí entra los conceptos de &lt;strong>first&lt;/strong> y &lt;strong>follow&lt;/strong>. Para explicarlos, mostramos un fragmento de una grámatica:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Producciones&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Pprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">P&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">P&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">B&lt;/span> &lt;span class="n">P&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">P&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">F&lt;/span> &lt;span class="n">P&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">P&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">T&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="n">Bprima&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">S&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">)&lt;/span> &lt;span class="n">W&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="n">Sprima&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">output&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">input&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">Begin&lt;/span> &lt;span class="n">C&lt;/span> &lt;span class="n">End&lt;/span> &lt;span class="n">J&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">J&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="n">Begin&lt;/span> &lt;span class="n">C&lt;/span> &lt;span class="n">End&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">J&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Bprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">E&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Bprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="n">Sprima&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">output&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">input&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Sprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Sprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span> &lt;span class="n">L&lt;/span> &lt;span class="p">)&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Primero hay que entender que un &lt;strong>terminal&lt;/strong> es un símbolo que aparece tal cual en el lenguaje final, como &lt;code>;&lt;/code>, &lt;code>if&lt;/code>, &lt;code>var&lt;/code>, etc.&lt;br>
+Un &lt;strong>no terminal&lt;/strong>, en cambio, representa una regla o grupo de reglas, como &lt;code>T&lt;/code>, &lt;code>B&lt;/code>, &lt;code>P&lt;/code>, etc.&lt;/p>
+&lt;hr>
+&lt;p>El conjunto &lt;strong>first&lt;/strong> de una regla son todos los terminales por los que puede comenzar.&lt;br>
+Por ejemplo, en el caso de &lt;code>W&lt;/code> en la gramática anterior, su &lt;code>first(W)&lt;/code> sería: &lt;code>id&lt;/code>, &lt;code>output&lt;/code>, &lt;code>input&lt;/code>, &lt;code>return&lt;/code>, &lt;code>Begin&lt;/code>.&lt;/p>
+&lt;p>El conjunto &lt;strong>follow&lt;/strong> de un no terminal son los terminales que pueden aparecer &lt;strong>inmediatamente después&lt;/strong> de él en alguna derivación.&lt;br>
+Por ejemplo, si evaluamos &lt;code>X&lt;/code>, su &lt;code>follow(X)&lt;/code> podría ser &lt;code>;&lt;/code>, si siempre va seguido por ese símbolo.&lt;/p>
+&lt;p>Además, si una regla puede derivar en &lt;strong>lambda&lt;/strong> (vacío), entonces su &lt;code>follow&lt;/code> también incluye lo que podría venir después de esa posición en la producción.&lt;br>
+Por ejemplo, como &lt;code>P -&amp;gt; B P&lt;/code> y &lt;code>P -&amp;gt; lambda&lt;/code>, &lt;code>follow(B)&lt;/code> incluiría lo que sigue a &lt;code>P&lt;/code>, e incluso &lt;code>$&lt;/code> (fin de entrada).&lt;/p>
+&lt;hr>
+&lt;p>Volviendo a los errores sintácticos, se producen cuando el símbolo actual &lt;strong>no pertenece al conjunto first&lt;/strong> de la regla esperada.&lt;br>
+Si, por ejemplo, se espera una producción de &lt;code>W&lt;/code> y el siguiente token es &lt;code>if&lt;/code> (que no está en &lt;code>first(W)&lt;/code>), se trata de un &lt;strong>error sintáctico&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>(Ejemplo típico: un &lt;code>else&lt;/code> sin un &lt;code>if&lt;/code>, o una expresión mal cerrada).&lt;/em>&lt;/p>
+&lt;h3 class="heading-element" id="analizador-semántico">&lt;span>13.3 Analizador semántico&lt;/span>
+ &lt;a href="#analizador-sem%c3%a1ntico" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Para los &lt;strong>errores semánticos&lt;/strong>, utilizamos &lt;strong>acciones semánticas&lt;/strong>, en las que se definen cosas como la herencia de atributos, inserciones en la tabla de símbolos, y validaciones de tipos.&lt;/p>
+&lt;p>Por ejemplo, en una regla como &lt;code>W → output E ;&lt;/code>, podríamos tener una acción semántica del estilo &lt;code>{ W.tipo := E.tipo }&lt;/code>, que asigna a &lt;code>W&lt;/code> el tipo de &lt;code>E&lt;/code>.&lt;br>
+En el código, esto se reflejaría evaluando ese caso y actualizando la pila de atributos.&lt;/p>
+&lt;p>Un error semántico típico sería que el tipo heredado no coincida con el esperado.&lt;/p>
+&lt;h2 class="heading-element" id="traductor-de-lenguajes">&lt;span>14 Traductor de lenguajes&lt;/span>
+ &lt;a href="#traductor-de-lenguajes" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>El traductor genera, en base a un archivo de codigo escrito en &lt;a href="https://dlsiis.fi.upm.es/traductores/IntroBoreal.html"target="_blank" rel="external nofollow noopener noreferrer">Lenguaje Boreal&lt;/a>, un archivo con el &lt;strong>codigo intermedio&lt;/strong> en el formato de un &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/formato_fichero_cuartetos.pdf"target="_blank" rel="external nofollow noopener noreferrer">fichero de cuartetos&lt;/a>. A parte de este, se &lt;strong>generan los archivos del procesador&lt;/strong> (tabla de simbolos, parse, errores y tokens). A continuación, el generador de código objeto, en base al fichero de cuartetos, genera un archivo &lt;code>.ens&lt;/code> en lenguaje &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/ENS2001.pdf"target="_blank" rel="external nofollow noopener noreferrer">ENS2001&lt;/a>.&lt;/p>
 &lt;p>Para descargar la libreria del procesador es necesario ejecutar el siguiente comando para que se instale en el repositoro local de maven:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -30,9 +141,10 @@
 &lt;/div>
 &lt;/div>&lt;p>Esto nos generará todos los archivos del procesador, el fichero &lt;code>cuartetos.txt&lt;/code> y el fichero &lt;code>codobj.ens&lt;/code>. Para ejecutar el &lt;code>.ens&lt;/code> debemos descargarnos el ensamblador, facilitado en la sección de herramientas, ensamblarlo y ejecutarlo.&lt;/p>
 &lt;hr>
-&lt;h3 class="heading-element" id="herramientas">&lt;span>0.1 Herramientas&lt;/span>
+&lt;h2 class="heading-element" id="herramientas">&lt;span>15 Herramientas&lt;/span>
  &lt;a href="#herramientas" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h3>&lt;p>Tanto el procesador de lenguajes como los ensambladores simbólicos para ensamblar el código objeto (ENS2001) se encuentran en el siguiente enlace:&lt;/p>
-&lt;p>👉 &lt;a href="https://dlsiis.fi.upm.es/traductores/Herramientas.html"target="_blank" rel="external nofollow noopener noreferrer">https://dlsiis.fi.upm.es/traductores/Herramientas.html&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;/h2>&lt;p>Tanto el procesador de lenguajes como los ensambladores simbólicos para ensamblar el código objeto (ENS2001) se encuentran en el siguiente enlace:&lt;/p>
+&lt;blockquote>
+&lt;p>👉 &lt;a href="https://dlsiis.fi.upm.es/traductores/Herramientas.html"target="_blank" rel="external nofollow noopener noreferrer">https://dlsiis.fi.upm.es/traductores/Herramientas.html&lt;/a>&lt;/p>&lt;/blockquote></description></item><item><title/><link>https://azuar4e.github.io/es/posts/sos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/sos/</guid><description/></item></channel></rss>

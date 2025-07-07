@@ -2,53 +2,59 @@
 
 
 {{< center-quote >}}
-Learning every day, sharing what I discover\
-Creating, experimenting, and documenting the process
+Let all you do be done in love
 
-_— My philosophy_
+_— 1 Corinthians 16:14_
 {{< /center-quote >}}
 
 ## About Me
 
-> The more I learn, the more I realize how much there is left to discover.
+Hey everyone! 👋
 
-Passionate about technology, software development, and sharing knowledge.
+My name is Ángel, and I'm a fourth-year Computer Science student focused on software development and cloud infrastructure management.
 
-- 👨‍💻 Software Developer  
-- 📚 Specialized in Cloud Computing and Infrastructure  
+- 👨‍💻 Software developer  
+- ☁️ Passionate about Cloud Computing and Infrastructure
 - :(fa-brands fa-github): My GitHub: [azuar4e](https://github.com/azuar4e)
 
-## My GitHub Activity
+In my free time, aside from learning new things, I enjoy working out, reading, and discovering music.  
+If you're curious, here's my [Spotify](https://open.spotify.com/user/angelazuara444?si=ce1ed5f9f35942ae) profile.
 
-![GitHub Activity Chart of azuar4e](https://ghchart.rshah.org/azuar4e)
+One of my favorite albums:
+
+{{< spotify album 3b4E89rxzZQ9zkhgKpj8N4 >}}
 
 ## About This Blog
 
-This blog documents my learning journey, focused on:
-- Cloud Computing
-- Infrastructure as Code
-- Automation
-- Backend Development
+The purpose of this blog is to document my learning journey in tech by explaining concepts clearly and accessibly—for both beginners and experienced readers.
 
-You can follow my updates via [GitHub](https://github.com/azuar4e) or [RSS](/index.xml).
+### Topics Covered
+
+- ☁️ Cloud infrastructure (AWS, GCP, Azure)  
+- 🐳 Containers and orchestration (Docker, Kubernetes)  
+- 🧠 Architecture and best practices  
+- 🛠️ Personal and university projects
+
+You can follow my posts here or on [GitHub](https://github.com/azuar4e).
 
 {{< style "min-height: 200px;" >}}
-{{< typeit code=javascript speed=20 >}}
-// My development approach
-const philosophy = {
-  learn: "Continuous learning",
-  build: "Practical projects",
-  share: "Open knowledge"
-};
+{{< typeit code=go speed=20 >}}
+// Things I try to live by
+const attitude := {
+  "learn something new",
+  "enjoy the process",
+  "be thankful every day",
+  "smile at life"
+}
 {{< /typeit >}}
 {{< /style >}}
 
 ## Contact
 
-For technical questions or collaborations:
+For any inquiries, ideas, or anything related to the blog, feel free to reach out:
 
-📮 Email: `angelazuara444@gmail.com` (please specify the reason)
-
+📮 **Email**: `angelazuara444@gmail.com` _(please include a subject)_  
+📱 **Twitter (X)**: [@micuenta](link) _(DMs open)_
 
 ---
 
