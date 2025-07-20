@@ -1,37 +1,149 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>azuar4e</title><link>https://azuar4e.github.io/es/</link><description>azuar4e</description><generator>Hugo 0.147.8 &amp; FixIt v0.3.21-b2e6f70a</generator><language>es</language><managingEditor>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</managingEditor><webMaster>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</webMaster><lastBuildDate>Tue, 17 Jun 2025 12:30:24 +0200</lastBuildDate><atom:link href="https://azuar4e.github.io/es/index.xml" rel="self" type="application/rss+xml"/><item><title>Traductor de Lenguajes</title><link>https://azuar4e.github.io/es/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/tdl/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>11 Introducción&lt;/span>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>azuar4e</title><link>https://azuar4e.github.io/es/</link><description>azuar4e</description><generator>Hugo 0.147.8 &amp; FixIt v0.3.21-b2e6f70a</generator><language>es</language><managingEditor>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</managingEditor><webMaster>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</webMaster><lastBuildDate>Tue, 17 Jun 2025 12:30:24 +0200</lastBuildDate><atom:link href="https://azuar4e.github.io/es/index.xml" rel="self" type="application/rss+xml"/><item><title>Servicio RESTful</title><link>https://azuar4e.github.io/es/posts/sos/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/sos/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>1 Introducción&lt;/span>
  &lt;a href="#introducci%c3%b3n" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h2>&lt;p>Este es un proyecto universitario para la asignatura &lt;a href="https://dlsiis.fi.upm.es/traductores/index.html"target="_blank" rel="external nofollow noopener noreferrer">Traductores de Lenguajes&lt;/a>. El traductor genera, a partir de un archivo de código escrito en el &lt;a href="https://dlsiis.fi.upm.es/traductores/IntroBoreal.html"target="_blank" rel="external nofollow noopener noreferrer">Lenguaje Boreal&lt;/a>, un archivo &lt;code>.ens&lt;/code> con el &lt;strong>código objeto&lt;/strong> del programa, en lenguaje &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/ENS2001.pdf"target="_blank" rel="external nofollow noopener noreferrer">ENS2001&lt;/a>.&lt;/p>
-&lt;p>El proyecto se divide en &lt;strong>dos partes principales&lt;/strong>:&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>Procesador de Lenguajes&lt;/strong>, escrito en &lt;em>Java&lt;/em>, proporcionado por la asignatura y extendido por nosotros.&lt;/li>
-&lt;li>&lt;strong>Traductor de Lenguajes&lt;/strong>, desarrollado desde cero en &lt;em>Python&lt;/em>.&lt;/li>
-&lt;/ul>
-&lt;h2 class="heading-element" id="información-adicional">&lt;span>12 Información adicional&lt;/span>
- &lt;a href="#informaci%c3%b3n-adicional" class="heading-mark">
+&lt;/h2></description></item><item><title>Traductor de Lenguajes</title><link>https://azuar4e.github.io/es/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/tdl/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>1 Introducción&lt;/span>
+ &lt;a href="#introducci%c3%b3n" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h2>&lt;p>En esta sección se detallan los pasos necesarios para instalar dependencias, compilar el proyecto y ejecutar cada componente.&lt;/p>
-&lt;h2 class="heading-element" id="procesador-de-lenguajes">&lt;span>13 Procesador de Lenguajes&lt;/span>
+&lt;/h2>&lt;p>En este artículo explico el funcionamiento de un compilador, desde el procesamiento del fichero fuente hasta la traducción a código objeto. Este post está basado en un trabajo universitario para la asignatura &lt;a href="https://dlsiis.fi.upm.es/traductores/index.html"target="_blank" rel="external nofollow noopener noreferrer">Traductores de Lenguajes&lt;/a>. Todo el código fuente está disponible en mi repositorio de GitHub (enlace al final, en la sección &lt;a href="#herramientas">Herramientas&lt;/a>).&lt;/p>
+&lt;p>El traductor genera, a partir de un archivo de código escrito en el &lt;a href="https://dlsiis.fi.upm.es/traductores/IntroBoreal.html"target="_blank" rel="external nofollow noopener noreferrer">Lenguaje Boreal&lt;/a>, previamente validado por el procesador, un archivo &lt;code>.ens&lt;/code> con el &lt;strong>código objeto&lt;/strong> del programa, escrito en el lenguaje &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/ENS2001.pdf"target="_blank" rel="external nofollow noopener noreferrer">ENS2001&lt;/a>.&lt;/p>
+&lt;p>El proyecto se divide en &lt;strong>dos partes principales&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Procesador de lenguajes&lt;/strong>, escrito en &lt;em>Java&lt;/em>, proporcionado por la asignatura y extendido por nosotros.&lt;/li>
+&lt;li>&lt;strong>Traductor de lenguajes&lt;/strong>, desarrollado desde cero en &lt;em>Python&lt;/em>.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;strong>Nota:&lt;/strong> Esta implementación solo cubre:&lt;/p>
+&lt;ul>
+&lt;li>Las sentencias IF-THEN e IF-THEN-ELSE.&lt;/li>
+&lt;li>El operador mínimo MIN.&lt;/li>
+&lt;li>Los procedimientos PROCEDURE con paso de parámetros por &lt;em>valor&lt;/em> y por &lt;em>referencia&lt;/em>.&lt;/li>
+&lt;li>Los operadores &lt;code>*&lt;/code>, &lt;code>AND&lt;/code> y &lt;code>=&lt;/code> (comparación, &lt;strong>no&lt;/strong> asignación).&lt;/li>
+&lt;/ul>
+&lt;p>⚠️ El resto de operadores no están cubiertos.&lt;/p>
+&lt;p>⚠️ Tampoco se realiza ninguna optimización sobre el código objeto (ensamblador).&lt;/p>&lt;/blockquote>
+&lt;h2 class="heading-element" id="procesador-de-lenguajes">&lt;span>2 Procesador de Lenguajes&lt;/span>
  &lt;a href="#procesador-de-lenguajes" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
 &lt;/h2>&lt;p>El procesador de lenguajes es el responsable de validar que un fichero fuente no tenga errores de tipo &lt;strong>léxico&lt;/strong>, &lt;strong>sintáctico&lt;/strong> o &lt;strong>semántico&lt;/strong>.&lt;/p>
-&lt;p>Este módulo se divide en &lt;strong>tres etapas&lt;/strong>:&lt;/p>
-&lt;h3 class="heading-element" id="analizador-léxico">&lt;span>13.1 Analizador léxico&lt;/span>
+&lt;p>Este módulo se divide en &lt;strong>cuatro etapas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Analizador léxico&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Analizador sintáctico&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Analizador semántico&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Generador de código intermedio&lt;/strong>, que en realidad pertenece al traductor pero forma parte del código del procesador.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>Antes de comenzar, es importante conocer los siguientes conceptos:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Tabla de símbolos&lt;/strong>: es la encargada de almacenar los identificadores de las variables, constantes, procedimientos, etc.&lt;/li>
+&lt;/ul>
+&lt;p>E.g.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">TABLA PRINCIPAL #1:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*LEXEMA: &amp;#39;S1&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	Atributos:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ Tipo: &amp;#39;cadena&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ Despl: 4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ Param: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*LEXEMA: &amp;#39;IMPRIME&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	Atributos:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ Tipo: &amp;#39;procedimiento&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ numParam: 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ TipoParam0: &amp;#39;entero&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ TipoParam1: &amp;#39;entero&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ ModoParam0: &amp;#39;valor&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ ModoParam1: &amp;#39;valor&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ TipoRetorno: &amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	+ EtiqFuncion: &amp;#39;EtiqProc2&amp;#39;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;strong>Parse&lt;/strong>: es el encargado de almacenar el orden con el que se ejecutan las reglas de la gramática.&lt;/li>
+&lt;/ul>
+&lt;p>E.g.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">ascendente 2 21 20 19 20 20 18 17 17 17 17 15 9 100 20 100 20 ...&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>ascendente&lt;/strong> indica el tipo de analizador sintáctico utilizado.&lt;/p>&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;strong>Tokens&lt;/strong>: puede ser cualquier cosa: un &lt;code>for&lt;/code>, un &lt;code>;&lt;/code>, el nombre de una variable, etc. El archivo fuente es dividido en tokens, que son almacenados en otro fichero bajo este nombre.&lt;/li>
+&lt;/ul>
+&lt;p>E.g.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">&amp;lt;VAR,-&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ID,1&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;DOSPUNTOS,-&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;STRING,-&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;PYC,-&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ID,2&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;DOSPUNTOS,-&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">...&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>Por último, el &lt;strong>tipo de procesador&lt;/strong>. En este caso, usamos uno &lt;em>ascendente&lt;/em>, pero también existen &lt;em>descendentes&lt;/em>, &lt;em>descendentes con tablas&lt;/em>, etc.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 class="heading-element" id="analizador-léxico">&lt;span>2.1 Analizador léxico&lt;/span>
  &lt;a href="#analizador-l%c3%a9xico" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h3>&lt;p>Para los &lt;strong>errores léxicos&lt;/strong>, utilizamos un &lt;strong>autómata&lt;/strong> que divide todo el contenido del programa en &lt;strong>tokens&lt;/strong>.&lt;br>
-Un token puede ser cualquier cosa: un &lt;code>for&lt;/code>, un &lt;code>;&lt;/code>, el nombre de una variable, etc.&lt;/p>
-&lt;p>Un error léxico ocurre cuando se recibe un símbolo inesperado.
-Por ejemplo, después de una asignación se espera una cadena, número, etc.; si en su lugar aparece un &lt;code>;&lt;/code>, se consideraría un error léxico.&lt;/p>
-&lt;h3 class="heading-element" id="analizador-sintáctico">&lt;span>13.2 Analizador sintáctico&lt;/span>
+&lt;/h3>&lt;p>Para los &lt;strong>errores léxicos&lt;/strong>, utilizamos un &lt;strong>autómata&lt;/strong> que recorre el fichero fuente carácter a carácter. A medida que se avanza, se van evaluando los estados del autómata y, si todo va bien, se genera un archivo de &lt;strong>tokens&lt;/strong> como salida.&lt;/p>
+&lt;p>Si se encuentra algún símbolo que no encaja en el autómata, se considera un &lt;strong>error léxico&lt;/strong>.&lt;/p>
+&lt;p>E.g. de un autómata:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/automata.PNG" title="Ejemplo de un autómata" data-thumbnail="/es/posts/tdl/images/automata.PNG" data-sub-html="&lt;h2>Ejemplo de un autómata&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/automata.PNG' alt="Ejemplo de un autómata" height="209" width="557">&lt;/a>&lt;/p>
+&lt;p>Un caso típico de error léxico es una &lt;strong>cadena sin cerrar&lt;/strong>. La siguiente imagen muestra un autómata que reconoce cadenas entre comillas:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image.png" title="Autómata para una cadena" data-thumbnail="/es/posts/tdl/images/image.png" data-sub-html="&lt;h2>Autómata para una cadena&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image.png' alt="Autómata para una cadena" height="544" width="1785">&lt;/a>&lt;/p>
+&lt;p>Aquí, &lt;code>C&lt;/code> representa cualquier carácter. Para alcanzar el estado final y reconocer una cadena correctamente, necesitamos que termine con un &lt;code>&amp;quot;&lt;/code>.&lt;/p>
+&lt;p>También se consideran errores léxicos situaciones como:&lt;/p>
+&lt;ul>
+&lt;li>Una cadena que supera la longitud máxima permitida&lt;/li>
+&lt;li>Un número fuera de rango&lt;/li>
+&lt;li>Caracteres no válidos en el lenguaje&lt;/li>
+&lt;/ul>
+&lt;p>Entre otros.&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="analizador-sintáctico">&lt;span>2.2 Analizador sintáctico&lt;/span>
  &lt;a href="#analizador-sint%c3%a1ctico" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h3>&lt;p>Para los &lt;strong>errores sintácticos&lt;/strong>, se analizan las estructuras del lenguaje mediante reglas gramaticales. Estos errores aparecen cuando la secuencia de tokens no sigue la sintaxis esperada. Aquí entra los conceptos de &lt;strong>first&lt;/strong> y &lt;strong>follow&lt;/strong>. Para explicarlos, mostramos un fragmento de una grámatica:&lt;/p>
+&lt;/h3>&lt;p>Para los &lt;strong>errores sintácticos&lt;/strong>, se analizan las estructuras del lenguaje mediante reglas gramaticales. Estos errores aparecen cuando la secuencia de tokens no sigue la sintaxis esperada. Aquí entra los conceptos de &lt;strong>first&lt;/strong> y &lt;strong>follow&lt;/strong>. Para explicarlos, mostramos un fragmento de una gramática:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -62,60 +174,1044 @@ Por ejemplo, después de una asignación se espera una cadena, número, etc.; si
 &lt;/span>&lt;span class="lnt">26
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Producciones&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Pprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">P&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">P&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">B&lt;/span> &lt;span class="n">P&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">P&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">F&lt;/span> &lt;span class="n">P&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">P&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">T&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="n">Bprima&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">S&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">)&lt;/span> &lt;span class="n">W&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">B&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="n">Sprima&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">output&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">input&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">W&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">Begin&lt;/span> &lt;span class="n">C&lt;/span> &lt;span class="n">End&lt;/span> &lt;span class="n">J&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">J&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="n">Begin&lt;/span> &lt;span class="n">C&lt;/span> &lt;span class="n">End&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">J&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Bprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">E&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Bprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">lambda&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="n">Sprima&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">output&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="n">input&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">S&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Sprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">E&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Sprima&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span> &lt;span class="n">L&lt;/span> &lt;span class="p">)&lt;/span> &lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">Producciones = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Pprima -&amp;gt; P
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">P -&amp;gt; B P
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">P -&amp;gt; F P
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">P -&amp;gt; lambda
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">B -&amp;gt; var T id Bprima ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">B -&amp;gt; S
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">B -&amp;gt; if ( E ) W
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">B -&amp;gt; lambda
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">W -&amp;gt; id Sprima
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">W -&amp;gt; output E ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">W -&amp;gt; input id ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">W -&amp;gt; return X ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">W -&amp;gt; Begin C End J
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">J -&amp;gt; else Begin C End
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">J -&amp;gt; lambda
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Bprima -&amp;gt; = E
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Bprima -&amp;gt; lambda
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">S -&amp;gt; id Sprima
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">S -&amp;gt; output E ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">S -&amp;gt; input id ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">S -&amp;gt; return X ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sprima -&amp;gt; = E ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sprima -&amp;gt; ( L ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Primero hay que entender que un &lt;strong>terminal&lt;/strong> es un símbolo que aparece tal cual en el lenguaje final, como &lt;code>;&lt;/code>, &lt;code>if&lt;/code>, &lt;code>var&lt;/code>, etc.&lt;br>
-Un &lt;strong>no terminal&lt;/strong>, en cambio, representa una regla o grupo de reglas, como &lt;code>T&lt;/code>, &lt;code>B&lt;/code>, &lt;code>P&lt;/code>, etc.&lt;/p>
+&lt;/div>&lt;p>Un &lt;strong>terminal&lt;/strong> es un símbolo que aparece tal cual en el lenguaje fuente (&lt;code>;&lt;/code>, &lt;code>if&lt;/code>, &lt;code>var&lt;/code>&amp;hellip;).&lt;br>
+Un &lt;strong>no terminal&lt;/strong> representa una regla o construcción de la gramática (&lt;code>T&lt;/code>, &lt;code>B&lt;/code>, &lt;code>P&lt;/code>&amp;hellip;).&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>El conjunto &lt;strong>first&lt;/strong> de un no terminal son todos los terminales con los que puede comenzar.&lt;br>
+Por ejemplo, el &lt;code>first(W)&lt;/code> sería: &lt;code>id&lt;/code>, &lt;code>output&lt;/code>, &lt;code>input&lt;/code>, &lt;code>return&lt;/code>, &lt;code>{&lt;/code> (Begin).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>El conjunto &lt;strong>follow&lt;/strong> de un no terminal son los terminales que pueden aparecer &lt;strong>justo después&lt;/strong> de él en una derivación.&lt;br>
+Por ejemplo, si &lt;code>X&lt;/code> siempre va seguido de &lt;code>;&lt;/code>, entonces &lt;code>follow(X) = { ; }&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Si una regla puede derivar en &lt;strong>lambda&lt;/strong> (vacío), su &lt;code>follow&lt;/code> también incluye lo que podría venir tras ese punto en la producción.&lt;br>
+e.g. en &lt;code>P → B P&lt;/code> y &lt;code>P → lambda&lt;/code>, como &lt;code>P&lt;/code> puede ser vacío, &lt;code>follow(B)&lt;/code> incluye lo que sigue a &lt;code>P&lt;/code>, e incluso el símbolo de fin &lt;code>$&lt;/code>.&lt;/p>
+&lt;p>Un &lt;strong>error sintáctico&lt;/strong> se produce cuando el token actual &lt;strong>no pertenece al conjunto &lt;code>first&lt;/code>&lt;/strong> de la regla esperada.&lt;br>
+Por ejemplo, si se espera una producción de &lt;code>W&lt;/code> y el siguiente token es &lt;code>if&lt;/code> (que no está en &lt;code>first(W)&lt;/code>), se trata de un error.&lt;/p>
+&lt;blockquote>
+&lt;p>Ejemplo típico: un &lt;code>else&lt;/code> sin su &lt;code>if&lt;/code>, o una expresión mal cerrada.&lt;/p>&lt;/blockquote>
 &lt;hr>
-&lt;p>El conjunto &lt;strong>first&lt;/strong> de una regla son todos los terminales por los que puede comenzar.&lt;br>
-Por ejemplo, en el caso de &lt;code>W&lt;/code> en la gramática anterior, su &lt;code>first(W)&lt;/code> sería: &lt;code>id&lt;/code>, &lt;code>output&lt;/code>, &lt;code>input&lt;/code>, &lt;code>return&lt;/code>, &lt;code>Begin&lt;/code>.&lt;/p>
-&lt;p>El conjunto &lt;strong>follow&lt;/strong> de un no terminal son los terminales que pueden aparecer &lt;strong>inmediatamente después&lt;/strong> de él en alguna derivación.&lt;br>
-Por ejemplo, si evaluamos &lt;code>X&lt;/code>, su &lt;code>follow(X)&lt;/code> podría ser &lt;code>;&lt;/code>, si siempre va seguido por ese símbolo.&lt;/p>
-&lt;p>Además, si una regla puede derivar en &lt;strong>lambda&lt;/strong> (vacío), entonces su &lt;code>follow&lt;/code> también incluye lo que podría venir después de esa posición en la producción.&lt;br>
-Por ejemplo, como &lt;code>P -&amp;gt; B P&lt;/code> y &lt;code>P -&amp;gt; lambda&lt;/code>, &lt;code>follow(B)&lt;/code> incluiría lo que sigue a &lt;code>P&lt;/code>, e incluso &lt;code>$&lt;/code> (fin de entrada).&lt;/p>
-&lt;hr>
-&lt;p>Volviendo a los errores sintácticos, se producen cuando el símbolo actual &lt;strong>no pertenece al conjunto first&lt;/strong> de la regla esperada.&lt;br>
-Si, por ejemplo, se espera una producción de &lt;code>W&lt;/code> y el siguiente token es &lt;code>if&lt;/code> (que no está en &lt;code>first(W)&lt;/code>), se trata de un &lt;strong>error sintáctico&lt;/strong>.&lt;/p>
-&lt;p>&lt;em>(Ejemplo típico: un &lt;code>else&lt;/code> sin un &lt;code>if&lt;/code>, o una expresión mal cerrada).&lt;/em>&lt;/p>
-&lt;h3 class="heading-element" id="analizador-semántico">&lt;span>13.3 Analizador semántico&lt;/span>
+&lt;h3 class="heading-element" id="analizador-semántico">&lt;span>2.3 Analizador semántico&lt;/span>
  &lt;a href="#analizador-sem%c3%a1ntico" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h3>&lt;p>Para los &lt;strong>errores semánticos&lt;/strong>, utilizamos &lt;strong>acciones semánticas&lt;/strong>, en las que se definen cosas como la herencia de atributos, inserciones en la tabla de símbolos, y validaciones de tipos.&lt;/p>
+&lt;/h3>&lt;p>Para los &lt;strong>errores semánticos&lt;/strong>, utilizamos &lt;strong>acciones semánticas&lt;/strong>, en las que se definen cosas como:&lt;/p>
+&lt;ul>
+&lt;li>Herencia de atributos&lt;/li>
+&lt;li>Inserciones en la tabla de símbolos&lt;/li>
+&lt;li>Validaciones de tipos&lt;/li>
+&lt;/ul>
 &lt;p>Por ejemplo, en una regla como &lt;code>W → output E ;&lt;/code>, podríamos tener una acción semántica del estilo &lt;code>{ W.tipo := E.tipo }&lt;/code>, que asigna a &lt;code>W&lt;/code> el tipo de &lt;code>E&lt;/code>.&lt;br>
 En el código, esto se reflejaría evaluando ese caso y actualizando la pila de atributos.&lt;/p>
 &lt;p>Un error semántico típico sería que el tipo heredado no coincida con el esperado.&lt;/p>
-&lt;h2 class="heading-element" id="traductor-de-lenguajes">&lt;span>14 Traductor de lenguajes&lt;/span>
+&lt;hr>
+&lt;h3 class="heading-element" id="generador-de-código-intermedio">&lt;span>2.4 Generador de código intermedio&lt;/span>
+ &lt;a href="#generador-de-c%c3%b3digo-intermedio" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Volviendo al traductor, el generador de código intermedio es una extensión del procesador en la que definimos nuevas acciones semánticas para poder generar el fichero con el &lt;strong>código intermedio&lt;/strong>, en este caso, en el formato de un &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/formato_fichero_cuartetos.pdf"target="_blank" rel="external nofollow noopener noreferrer">fichero de cuartetos&lt;/a> definido por la asignatura.&lt;/p>
+&lt;p>Para esto, en nuestra implementación definimos &lt;em>2 nuevas clases&lt;/em>, &lt;code>gci.java&lt;/code> y &lt;code>cuarteto.java&lt;/code>.&lt;/p>
+&lt;p>En la primera definimos las siguientes funciones:&lt;/p>
+&lt;p>&lt;code>emite&lt;/code>, que es la que genera los cuartetos:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Java" data-lang="Java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">cuarteto&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">emite&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">operador&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">resultado&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">cuarteto&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">new&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">cuarteto&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">operador&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">resultado&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">printCuarteto&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>nuevatemp&lt;/code>, que crea una nueva variable temporal del tipo especificado y la inserta en la tabla de símbolos:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Java" data-lang="Java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Integer&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">nuevatemp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">nuevatemp&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;t&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">conttemp&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">conttemp&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">tsGlobal&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Integer&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">addEntradaTSGlobal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nuevatemp&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">equals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;tipo_error&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setTipo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setTipo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setValorAtributoEnt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;desplazamiento&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despGlobal&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Integer&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">new&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;VAR_GLOBAL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despLocal&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">switch&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;lógico&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despGlobal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">1&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;entero&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despGlobal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">1&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;cadena&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despGlobal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">64&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">default&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Integer&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">addEntradaTSLocal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nuevatemp&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">equals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;tipo_error&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setTipo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setTipo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setValorAtributoEnt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;desplazamiento&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despLocal&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Integer&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">new&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;VAR_LOCAL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despLocal&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">switch&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;lógico&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despLocal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">1&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;entero&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despLocal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">1&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;cadena&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">ASem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">despLocal&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">64&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">default&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>nuevaetiq&lt;/code>, que crea una nueva etiqueta utilizada para los saltos condicionales e incondicionales:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Java" data-lang="Java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">nuevaetiq&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">nombre&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">nuevaetiq&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nombre&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">nuevaetiq&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;Etiq&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">contetiq&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">contetiq&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">nuevaetiq&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">nombre&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">new&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="o">&amp;lt;&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ET&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">nuevaetiq&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tupla&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>En la clase &lt;code>cuarteto&lt;/code> definimos el objeto &lt;strong>cuarteto&lt;/strong> y un método &lt;code>toString&lt;/code> para su representación:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Java" data-lang="Java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">cuarteto&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">operador&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">resultado&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">operador&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">operador&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">arg1&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg1&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">arg2&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">arg2&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">resultado&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">resultado&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;p>En cuanto a las acciones semánticas para la generación de código intermedio, se definen en la clase &lt;code>ASem.java&lt;/code> junto a las acciones del propio analizador semántico.&lt;/p>
+&lt;p>A continuación un fragmento de código para la acción &lt;code>processRule(94, &amp;quot;Z -&amp;gt; id LL&amp;quot;);&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Java" data-lang="Java">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">llAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getLongs&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idTipo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">equals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;procedimiento&amp;#34;&lt;/span>&lt;span class="p">)){&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;CALL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoCad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;etiqueta&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">paramRef2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">!=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;amp;&amp;amp;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">paramRef2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">()).&lt;/span>&lt;span class="na">equals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;referencia&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setReferencia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;referencia&amp;#34;&lt;/span>&lt;span class="p">);}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">identificadores&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setLugar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">tupla&lt;/span>&lt;span class="o">&amp;lt;&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;VAR_LOCAL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoEnt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;desplazamiento&amp;#34;&lt;/span>&lt;span class="p">)));&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">identificadores&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">()))&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setLugar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">tupla&lt;/span>&lt;span class="o">&amp;lt;&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;VAR_GLOBAL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoEnt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;desplazamiento&amp;#34;&lt;/span>&lt;span class="p">)));&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">setLugar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">tupla&lt;/span>&lt;span class="o">&amp;lt;&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;VAR_LOCAL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoEnt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;desplazamiento&amp;#34;&lt;/span>&lt;span class="p">)));&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> 
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">LinkedList&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Integer&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">referencias&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">paramRef&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">());&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">LinkedList&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">tipos&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">paramTipo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">());&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">llAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getLongs&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">1&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;gt;=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">0&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">referencias&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipos&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="na">equals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;cadena&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;PARAM_CAD&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">llAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getParam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;PARAM&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">llAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getParam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipos&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="na">equals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;cadena&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;PARAM_REF_CAD&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">llAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getParam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;PARAM_REF&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">llAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getParam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">ret&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoCad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;tipoRetorno&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">switch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ret&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;entero&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;CALL_FUN&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoCad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;etiqueta&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getLugar&lt;/span>&lt;span class="p">());&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">case&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;cadena&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;CALL_FUN_CAD&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoCad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;etiqueta&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getLugar&lt;/span>&lt;span class="p">());&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">default&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">gci&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">emite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;CALL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Procesador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">gestorTS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getValorAtributoCad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">idAtb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getPos&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;etiqueta&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>La acción semántica se divide en dos ramas:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Si no hay parámetros (&lt;code>llAtb.getLongs() == 0&lt;/code>)&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Si &lt;code>id&lt;/code> es un procedimiento → emitir &lt;code>CALL&lt;/code>.&lt;/li>
+&lt;li>Si es una variable → crear tupla con su ámbito (local o global) y desplazamiento en la tabla de símbolos, y asignarlo a &lt;code>res.setLugar()&lt;/code> para que se herede por el resto del arbol y sea accesible en otras reglas.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Si hay parámetros&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Emitir los parámetros uno a uno según tipo y paso por valor/referencia.&lt;/li>
+&lt;li>Emitir &lt;code>CALL_FUN&lt;/code>, &lt;code>CALL_FUN_CAD&lt;/code> o &lt;code>CALL&lt;/code> según el tipo de retorno. En este caso solo puede ser &lt;code>CALL&lt;/code> ya que el traductor está diseñado únicamente para procedimientos (sin valor de retorno).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>&lt;code>res&lt;/code> es un objeto de la clase atributos y es lo que retorna el método de la acción. Las acciones también reciben objetos de la clase atributos que se obtienen desde la pila de atributos del analizador semántico.&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 class="heading-element" id="traductor-de-lenguajes">&lt;span>3 Traductor de lenguajes&lt;/span>
  &lt;a href="#traductor-de-lenguajes" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h2>&lt;p>El traductor genera, en base a un archivo de codigo escrito en &lt;a href="https://dlsiis.fi.upm.es/traductores/IntroBoreal.html"target="_blank" rel="external nofollow noopener noreferrer">Lenguaje Boreal&lt;/a>, un archivo con el &lt;strong>codigo intermedio&lt;/strong> en el formato de un &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/formato_fichero_cuartetos.pdf"target="_blank" rel="external nofollow noopener noreferrer">fichero de cuartetos&lt;/a>. A parte de este, se &lt;strong>generan los archivos del procesador&lt;/strong> (tabla de simbolos, parse, errores y tokens). A continuación, el generador de código objeto, en base al fichero de cuartetos, genera un archivo &lt;code>.ens&lt;/code> en lenguaje &lt;a href="https://dlsiis.fi.upm.es/traductores/Documentos/ENS2001.pdf"target="_blank" rel="external nofollow noopener noreferrer">ENS2001&lt;/a>.&lt;/p>
-&lt;p>Para descargar la libreria del procesador es necesario ejecutar el siguiente comando para que se instale en el repositoro local de maven:&lt;/p>
+&lt;/h2>&lt;p>Una vez validado el archivo fuente, se nos generan los archivos &lt;code>tokens.txt&lt;/code>, &lt;code>parse.txt&lt;/code>, &lt;code>errores.txt&lt;/code>, &lt;code>ts.txt&lt;/code> y adicionalmente, el archivo &lt;code>cuartetos.txt&lt;/code>. A continuación, el &lt;strong>generador de código objeto&lt;/strong>, en base al &lt;em>fichero de cuartetos&lt;/em>, genera un archivo &lt;code>.ens&lt;/code>.&lt;/p>
+&lt;p>Como hemos hecho con anterioridad, antes de adentrarnos en el código debemos saber:&lt;/p>
+&lt;p>Que un &lt;strong>registro de activación&lt;/strong> (RA) es una zona de memoria consecutiva en la que se almacena la información de activación de un subprograma (cada uno tiene el suyo propio).&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image1.png" title="Registro de Activación" data-thumbnail="/es/posts/tdl/images/image1.png" data-sub-html="&lt;h2>Registro de Activación&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image1.png' alt="Registro de Activación" height="273" width="270">&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>El &lt;strong>estado de la máquina&lt;/strong> (EM) es el estado antes de llamar a un subprograma.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>El &lt;strong>puntero de control&lt;/strong> (pc) apunta al RA del subprograma llamador. Se usa al finalizar el subprograma.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>El &lt;strong>puntero de acceso&lt;/strong> (pa) apunta al registro de activacion del subprograma donde está declarado el subprograma actual. Si &lt;code>b&lt;/code> esta definido en &lt;code>a&lt;/code>, el pa de &lt;code>b&lt;/code> apunta a &lt;code>a&lt;/code>. Se utiliza para acceder a variables no locales cuando hay anidamiento de funciones.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 class="heading-element" id="ficheros-empleados">&lt;span>3.1 Ficheros empleados&lt;/span>
+ &lt;a href="#ficheros-empleados" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>En esta implementación hacemos uso de tres ficheros:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>_ens.py&lt;/code>&lt;/strong>: maneja la creación y escritura del archivo &lt;code>.ens&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>&lt;code>_gco.py&lt;/code>&lt;/strong>: archivo principal; traduce cada cuarteto a instrucciones &lt;code>.ens&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>&lt;code>_calcprev.py&lt;/code>&lt;/strong>: calcula tamaños de RA&amp;rsquo;s y zona de datos estáticos (globales).&lt;/li>
+&lt;/ul>
+&lt;h3 class="heading-element" id="funcionamiento">&lt;span>3.2 Funcionamiento&lt;/span>
+ &lt;a href="#funcionamiento" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>&lt;code>_ens.py&lt;/code>: este módulo contiene una única función que abre el archivo &lt;code>.ens&lt;/code> en &lt;strong>modo escritura&lt;/strong> y añade líneas según sea necesario:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">archivo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">archivo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">archivo&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">archivo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;codobj.ens&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;w&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">archivo&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">linea&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>_calcprev.py&lt;/code>: Este script recorre la tabla de símbolos (&lt;code>ts.txt&lt;/code>) para calcular:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>El tamaño de la &lt;strong>zona de datos estáticos&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Los tamaños de cada &lt;strong>registro de activación&lt;/strong> (RA).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Las &lt;strong>referencias&lt;/strong> necesarias para parámetros por referencia.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Utilizamos &lt;em>dos funciones auxiliares&lt;/em>, una para leer cada línea de la tabla de símbolos y otra para obtener el tamaño de cada tipo.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">leer&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">archivo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">archivo&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">archivo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;ts.txt&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">archivo&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">readline&lt;/span>&lt;span class="p">()&lt;/span> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">reserva&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">tipo&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s1">&amp;#39;entero&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="n">tipo&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s1">&amp;#39;logico&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="n">tipo&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s1">&amp;#39;cadena&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">64&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Luego en el &lt;code>main()&lt;/code> hacemos un bucle que:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Lee línea a línea la tabla de símbolos.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Para la &lt;strong>tabla local&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Calcular&lt;/strong> el tamaño del RA sumando los tamaños obtenidos con &lt;code>reserva(...)&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Registrar&lt;/strong> los desplazamientos de los parámetros pasados por referencia.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Para la &lt;strong>tabla global&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Suma&lt;/strong> tamaños de variables globales.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Suma&lt;/strong> el tamaño del retorno si es una funciones/procedimientos.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Finalmente, genera las directivas de inicio de memoria y las etiquetas &lt;code>EQU&lt;/code> para cada RA:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">cadfinal&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tamestaticos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ras&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">locales&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coleccion&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;ra&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">ras&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">desp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">strip&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">separador&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">strip&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">lexema&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">desp&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">reserva&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">de&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">referencias&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;ra&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">ras&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">referencias&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;ra&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">ras&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">referencias&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;ra&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">ras&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coleccion&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;ra&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">ras&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">desp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ras&lt;/span>&lt;span class="o">+=&lt;/span>&lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">globales&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">rasaux&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">lexema&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">t&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tipo&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">t&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="s1">&amp;#39;funcion&amp;#39;&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">t&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="s1">&amp;#39;procedimiento&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tamestaticos&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">reserva&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">t&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">retorno&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">aux&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">coleccion&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;ra&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">rasaux&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">aux&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">reserva&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">retorno&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coleccion&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;ra&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">rasaux&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">aux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">rasaux&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cadfinal&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">tamestaticos&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cadfinal&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">inicio_estaticas: RES &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">tamestaticos&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cadfinal&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">inicio_pila: NOP&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">tamestaticos&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">MOVE #inicio_estaticas, .IY&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">MOVE #inicio_pila, .IX&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># generamos las etiquetas para los registros de activacion&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">ra&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">coleccion&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">ra&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">: EQU &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">coleccion&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ra&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n\t\t\t&lt;/span>&lt;span class="s2">BR /main&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>Nota:&lt;/strong> La variable &lt;code>cadfinal&lt;/code> no se escribe aquí porque su contenido se añade al final del fichero &lt;code>.ens&lt;/code>.&lt;/p>&lt;/blockquote>
+&lt;p>Por último tenemos &lt;code>_gco.py&lt;/code>, el archivo principal. A continuación pongo un extracto para entender su funcionamiento:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">patron_mul&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">\(MUL,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) ,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) ,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) 
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">\)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">patron_and&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">\(AND,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) ,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) ,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) 
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">\)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">patron_asig&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">\(ASIG,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) ,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) ,\s*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ((?:\{[^&lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">]*\}|[^,()])+) 
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">\)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Tenemos una sección con los patrones para detectar cada posible cuarteto, para esto hacemos uso de la librería &lt;code>re&lt;/code>.&lt;/p>
+&lt;p>También usamos estos patrones para extraer desplazamientos, nombres, espacios y detectar el programa principal.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\&amp;#34;&lt;/span>&lt;span class="s2">\s*&lt;/span>&lt;span class="se">\&amp;#34;&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ptloc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;{VAR_LOCAL, (.+)}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ptglob&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;{VAR_GLOBAL, (.+)}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ptp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;EtiqProc(\d+)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ptf&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;EtiqFunc(\d+)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ptm&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;main&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>En cuanto a las funciones, utilizamos las siguientes:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>leer&lt;/code>: utilizada para leer cada cuarteto.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">leer&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">archivo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">archivo&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">archivo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;cuartetos.txt&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">archivo&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">readline&lt;/span>&lt;span class="p">()&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>declarar_cads&lt;/code>: nos permite declarar los literales de cadenas al final del fichero de salida. Al final del bucle principal, llamamos a esta funcion con el atributo &lt;code>cadena&lt;/code> None y &lt;code>write&lt;/code> como &lt;code>True&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">declarar_cads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cadena&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">write&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">cads&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cds&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">cadena&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="kc">None&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cadena&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">cads&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cads&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">cadena&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">cds&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">:&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">cadena&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cads&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cads&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">cadena&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">cds&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">:&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">cadena&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">write&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">cads&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cads&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cads&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">True&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>leer_cadena_ens&lt;/code>: con esta función podemos pasar caracter a caracter la cadena declarada a un registro, o de un registro a otro. Esto es fundamental ya que a diferencia de con los enteros, para las cadenas tenemos que mover todo su contenido caracter a caracter.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">leer_cadena_ens&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cadena&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">escad&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">bucles&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">escad&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">codobj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> MOVE #&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">cadena&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, .R7
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> DEC .R2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> DEC .R7
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">bucle&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">bucles&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">:	 INC .R2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> INC .R7
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> MOVE [.R7], [.R2]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> CMP [.R7], #0
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> BNZ $bucle&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">bucles&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">codobj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> DEC .R3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> DEC .R2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">bucle&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">bucles&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">:	 INC .R3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> INC .R2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> MOVE [.R2], [.R3]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> CMP [.R2], #0
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> BNZ $bucle&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">bucles&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bucles&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">codobj&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>paramcad&lt;/code>: análoga a la anterior, esta se usa únicamente cuando el parámetro de un subprograma es una cadena.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">paramcad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">des&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">desra&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">bucles&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">codobj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ADD #&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">des&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, .IX
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> MOVE .A, .R2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> ADD #&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">desra&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, .IX
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> MOVE .A, .R3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> DEC .R3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> DEC .R2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">bucle&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">bucles&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">:	 INC .R3
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> INC .R2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> MOVE [.R2], [.R3]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> CMP [.R2], #0
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> BNZ $bucle&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">bucles&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bucles&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">codobj&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>transformar_dir&lt;/code>: encargada de mover las direcciones de memoria pasadas como parámetros a los registros correspondientes. Estas pueden ser entre una y tres. Básicamente, recibe algo como &lt;code>{VAR_GLOBAL, 3}&lt;/code> y esto mueve lo que hay en la dirección &lt;code>#3[.IY]&lt;/code> a un registro como &lt;code>R2&lt;/code>. Esto porque es global, si fuera local sería &lt;code>#3[.IX]&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">transformar_dir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dir1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dir2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dir3&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ptglob&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;{VAR_GLOBAL, (.+)}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ptloc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;{VAR_LOCAL, (.+)}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nreg&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="nb">dir&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">dir1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dir2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dir3&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nb">dir&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ptglob&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">dir&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cad&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">ADD #&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ptglob&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">dir&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, .IY&lt;/span>&lt;span class="se">\n\t\t\t&lt;/span>&lt;span class="s2">MOVE .A, .R&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">nreg&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nreg&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cad&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ptloc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">dir&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="c1"># al ser local se le suma el tamaño del EM y PA&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">desp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ptloc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">dir&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cad&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">ADD #&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">desp&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, .IX&lt;/span>&lt;span class="se">\n\t\t\t&lt;/span>&lt;span class="s2">MOVE .A, .R&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">nreg&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">raact&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">_calcprev&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">referencias&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">desp&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">_calcprev&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">referencias&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">raact&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cad&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">MOVE [.R&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">nreg&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">], .R&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">nreg&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nreg&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cad&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Por último, el buble principal, que es el encargado de llamar a las funciones anteriores, y de iterar sobre cada cuarteto recibido. Dado que este bucle ocupa 600 líneas, pongo el comienzo para que se vea claro su funcionamiento.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">global&lt;/span> &lt;span class="n">cds&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">contador_llamadas&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">primeraetiq&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">contparam&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">where&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">contmin&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">param_min&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">raact&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">esetiq&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_calcprev&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">linea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leer&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">patron_mul&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">VERBOSE&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">esetiq&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">False&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coincidencia&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">patron_mul&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">VERBOSE&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">transformar_dir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">coincidencia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">coincidencia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">coincidencia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cadena&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">MUL [.R2], [.R3]&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cadena&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cadena&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">MOVE .A, [.R4]&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cadena&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">patron_and&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">VERBOSE&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">esetiq&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">False&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coincidencia&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">patron_and&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linea&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">VERBOSE&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">transformar_dir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">coincidencia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">coincidencia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">coincidencia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cadena&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">AND .R2, .R3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cadena&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cadena&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\t\t\t&lt;/span>&lt;span class="s2">MOVE .A, .R4&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cadena&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">escribir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Como se puede observar, es un bucle muy sencillo en el que vamos evaluando cada caso y generando el código objeto correspondiente.&lt;/p>
+&lt;hr>
+&lt;h2 class="heading-element" id="ejecución">&lt;span>4 Ejecución&lt;/span>
+ &lt;a href="#ejecuci%c3%b3n" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>En esta sección se explica cómo ejecutar el código generado por el traductor, y se prueban diferentes ejemplos para entender su funcionamiento.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Nota:&lt;/strong> Solo se cubre la explicación para Windows, ya que en Linux el ensamblador no tiene interfaz y resulta menos didáctico.&lt;/p>&lt;/blockquote>
+&lt;p>Primero de todo tenemos que compilar el proyecto. Puedes consultar como hacerlo en la sección &lt;a href="#informaci%c3%b3n-adicional">Información Adicional&lt;/a>.&lt;/p>
+&lt;p>Una vez generado el fichero &lt;code>.ens&lt;/code> (de nombre &lt;code>codobj.ens&lt;/code>), ya podemos pasar a ejecutarlo con el ensamblador.&lt;/p>
+&lt;h3 class="heading-element" id="descarga">&lt;span>4.1 Descarga&lt;/span>
+ &lt;a href="#descarga" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Para ello tenemos que descargarnos el ensamblador (disponible en la sección &lt;a href="#herramientas">Herramientas&lt;/a>). Al descomprimir el archivo, obtenemos una carpeta &lt;code>ENS2001-Windows&lt;/code> como la siguiente:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image2.png" title="Carpeta de Descarga" data-thumbnail="/es/posts/tdl/images/image2.png" data-sub-html="&lt;h2>Carpeta de Descarga&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image2.png' alt="Carpeta de Descarga" height="760" width="845">&lt;/a>&lt;/p>
+&lt;p>A excepción del fichero &lt;code>codobj.ens&lt;/code>, que es el que vamos a ensamblar, el resto de archivos vienen por defecto. Se incluyen algunos ejemplos y dos ficheros que se recomienda leer: &lt;code>leeme.txt&lt;/code> y &lt;code>bugs.txt&lt;/code>.&lt;/p>
+&lt;h3 class="heading-element" id="ensamblador">&lt;span>4.2 Ensamblador&lt;/span>
+ &lt;a href="#ensamblador" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>El ensamblador es el ejecutable que viene seleccionado en la captura de arriba (&lt;code>winens&lt;/code>).&lt;/p>
+&lt;p>Una vez ejecutado, veremos una interfaz como la siguiente:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image3.png" title="Ensamblador" data-thumbnail="/es/posts/tdl/images/image3.png" data-sub-html="&lt;h2>Ensamblador&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image3.png' alt="Ensamblador" height="416" width="628">&lt;/a>&lt;/p>
+&lt;p>Para ver con claridad lo que va haciendo el ensamblador se recomienda abrir las siguientes ventanas:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image4.png" title="Ventanas" data-thumbnail="/es/posts/tdl/images/image4.png" data-sub-html="&lt;h2>Ventanas&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image4.png' alt="Ventanas" height="138" width="211">&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>La &lt;strong>ventana del código fuente&lt;/strong> muestra el orden en el que se ejecutan las instrucciones del código objeto. En este caso como aun no se ha cargado ningun archivo, están todas las direcciones en &lt;code>NOP&lt;/code>.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image5.png" title="Código fuente" data-thumbnail="/es/posts/tdl/images/image5.png" data-sub-html="&lt;h2>Código fuente&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image5.png' alt="Código fuente" height="291" width="259">&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>La &lt;strong>ventana de registros&lt;/strong> muestra el estado de los registros de la máquina.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image6.png" title="Registros" data-thumbnail="/es/posts/tdl/images/image6.png" data-sub-html="&lt;h2>Registros&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image6.png' alt="Registros" height="427" width="164">&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>La &lt;strong>ventana de la pila&lt;/strong> muestra el contenido de la pila de datos.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image7.png" title="Pila" data-thumbnail="/es/posts/tdl/images/image7.png" data-sub-html="&lt;h2>Pila&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image7.png' alt="Pila" height="292" width="154">&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Para cargar el archivo &lt;code>codobj.ens&lt;/code> hacemos &lt;code>Archivo &amp;gt; Abrir y Ensamblar&lt;/code>. Si todo va bien, nos dirá que ha sido ensamblado correctamente:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image8.png" title="Ventana de Ensamblado" data-thumbnail="/es/posts/tdl/images/image8.png" data-sub-html="&lt;h2>Ventana de Ensamblado&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image8.png' alt="Ventana de Ensamblado" height="416" width="626">&lt;/a>&lt;/p>
+&lt;p>Ahora ya estamos listos para ejecutar el ensamblador. Al darle al ▶️ se ejecutará el ensamblador y nos mostrará el resultado. Si nuestro código ejecuta funciones de escritura en consola, esta se abrirá. En nuestro caso hemos ensamblado el fichero &lt;code>expr.txt&lt;/code> (disponible en el repositorio de GitHub), y el resultado es el siguiente:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image9.png" title="Resultado del Ensamblador" data-thumbnail="/es/posts/tdl/images/image9.png" data-sub-html="&lt;h2>Resultado del Ensamblador&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image9.png' alt="Resultado del Ensamblador" height="351" width="459">&lt;/a>&lt;/p>
+&lt;p>Introducimos un dígito como nos pide y le damos al enter.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image10.png" title="Resultado del Ensamblador 2" data-thumbnail="/es/posts/tdl/images/image10.png" data-sub-html="&lt;h2>Resultado del Ensamblador 2&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image10.png' alt="Resultado del Ensamblador 2" height="351" width="459">&lt;/a>&lt;/p>
+&lt;p>Escribimos nuestro nombre:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image11.png" title="Resultado del Ensamblador 3" data-thumbnail="/es/posts/tdl/images/image11.png" data-sub-html="&lt;h2>Resultado del Ensamblador 3&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image11.png' alt="Resultado del Ensamblador 3" height="605" width="737">&lt;/a>&lt;/p>
+&lt;p>Y tras esto, el programa finaliza su ejecución correctamente.&lt;/p>
+&lt;hr>
+&lt;h2 class="heading-element" id="información-adicional">&lt;span>5 Información adicional&lt;/span>
+ &lt;a href="#informaci%c3%b3n-adicional" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>En esta sección se detallan los pasos necesarios para instalar las dependencias, compilar el proyecto y ejecutar cada componente.&lt;/p>
+&lt;h3 class="heading-element" id="instalación-de-dependencias">&lt;span>5.1 Instalación de dependencias&lt;/span>
+ &lt;a href="#instalaci%c3%b3n-de-dependencias" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Para instalar la biblioteca del procesador (&lt;code>ts-lib.jar&lt;/code>) en el repositorio local de Maven, ejecuta el siguiente comando:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -123,28 +1219,80 @@ En el código, esto se reflejaría evaluando ese caso y actualizando la pila de 
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">mvn&lt;/span> &lt;span class="n">install&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="nb">install-file&lt;/span> &lt;span class="n">-Dfile&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="s2">&amp;#34;.\lib\ts-lib.jar&amp;#34;&lt;/span> &lt;span class="n">-DgroupId&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="n">tslib&lt;/span> &lt;span class="n">-DartifactId&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="nb">ts-lib&lt;/span> &lt;span class="n">-Dversion&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="s2">&amp;#34;1.0&amp;#34;&lt;/span> &lt;span class="n">-Dpackaging&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="n">jar&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Para ejecutar el procesador es necesario ejecutar el siguiente comando:&lt;/p>
+&lt;/div>&lt;p>O si estás en Linux o macOS:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">java&lt;/span> &lt;span class="n">-jar&lt;/span> &lt;span class="p">.\&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">tdl&lt;/span>&lt;span class="p">-&lt;/span>&lt;span class="mf">1.0&lt;/span>&lt;span class="n">-SNAPSHOT-jar-with-dependencies&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">jar&lt;/span> &lt;span class="p">.\&lt;/span>&lt;span class="n">ruta&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">al&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">ficheroBoreal&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">txt&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mvn install:install-file -Dfile&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;./lib/ts-lib.jar&amp;#34;&lt;/span> -DgroupId&lt;span class="o">=&lt;/span>tslib -DartifactId&lt;span class="o">=&lt;/span>ts-lib -Dversion&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;1.0&amp;#34;&lt;/span> -Dpackaging&lt;span class="o">=&lt;/span>jar&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Para ejecutar el traductor, desde la carpeta gco/, ejecutamos el comando:&lt;/p>
+&lt;/div>&lt;h3 class="heading-element" id="compilación-del-procesador">&lt;span>5.2 Compilación del procesador&lt;/span>
+ &lt;a href="#compilaci%c3%b3n-del-procesador" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Una vez instalada la librería, genera el ejecutable del procesador con:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">python _gco.py ../tdl/src/test/resources/ficheroboreal.txt&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">mvn&lt;/span> &lt;span class="n">clean&lt;/span> &lt;span class="n">package&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Esto nos generará todos los archivos del procesador, el fichero &lt;code>cuartetos.txt&lt;/code> y el fichero &lt;code>codobj.ens&lt;/code>. Para ejecutar el &lt;code>.ens&lt;/code> debemos descargarnos el ensamblador, facilitado en la sección de herramientas, ensamblarlo y ejecutarlo.&lt;/p>
+&lt;/div>&lt;h3 class="heading-element" id="ejecución-del-procesador">&lt;span>5.3 Ejecución del procesador&lt;/span>
+ &lt;a href="#ejecuci%c3%b3n-del-procesador" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Después de compilar, puedes ejecutar el procesador con el siguiente comando (sustituyendo la ruta por la del archivo Boreal):&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">java -jar .&lt;span class="se">\t&lt;/span>arget&lt;span class="se">\t&lt;/span>dl-1.0-SNAPSHOT-jar-with-dependencies.jar .&lt;span class="se">\r&lt;/span>uta&lt;span class="se">\a&lt;/span>l&lt;span class="se">\f&lt;/span>icheroBoreal.txt&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 class="heading-element" id="ejecución-del-traductor">&lt;span>5.4 Ejecución del traductor&lt;/span>
+ &lt;a href="#ejecuci%c3%b3n-del-traductor" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Desde la carpeta &lt;code>gco/&lt;/code>, donde se encuentra el ejecutable del traductor, ejecuta:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="p">.\&lt;/span>&lt;span class="n">_gco&lt;/span> &lt;span class="p">..\&lt;/span>&lt;span class="n">tdl&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">src&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">resources&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">ficheroboreal&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">txt&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>O si estás en Linux o macOS:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./_gco ../tdl/src/test/resources/ficheroboreal.txt&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Esto generará todos los archivos del procesador, así como el fichero &lt;code>cuartetos.txt&lt;/code> (código intermedio) y &lt;code>codobj.ens&lt;/code> (código objeto).&lt;/p>
+&lt;h3 class="heading-element" id="ejecución-del-código-objeto">&lt;span>5.5 Ejecución del código objeto&lt;/span>
+ &lt;a href="#ejecuci%c3%b3n-del-c%c3%b3digo-objeto" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Para ejecutar el archivo &lt;code>.ens&lt;/code>, es necesario descargar el ensamblador (disponible en la sección Herramientas), compilarlo y ejecutarlo con el fichero &lt;code>codobj.ens&lt;/code> generado.&lt;/p>
 &lt;hr>
-&lt;h2 class="heading-element" id="herramientas">&lt;span>15 Herramientas&lt;/span>
+&lt;h2 class="heading-element" id="herramientas">&lt;span>6 Herramientas&lt;/span>
  &lt;a href="#herramientas" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
 &lt;/h2>&lt;p>Tanto el procesador de lenguajes como los ensambladores simbólicos para ensamblar el código objeto (ENS2001) se encuentran en el siguiente enlace:&lt;/p>
 &lt;blockquote>
-&lt;p>👉 &lt;a href="https://dlsiis.fi.upm.es/traductores/Herramientas.html"target="_blank" rel="external nofollow noopener noreferrer">https://dlsiis.fi.upm.es/traductores/Herramientas.html&lt;/a>&lt;/p>&lt;/blockquote></description></item><item><title/><link>https://azuar4e.github.io/es/posts/sos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/sos/</guid><description/></item></channel></rss>
+&lt;p>👉 &lt;a href="https://dlsiis.fi.upm.es/traductores/Herramientas.html"target="_blank" rel="external nofollow noopener noreferrer">https://dlsiis.fi.upm.es/traductores/Herramientas.html&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>Podéis encontrar el código fuente de esta implementación en mi repositorio de GitHub:&lt;/p>
+&lt;blockquote>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/TDL"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/TDL&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 class="heading-element" id="conclusión">&lt;span>7 Conclusión&lt;/span>
+ &lt;a href="#conclusi%c3%b3n" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>El proyecto es una gran oportunidad para aprender y profundizar sobre el funcionamiento de un compilador. Aunque este esta basado en un lenguaje y un ensamblador que en el día a día no se utilizan, nos sirve como ejemplo didáctico y sencillo para explicar los conceptos clave.&lt;/p>
+&lt;p>Nuevamente el código fuente lo podeís encontrar en mi repositorio de GitHub.&lt;/p>
+&lt;p>¡Tener una buena vida!&lt;/p></description></item></channel></rss>

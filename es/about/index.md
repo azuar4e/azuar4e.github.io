@@ -24,7 +24,7 @@ Si te interesa, aquí tienes mi perfil de [Spotify](https://open.spotify.com/use
 
 Aquí dejo uno de mis álbumes favoritos:
 
-{{< spotify album 3b4E89rxzZQ9zkhgKpj8N4 >}}
+{{< spotify album 5EyIDBAqhnlkAHqvPRwdbX >}}
 
 ## Sobre este blog
 
