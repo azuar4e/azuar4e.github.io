@@ -30,7 +30,7 @@ If you're curious, here's my [Spotify](https://open.spotify.com/user/angelazuara
 
 One of my favorite albums:
 
-{{< spotify album 3b4E89rxzZQ9zkhgKpj8N4 >}}
+{{< spotify album 5EyIDBAqhnlkAHqvPRwdbX >}}
 
 ## About This Blog
 
