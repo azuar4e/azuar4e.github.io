@@ -22,6 +22,8 @@ El proyecto se divide en **dos partes principales**:
 >⚠️ El resto de operadores no están cubiertos.
 >
 >⚠️ Tampoco se realiza ninguna optimización sobre el código objeto (ensamblador).
+>⚠️ **Los materiales originales del Lenguaje Boreal y el procesador ENS2001 pueden no estar disponibles temporalmente.**
+> Este post se centra en mi implementación del compilador, no en la distribución de los materiales originales. Si necesitas consultarlos, puedes intentar acceder más adelante o buscar versiones archivadas.
 
 ## Procesador de Lenguajes
 

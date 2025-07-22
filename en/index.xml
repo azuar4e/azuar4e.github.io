@@ -19,6 +19,8 @@
 &lt;/ul>
 &lt;p>⚠️ The &lt;em>rest of the operators&lt;/em> are &lt;strong>not covered&lt;/strong>.&lt;/p>
 &lt;p>⚠️ No optimization is performed on the generated object code (assembly).&lt;/p>
+&lt;p>⚠️ &lt;strong>The original Boreal language and the ENS2001 assembler materials may not be available temporarily.&lt;/strong>
+This post focuses on my implementation of the compiler, not on the distribution of the original materials. If you need to consult them, you can try accessing it later or search for archived versions.&lt;/p>
 &lt;p>&lt;strong>Additional Note:&lt;/strong> All the code in this implementation is written in Spanish, as the course was taught in Spanish. However, this shouldn&amp;rsquo;t be a problem, as the concepts are explained in English.&lt;/p>&lt;/blockquote>
 &lt;h2 class="heading-element" id="language-processor">&lt;span>2 Language Processor&lt;/span>
  &lt;a href="#language-processor" class="heading-mark">
