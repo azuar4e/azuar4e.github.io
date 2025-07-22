@@ -15,7 +15,7 @@
 &lt;li>The sentences &lt;code>IF-THEN&lt;/code> and &lt;code>IF-THEN-ELSE&lt;/code>.&lt;/li>
 &lt;li>The minimum operator &lt;code>MIN&lt;/code>.&lt;/li>
 &lt;li>The procedures &lt;code>PROCEDURE&lt;/code> with parameter passing by &lt;em>value&lt;/em> and by &lt;em>reference&lt;/em>.&lt;/li>
-&lt;li>The operators &lt;code>*&lt;/code>, &lt;code>AND&lt;/code> and &lt;code>=&lt;/code> (comparison, &lt;strong>not&lt;/strong> assignment).&lt;/li>
+&lt;li>The operators &lt;code>*&lt;/code>, &lt;code>AND&lt;/code> and &lt;code>=&lt;/code> (comparison operator, &lt;strong>not&lt;/strong> assignment).&lt;/li>
 &lt;/ul>
 &lt;p>⚠️ The &lt;em>rest of the operators&lt;/em> are &lt;strong>not covered&lt;/strong>.&lt;/p>
 &lt;p>⚠️ No optimization is performed on the generated object code (assembly).&lt;/p>
