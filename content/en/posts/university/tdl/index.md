@@ -34,6 +34,9 @@ The project is divided into **two main parts**:
 >
 >⚠️ No optimization is performed on the generated object code (assembly).
 >
+>⚠️ **The original Boreal language and the ENS2001 assembler materials may not be available temporarily.**
+>This post focuses on my implementation of the compiler, not on the distribution of the original materials. If you need to consult them, you can try accessing it later or search for archived versions.
+>
 > **Additional Note:** All the code in this implementation is written in Spanish, as the course was taught in Spanish. However, this shouldn't be a problem, as the concepts are explained in English.
 
 ## Language Processor
