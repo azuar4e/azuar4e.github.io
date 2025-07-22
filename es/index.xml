@@ -2,7 +2,7 @@
  &lt;a href="#introducci%c3%b3n" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
-&lt;/h2></description></item><item><title>Traductor de Lenguajes</title><link>https://azuar4e.github.io/es/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/tdl/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>1 Introducción&lt;/span>
+&lt;/h2>&lt;p>En este artículo explico una implementación de un servicio RESTful para una biblioteca de libros. Esta implementación está escrita en &lt;em>Java&lt;/em> y utiliza la biblioteca &lt;em>Spring&lt;/em>. El proyecto pertenece a la asignatura &lt;a href="https://dlsiis.fi.upm.es/sistemasorientadosservicios/index.html"target="_blank" rel="external nofollow noopener noreferrer">Sistemas Orientados a Servicios&lt;/a>.&lt;/p></description></item><item><title>Traductor de Lenguajes</title><link>https://azuar4e.github.io/es/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>angelazuara444@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/tdl/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>1 Introducción&lt;/span>
  &lt;a href="#introducci%c3%b3n" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
@@ -1160,16 +1160,22 @@ En el código, esto se reflejaría evaluando ese caso y actualizando la pila de 
 &lt;/h2>&lt;p>En esta sección se explica cómo ejecutar el código generado por el traductor, y se prueban diferentes ejemplos para entender su funcionamiento.&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;strong>Nota:&lt;/strong> Solo se cubre la explicación para Windows, ya que en Linux el ensamblador no tiene interfaz y resulta menos didáctico.&lt;/p>&lt;/blockquote>
-&lt;p>Primero de todo tenemos que compilar el proyecto. Puedes consultar como hacerlo en la sección &lt;a href="#informaci%c3%b3n-adicional">Información Adicional&lt;/a>.&lt;/p>
-&lt;p>Una vez generado el fichero &lt;code>.ens&lt;/code> (de nombre &lt;code>codobj.ens&lt;/code>), ya podemos pasar a ejecutarlo con el ensamblador.&lt;/p>
-&lt;h3 class="heading-element" id="descarga">&lt;span>4.1 Descarga&lt;/span>
+&lt;h3 class="heading-element" id="prerequisitos">&lt;span>4.1 Prerequisitos&lt;/span>
+ &lt;a href="#prerequisitos" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;ol>
+&lt;li>Asegurarse de que se haya compilado el proyecto (ver sección &lt;a href="#uso">Uso&lt;/a>).&lt;/li>
+&lt;li>Fichero &lt;code>codobj.ens&lt;/code> generado (código objeto).&lt;/li>
+&lt;/ol>
+&lt;h3 class="heading-element" id="descarga">&lt;span>4.2 Descarga&lt;/span>
  &lt;a href="#descarga" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
 &lt;/h3>&lt;p>Para ello tenemos que descargarnos el ensamblador (disponible en la sección &lt;a href="#herramientas">Herramientas&lt;/a>). Al descomprimir el archivo, obtenemos una carpeta &lt;code>ENS2001-Windows&lt;/code> como la siguiente:&lt;/p>
 &lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image2.png" title="Carpeta de Descarga" data-thumbnail="/es/posts/tdl/images/image2.png" data-sub-html="&lt;h2>Carpeta de Descarga&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image2.png' alt="Carpeta de Descarga" height="760" width="845">&lt;/a>&lt;/p>
 &lt;p>A excepción del fichero &lt;code>codobj.ens&lt;/code>, que es el que vamos a ensamblar, el resto de archivos vienen por defecto. Se incluyen algunos ejemplos y dos ficheros que se recomienda leer: &lt;code>leeme.txt&lt;/code> y &lt;code>bugs.txt&lt;/code>.&lt;/p>
-&lt;h3 class="heading-element" id="ensamblador">&lt;span>4.2 Ensamblador&lt;/span>
+&lt;h3 class="heading-element" id="ensamblador">&lt;span>4.3 Ensamblador&lt;/span>
  &lt;a href="#ensamblador" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
@@ -1202,8 +1208,8 @@ En el código, esto se reflejaría evaluando ese caso y actualizando la pila de 
 &lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/tdl/images/image11.png" title="Resultado del Ensamblador 3" data-thumbnail="/es/posts/tdl/images/image11.png" data-sub-html="&lt;h2>Resultado del Ensamblador 3&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/tdl/images/image11.png' alt="Resultado del Ensamblador 3" height="605" width="737">&lt;/a>&lt;/p>
 &lt;p>Y tras esto, el programa finaliza su ejecución correctamente.&lt;/p>
 &lt;hr>
-&lt;h2 class="heading-element" id="información-adicional">&lt;span>5 Información adicional&lt;/span>
- &lt;a href="#informaci%c3%b3n-adicional" class="heading-mark">
+&lt;h2 class="heading-element" id="uso">&lt;span>5 Uso&lt;/span>
+ &lt;a href="#uso" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
 &lt;/h2>&lt;p>En esta sección se detallan los pasos necesarios para instalar las dependencias, compilar el proyecto y ejecutar cada componente.&lt;/p>

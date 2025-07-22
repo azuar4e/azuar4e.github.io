@@ -709,9 +709,10 @@ En esta sección se explica cómo ejecutar el código generado por el traductor,
 
 > **Nota:** Solo se cubre la explicación para Windows, ya que en Linux el ensamblador no tiene interfaz y resulta menos didáctico.
 
-Primero de todo tenemos que compilar el proyecto. Puedes consultar como hacerlo en la sección [Información Adicional](#información-adicional).
+### Prerequisitos
 
-Una vez generado el fichero `.ens` (de nombre `codobj.ens`), ya podemos pasar a ejecutarlo con el ensamblador.
+1. Asegurarse de que se haya compilado el proyecto (ver sección [Uso](#uso)).
+2. Fichero `codobj.ens` generado (código objeto).
 
 ### Descarga
 
@@ -765,7 +766,7 @@ Y tras esto, el programa finaliza su ejecución correctamente.
 
 ---
 
-## Información adicional
+## Uso
 
 En esta sección se detallan los pasos necesarios para instalar las dependencias, compilar el proyecto y ejecutar cada componente.
 
