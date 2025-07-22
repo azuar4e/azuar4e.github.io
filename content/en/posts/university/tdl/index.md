@@ -28,7 +28,7 @@ The project is divided into **two main parts**:
 > - The sentences ``IF-THEN`` and ``IF-THEN-ELSE``.
 > - The minimum operator ``MIN``.
 > - The procedures ``PROCEDURE`` with parameter passing by *value* and by *reference*.
-> - The operators ``*``, ``AND`` and ``=`` (comparison, **not** assignment).
+> - The operators ``*``, ``AND`` and ``=`` (comparison operator, **not** assignment).
 >
 >⚠️ The *rest of the operators* are **not covered**.
 >
