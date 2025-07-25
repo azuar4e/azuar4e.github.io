@@ -1,7 +1,7 @@
 ---
 title: Servicio RESTful
 description: Un proyecto universitario de la asignatura Sistemas Orientados a Servicios.
-date: 2025-06-17T12:30:24+02:00
+date: 2025-07-25T15:00:00+02:00
 tags:
     - Java
     - Spring
