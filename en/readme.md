@@ -6,5 +6,5 @@
 
 2 articles in total
 
-- 06-17 [RESTful Service](https://azuar4e.github.io/en/posts/sos/ "2025-06-17 12:30:24")
+- 07-25 [RESTful Service](https://azuar4e.github.io/en/posts/sos/ "2025-07-25 15:00:00")
 - 06-17 [Language Translator](https://azuar4e.github.io/en/posts/tdl/ "2025-06-17 12:30:24")
