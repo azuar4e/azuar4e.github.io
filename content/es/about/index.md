@@ -65,7 +65,7 @@ const actitud := {
 
 Para cualquier consulta, propuesta o asunto relacionado con el contenido del blog, siéntete libre de escribirme a:
 
-📮 **Email**: `angelazuara444@gmail.com` _(por favor indica el motivo)_
+📮 **Email**: `azuar4e@gmail.com` _(por favor indica el motivo)_
 
 📱 **Twitter (X)**: [@azuar4e](https://x.com/azuar4e) _(por MD)_
 
