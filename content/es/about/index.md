@@ -67,7 +67,7 @@ Para cualquier consulta, propuesta o asunto relacionado con el contenido del blo
 
 📮 **Email**: `angelazuara444@gmail.com` _(por favor indica el motivo)_
 
-📱 **Twitter (X)**: [micuenta](link) _(por MD)_
+📱 **Twitter (X)**: [@azuar4e](https://x.com/azuar4e) _(por MD)_
 
 ---
 

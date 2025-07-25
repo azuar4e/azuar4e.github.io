@@ -62,4 +62,4 @@ const attitude := {
 For any inquiries, ideas, or anything related to the blog, feel free to reach out:
 
 📮 **Email**: `angelazuara444@gmail.com` _(please include a subject)_  
-📱 **Twitter (X)**: [@micuenta](link) _(DMs open)_
+📱 **Twitter (X)**: [@azuar4e](https://x.com/azuar4e) _(DMs open)_
