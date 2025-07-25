@@ -1033,6 +1033,7 @@ Verifying in the same order as the console and code:
 ![Postman](images/image53.png)
 ![Postman](images/image54.png)
 ![Postman](images/image55.png)
+![Postman](images/image68.png)
 ![Postman](images/image56.png)
 
 Returned:
