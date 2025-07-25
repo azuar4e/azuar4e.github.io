@@ -1015,6 +1015,7 @@ Verificamos por orden según aparecen en la consola y código:
 ![Postman](images/image53.png)
 ![Postman](images/image54.png)
 ![Postman](images/image55.png)
+![Postman](images/image68.png)
 ![Postman](images/image56.png)
 
 Devueltos:
