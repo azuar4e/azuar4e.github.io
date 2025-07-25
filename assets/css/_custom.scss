@@ -19,25 +19,25 @@ $blog-bg-color: #fafaf8 !default;
     background-image: linear-gradient(180deg, lighten($blog-base-color, 5%), $blog-base-color);
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 3.5rem;
-    left: 0;
-    width: MAX(360px, 10%);
-    height: 110px;
-    pointer-events: none;
-    background-image: url(/images/drop.min.svg);
-    // 背景图水平翻转
-    transform: scaleX(-1);
-    background-size: contain;
-    background-position: top;
-    background-repeat: no-repeat;
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   top: 3.5rem;
+  //   left: 0;
+  //   width: MAX(360px, 10%);
+  //   height: 110px;
+  //   pointer-events: none;
+  //   background-image: url(/images/drop.min.svg);
+  //   // 背景图水平翻转
+  //   transform: scaleX(-1);
+  //   background-size: contain;
+  //   background-position: top;
+  //   background-repeat: no-repeat;
 
-    [data-theme='dark'] & {
-      background-image: url(/images/drop-dark.min.svg);
-    }
-  }
+  //   [data-theme='dark'] & {
+  //     background-image: url(/images/drop-dark.min.svg);
+  //   }
+  // }
 
   &:hover {
     filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.1));
