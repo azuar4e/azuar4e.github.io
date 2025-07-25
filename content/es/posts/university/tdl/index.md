@@ -853,4 +853,4 @@ El proyecto es una gran oportunidad para aprender y profundizar sobre el funcion
 
 Nuevamente el código fuente lo podeís encontrar en mi repositorio de GitHub.
 
-¡Tener una buena vida!
+Have a nice life! 👋
