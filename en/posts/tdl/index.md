@@ -846,7 +846,7 @@ This project is a great opportunity to learn and dive deeper into how a compiler
 
 Again, you can find the source code in my GitHub repository.
 
-Have a nice life!
+Have a nice life! 👋
 
 
 ---
