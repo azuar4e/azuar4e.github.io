@@ -1064,4 +1064,4 @@ Este proyecto es un buen ejemplo de cómo podemos crear una API RESTful con *Spr
 
 Como siempre, puedes encontrar el código fuente en mi [repositorio de GitHub](https://github.com/azuar4e/RESTful-Service).
 
-Have a nice life! 👋
+Gracias por leer, nos vemos en la próxima, ¡Cuidaos! 👋
