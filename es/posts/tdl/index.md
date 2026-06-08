@@ -842,7 +842,7 @@ El proyecto es una gran oportunidad para aprender y profundizar sobre el funcion
 
 Nuevamente el código fuente lo podeís encontrar en mi repositorio de GitHub.
 
-Have a nice life! 👋
+Gracias por leer, nos vemos en la próxima, ¡Cuidaos! 👋
 
 
 ---

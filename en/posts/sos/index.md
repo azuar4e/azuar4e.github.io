@@ -1057,7 +1057,7 @@ This project is a good example of how to create a RESTful API using *Spring Boot
 
 As always, you can find the source code in my [GitHub repository](https://github.com/azuar4e/RESTful-Service).
 
-Have a nice life! 👋
+Thanks for reading, see you next time. Take care! 👋
 
 
 ---

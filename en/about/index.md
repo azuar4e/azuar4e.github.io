@@ -1,28 +1,17 @@
 # About Me
 
 
-{{< center-quote >}}
-Let all you do be done in love
-
-_— 1 Corinthians 16:14_
-{{< /center-quote >}}
-
 ## About Me
 
 Hey everyone! 👋
 
-My name is Ángel, and I'm a fourth-year Computer Science student focused on software development and cloud infrastructure management.
+My name is Ángel, and I'm a Computer Science Graduated focused on software development and cloud infrastructure management.
 
 - 👨‍💻 Software developer  
 - ☁️ Passionate about Cloud Computing and Infrastructure
 - :(fa-brands fa-github): My GitHub: [azuar4e](https://github.com/azuar4e)
 
-In my free time, aside from learning new things, I enjoy working out, reading, and discovering music.  
-If you're curious, here's my [Spotify](https://open.spotify.com/user/angelazuara444?si=ce1ed5f9f35942ae) profile.
-
-One of my favorite albums:
-
-{{< spotify album 5EyIDBAqhnlkAHqvPRwdbX >}}
+In my free time, aside from learning new things, I enjoy working out, reading, and discovering music.
 
 ## About This Blog
 

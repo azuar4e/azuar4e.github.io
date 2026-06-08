@@ -1,30 +1,18 @@
 # Sobre Mí
 
 
-{{< center-quote >}}
-Todas vuestras cosas sean hechas con amor.
-
-_— 1 Corintios 16:14_
-{{< /center-quote >}}
-
 ## Sobre mí
 
 ¡Hola a todos! 👋
 
-Mi nombre es Ángel y soy un estudiante de Ingeniería Informática de cuarto año, centrado en el desarrollo y la gestión de entornos cloud.
-
+Mi nombre es Ángel y soy licenciado en Ingeniería Informática, centrado en el desarrollo y la gestión de entornos cloud.
 
 - 👨‍💻 Desarrollador de software
 - ☁️ Interesado en Cloud Computing e Infraestructura
 - :(fa-brands fa-github):  Mi GitHub: [azuar4e](https://github.com/azuar4e)
 
 
-En mi tiempo libre, además de seguir aprendiendo, me gusta entrenar, leer y descubrir música.  
-Si te interesa, aquí tienes mi perfil de [Spotify](https://open.spotify.com/user/angelazuara444?si=ce1ed5f9f35942ae).
-
-Aquí dejo uno de mis álbumes favoritos:
-
-{{< spotify album 5EyIDBAqhnlkAHqvPRwdbX >}}
+En mi tiempo libre, además de seguir aprendiendo, me gusta entrenar, leer y descubrir música.
 
 ## Sobre este blog
 
