@@ -833,8 +833,11 @@ También hemos indagado en el despliegue de una infraestructura automatizada med
 Nuevamente, todo el código está disponible en los repositorios de GitHub de mi cuenta.
 
 >👉 <https://github.com/azuar4e/api-gateway-tfg>
+>
 >👉 <https://github.com/azuar4e/scraper-tfg>
+>
 >👉 <https://github.com/azuar4e/flux-repo-tfg>
+>
 >👉 <https://github.com/azuar4e/terraform-tfg>
 
 Gracias por leer, nos vemos en la próxima, ¡Cuidaos! 👋
