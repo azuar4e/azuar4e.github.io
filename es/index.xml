@@ -2692,10 +2692,10 @@ Mediante un enfoque GitOps, este se encarga de aplicar los manifiestos definidos
 &lt;p>También hemos indagado en el despliegue de una infraestructura automatizada mediante Infraestructura como Código, pudiendo levantarla de forma declarativa y persistente, y almacenando el estado de la misma en un backend de S3.&lt;/p>
 &lt;p>Nuevamente, todo el código está disponible en los repositorios de GitHub de mi cuenta.&lt;/p>
 &lt;blockquote>
-&lt;p>👉 &lt;a href="https://github.com/azuar4e/api-gateway-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/api-gateway-tfg&lt;/a>
-👉 &lt;a href="https://github.com/azuar4e/scraper-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/scraper-tfg&lt;/a>
-👉 &lt;a href="https://github.com/azuar4e/flux-repo-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/flux-repo-tfg&lt;/a>
-👉 &lt;a href="https://github.com/azuar4e/terraform-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/terraform-tfg&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/api-gateway-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/api-gateway-tfg&lt;/a>&lt;/p>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/scraper-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/scraper-tfg&lt;/a>&lt;/p>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/flux-repo-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/flux-repo-tfg&lt;/a>&lt;/p>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/terraform-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/terraform-tfg&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>Gracias por leer, nos vemos en la próxima, ¡Cuidaos! 👋&lt;/p>
 &lt;hr>
 &lt;h2 class="heading-element" id="anexo">&lt;span>5 Anexo&lt;/span>

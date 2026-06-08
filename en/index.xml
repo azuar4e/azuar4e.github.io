@@ -2700,10 +2700,10 @@ The original return date was &lt;code>LocalDate.now().plusWeeks(1)&lt;/code>. Si
 &lt;p>Infrastructure provisioning was also automated using Infrastructure as Code, allowing the environment to be declared, spun up, and torn down reproducibly, with state stored in an S3 backend.&lt;/p>
 &lt;p>All the code is available in the GitHub repositories:&lt;/p>
 &lt;blockquote>
-&lt;p>👉 &lt;a href="https://github.com/azuar4e/api-gateway-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/api-gateway-tfg&lt;/a>
-👉 &lt;a href="https://github.com/azuar4e/scraper-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/scraper-tfg&lt;/a>
-👉 &lt;a href="https://github.com/azuar4e/flux-repo-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/flux-repo-tfg&lt;/a>
-👉 &lt;a href="https://github.com/azuar4e/terraform-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/terraform-tfg&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/api-gateway-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/api-gateway-tfg&lt;/a>&lt;/p>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/scraper-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/scraper-tfg&lt;/a>&lt;/p>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/flux-repo-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/flux-repo-tfg&lt;/a>&lt;/p>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/terraform-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/terraform-tfg&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>Thanks for reading, see you next time. Take care! 👋&lt;/p>
 &lt;hr>
 &lt;h2 class="heading-element" id="appendix">&lt;span>5 Appendix&lt;/span>

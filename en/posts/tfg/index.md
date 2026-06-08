@@ -802,8 +802,11 @@ Infrastructure provisioning was also automated using Infrastructure as Code, all
 All the code is available in the GitHub repositories:
 
 >👉 <https://github.com/azuar4e/api-gateway-tfg>
+>
 >👉 <https://github.com/azuar4e/scraper-tfg>
+>
 >👉 <https://github.com/azuar4e/flux-repo-tfg>
+>
 >👉 <https://github.com/azuar4e/terraform-tfg>
 
 Thanks for reading, see you next time. Take care! 👋
