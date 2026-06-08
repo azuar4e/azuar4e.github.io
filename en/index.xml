@@ -1560,7 +1560,1294 @@ The original return date was &lt;code>LocalDate.now().plusWeeks(1)&lt;/code>. Si
  &lt;/a>
 &lt;/h2>&lt;p>This project is a good example of how to create a RESTful API using &lt;em>Spring Boot&lt;/em>. It is quite complete, as it covers various aspects such as architecture, the use of REST patterns, centralized exception handling, and the creation of a client to consume the API.&lt;/p>
 &lt;p>As always, you can find the source code in my &lt;a href="https://github.com/azuar4e/RESTful-Service"target="_blank" rel="external nofollow noopener noreferrer">GitHub repository&lt;/a>.&lt;/p>
-&lt;p>Thanks for reading, see you next time. Take care! 👋&lt;/p></description></item><item><title>Language Translator</title><link>https://azuar4e.github.io/en/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>azuar4e@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/en/posts/tdl/</guid><category domain="https://azuar4e.github.io/en/categories/university/">University</category><category domain="https://azuar4e.github.io/en/categories/personal-projects/">Personal Projects</category><description>&lt;h2 class="heading-element" id="introduction">&lt;span>1 Introduction&lt;/span>
+&lt;p>Thanks for reading, see you next time. Take care! 👋&lt;/p></description></item><item><title>Design and Implementation of a Cloud-Native Architecture Based on Microservices Deployed on Kubernetes</title><link>https://azuar4e.github.io/en/posts/tfg/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>azuar4e@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/en/posts/tfg/</guid><category domain="https://azuar4e.github.io/en/categories/university/">University</category><category domain="https://azuar4e.github.io/en/categories/personal-projects/">Personal Projects</category><description>&lt;h2 class="heading-element" id="introduction">&lt;span>1 Introduction&lt;/span>
+ &lt;a href="#introduction" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>This article covers the implementation of a cloud-native infrastructure deployed on Amazon Web Services (AWS), based on a microservices architecture developed in Go. It also incorporates a CI/CD pipeline that automates the deployment process and ensures high availability, fault tolerance, and service scaling through GitHub workflows and tools such as FluxCD.&lt;/p>
+&lt;p>The proposed infrastructure represents a common scenario in modern production environments, where microservices-based architectures have largely replaced traditional &lt;strong>monolithic systems&lt;/strong>. In the latter, the application is built as a single unit, which may simplify initial development but introduces limitations as the system grows in complexity. In particular, the accumulation of responsibilities in a single component makes maintenance harder and means a failure can bring down the entire system.&lt;/p>
+&lt;p>In contrast, in a microservices architecture each component handles a specific piece of functionality and operates independently. This improves system availability since a failure in one service does not cause a total outage. &lt;strong>Decoupling&lt;/strong> between services also makes it easier to evolve the system, add new features, and maintain it over time.&lt;/p>
+&lt;p>Cloud platforms, compared to traditional on-premises infrastructure, provide resources on demand, enabling scalability, high availability, and simplified infrastructure management. Providers like AWS, Microsoft Azure, and Google Cloud offer managed services that simplify the deployment and operation of distributed applications.&lt;/p>
+&lt;p>Adopting a cloud-native architecture is challenging, particularly around deployment, infrastructure management, and inter-service communication. Tools like Kubernetes and CI/CD systems help address these challenges.&lt;/p>
+&lt;p>To accomplish this, Terraform is used to provision the cloud infrastructure. On top of it, a Kubernetes cluster is deployed where FluxCD acts as the continuous delivery tool, connected to a GitHub repository containing the manifests needed to deploy and manage the application.&lt;/p>
+&lt;p>The application itself is a price-tracking tool for products on a given website. It is implemented as a microservices architecture composed of an API, a scraping service, and a serverless task re-scheduling component via AWS Lambda.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong> This article assumes the reader is familiar with the technologies used in this project.&lt;/p>
+&lt;p>&lt;strong>Note 2:&lt;/strong> The full thesis will be published on the university website at the end of the month, after the defense. It includes a more detailed explanation of the work for readers with less background in the topic, although it will be in spanish.&lt;/p>&lt;/blockquote>
+&lt;h2 class="heading-element" id="development">&lt;span>2 Development&lt;/span>
+ &lt;a href="#development" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>Before diving in, here is a high-level overview of the system design and the chosen tech stack.&lt;/p>
+&lt;p>The microservices are developed in &lt;a href="https://go.dev/doc/faq#creating_a_new_language"target="_blank" rel="external nofollow noopener noreferrer">Go&lt;/a> (Golang), a language designed by Google specifically for scalability and distributed systems problems. It performs close to low-level languages while keeping memory management simple. It is also the &lt;em>de facto&lt;/em> standard in the cloud-native ecosystem (Kubernetes itself is written in Go), which ensures optimal integration and efficient container deployment.&lt;/p>
+&lt;p>The following AWS resources were deployed to support the services:&lt;/p>
+&lt;ul>
+&lt;li>Amazon DynamoDB for job storage, and an Amazon Relational Database Service (RDS) PostgreSQL instance for user management. An AWS Lambda function implements the re-scheduler.&lt;/li>
+&lt;li>A Virtual Private Cloud (VPC) encompassing the entire infrastructure, with two public and two private subnets. The main resources (EKS cluster, RDS) live in the private ones. The setup includes routing tables, an Internet Gateway, and a NAT Gateway for external connectivity.&lt;/li>
+&lt;li>Amazon Simple Notification Service (SNS) for notifying users of price changes.&lt;/li>
+&lt;li>Amazon Simple Queue Service for message queue management.&lt;/li>
+&lt;li>Amazon CloudWatch for metrics collection and monitoring.&lt;/li>
+&lt;li>Amazon Route 53 for DNS management, providing a stable access point for certain infrastructure resources.&lt;/li>
+&lt;li>An Amazon Elastic Kubernetes Service (EKS) cluster with FluxCD installed. Using a GitOps approach, FluxCD applies the manifests defined in a GitHub repository and keeps the desired and actual cluster state in sync. The &lt;a href="https://github.com/kubernetes/ingress-nginx"target="_blank" rel="external nofollow noopener noreferrer">NGINX Ingress Controller&lt;/a> exposes the application through an Elastic Load Balancer (ELB) as the external entry point.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>The NGINX Ingress Controller is deprecated, with no updates since March 2026. The natural alternative would be the Kubernetes &lt;strong>Gateway API&lt;/strong>.&lt;/p>&lt;/blockquote>
+&lt;p>The diagram below shows the full infrastructure architecture.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/arquitfg.png" title="System Architecture Diagram" data-thumbnail="/en/posts/tfg/images/arquitfg.png" data-sub-html="&lt;h2>System Architecture Diagram&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/arquitfg.png' alt="System Architecture Diagram" height="701" width="1143">&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Why this stack?&lt;/strong>&lt;/p>
+&lt;p>For databases, two solutions were chosen based on the use case: &lt;strong>DynamoDB&lt;/strong> for jobs (simple key-based access, no joins needed) and &lt;strong>RDS PostgreSQL&lt;/strong> for users (relational data with ACID guarantees). Each one where it makes sense.&lt;/p>
+&lt;p>For messaging, Kafka was ruled out as overkill for this volume, it requires maintaining a dedicated cluster and is designed for millions of events. &lt;strong>SQS/SNS&lt;/strong> is sufficient with no operational overhead. SNS was preferred over SES for notifications because it allows adding extra channels like SMS without changing the architecture.&lt;/p>
+&lt;p>The re-scheduler was implemented as a &lt;strong>Lambda&lt;/strong> function rather than a Kubernetes pod. Its logic is minimal and runs periodically, so there is no point in keeping a process running 24/7 with no workload.&lt;/p>
+&lt;p>For orchestration, the choice was between EKS, ECS, and EC2. ECS is simpler but locks you into the AWS ecosystem. EC2 would require managing orchestration manually, which is not viable here. &lt;strong>EKS&lt;/strong> was chosen for its portability, mature ecosystem (FluxCD, NGINX Ingress&amp;hellip;), and because it is the standard in professional environments.&lt;/p>
+&lt;p>Finally, &lt;strong>Terraform&lt;/strong> was preferred over CloudFormation for being provider-agnostic, having a wider module ecosystem, and using a more readable and maintainable declarative language (HCL).&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="microservices">&lt;span>2.1 Microservices&lt;/span>
+ &lt;a href="#microservices" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>The microservices are developed in Go and deployed on the EKS cluster worker nodes via FluxCD, as described in the &lt;a href="#cicd-pipeline-and-automation">CI/CD Pipeline&lt;/a> section.&lt;/p>
+&lt;p>The following diagram illustrates how they interact:&lt;/p>
+&lt;p>&lt;a id="micros-diagram">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/flujomicroservicio.png" title="Microservices Diagram" data-thumbnail="/en/posts/tfg/images/flujomicroservicio.png" data-sub-html="&lt;h2>Microservices Diagram&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/flujomicroservicio.png' alt="Microservices Diagram" height="434" width="749">&lt;/a>&lt;/p>
+&lt;p>The user registers and logs in through the API Gateway. Once authenticated, they receive a JWT in a cookie granting access to the &lt;code>/validate&lt;/code>, &lt;code>/jobs&lt;/code> (GET, POST, DELETE), and &lt;code>/jobs/:id&lt;/code> endpoints.&lt;/p>
+&lt;p>Upon registration, the user receives an Amazon SNS email asking them to subscribe in order to receive notifications. When a job is created (a product URL plus a target price), it is enqueued in SQS. The scraper consumes the queue using 5 parallel workers: it extracts the URL and price, scrapes the page, and compares the result with the target price. If the price is at or below the target, the user is notified via email.&lt;/p>
+&lt;p>The re-scheduler re-enqueues jobs that were processed by the scraper but have not yet reached the target price. Once the scraper deletes the message from the queue, the re-scheduler checks the last recorded price and, if the condition is not met, sends a new message to SQS for the next processing cycle.&lt;/p>
+&lt;p>The source code for the &lt;a href="https://github.com/azuar4e/api-gateway-tfg"target="_blank" rel="external nofollow noopener noreferrer">API Gateway&lt;/a> and &lt;a href="https://github.com/azuar4e/scraper-tfg"target="_blank" rel="external nofollow noopener noreferrer">Scraper&lt;/a> is available on GitHub. The re-scheduler code, being a smaller Lambda function, is included in the &lt;a href="#appendix">Appendix&lt;/a>.&lt;/p>
+&lt;h4 class="heading-element" id="api-gateway">&lt;span>2.1.1 API Gateway&lt;/span>
+ &lt;a href="#api-gateway" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>This microservice was built using &lt;a href="https://github.com/gin-gonic/gin"target="_blank" rel="external nofollow noopener noreferrer">Gin&lt;/a>, a lightweight Go web framework for REST APIs, along with the AWS SDK for Go.&lt;/p>
+&lt;p>The application entry point is &lt;code>main.go&lt;/code>. Before initializing the router, an &lt;code>init&lt;/code> function establishes connections to all external services:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">init&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">LoadEnvVariables&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ConnectToPostgres&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SyncDB&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ConnectToDynamo&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ConnectToSQS&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ConnectToSNS&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The router and endpoints are configured in the main function:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">r&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Default&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/api/v1&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Public endpoints&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">POST&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/signin&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">controllers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SigninHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">POST&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/signup&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">controllers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">RegisterHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">middleware&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AuthMiddleware&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Protected endpoints&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">POST&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/jobs&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">handlers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">CreateJobHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">GET&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/jobs&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">handlers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">GetJobsHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">DELETE&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/jobs&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">handlers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DeleteJobsHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">GET&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/jobs/:id&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">handlers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">GetJobByIdHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">DELETE&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/jobs/:id&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">handlers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DeleteJobHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">GET&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/validate&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">controllers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Validate&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;:9090&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The API listens on port &lt;code>9090&lt;/code>, accessible externally through the ELB under the &lt;code>/api/v1&lt;/code> prefix. The auth middleware is placed deliberately after the public authentication endpoints.&lt;/p>
+&lt;p>During registration (&lt;code>/signup&lt;/code>), the user sends their credentials, the password is hashed and stored in PostgreSQL, and the user is subscribed to an SNS topic. On login (&lt;code>/signin&lt;/code>), the password is validated and a signed JWT is generated:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">token&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">jwt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewWithClaims&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">jwt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SigningMethodHS256&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">jwt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">MapClaims&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;sub&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">user&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ID&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;exp&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Now&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nf">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Hour&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">24&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Unix&lt;/span>&lt;span class="p">(),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">tokenString&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">token&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SignedWith&lt;/span>&lt;span class="p">([]&lt;/span>&lt;span class="nb">byte&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;JWT_SECRET&amp;#34;&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SetSameSite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SameSiteLaxMode&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SetCookie&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Authorization&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">tokenString&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3600&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="mi">24&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">JSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusOK&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{})&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The auth middleware reads the token from the cookie and validates it:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">token&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">jwt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">tokenString&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">token&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">jwt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Token&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">error&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="nb">byte&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;JWT_SECRET&amp;#34;&lt;/span>&lt;span class="p">)),&lt;/span> &lt;span class="kc">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">},&lt;/span> &lt;span class="nx">jwt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">WithValidMethods&lt;/span>&lt;span class="p">([]&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">jwt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SigningMethodHS256&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Alg&lt;/span>&lt;span class="p">()}))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AbortWithStatusJSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusUnauthorized&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;error&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;Invalid token: &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Error&lt;/span>&lt;span class="p">()})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The DynamoDB data structure for jobs:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">type&lt;/span> &lt;span class="nx">JobDynamoItem&lt;/span> &lt;span class="kd">struct&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">PK&lt;/span> &lt;span class="kt">int64&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;PK&amp;#34;`&lt;/span> &lt;span class="c1">// user_id&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">SK&lt;/span> &lt;span class="kt">int64&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;SK&amp;#34;`&lt;/span> &lt;span class="c1">// job_id&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">URL&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;url&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">TargetPrice&lt;/span> &lt;span class="kt">float64&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;target_price&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">LastPrice&lt;/span> &lt;span class="kt">float64&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;last_price&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Status&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;status&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">CreatedAt&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;created_at&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">UpdatedAt&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`dynamodbav:&amp;#34;updated_at&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Handler tests are run in isolation using mocks for external dependencies, defining an interface that abstracts the &lt;code>PutItem&lt;/code> operation:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">type&lt;/span> &lt;span class="nx">DynamoInterface&lt;/span> &lt;span class="kd">interface&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">PutItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">params&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">dynamodb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">PutItemInput&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">optFns&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="nx">dynamodb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Options&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="nx">dynamodb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">PutItemOutput&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">error&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This allows injecting a mock implementation during tests without real AWS connections.&lt;/p>
+&lt;p>The repository also includes a GitHub Actions CI pipeline that automates test execution, container image builds, and publishing to GHCR (shown in the &lt;a href="#micros-diagram">microservices diagram&lt;/a>).&lt;/p>
+&lt;h4 class="heading-element" id="scraper">&lt;span>2.1.2 Scraper&lt;/span>
+ &lt;a href="#scraper" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>This microservice uses &lt;a href="https://github.com/playwright-community/playwright-go"target="_blank" rel="external nofollow noopener noreferrer">Playwright&lt;/a> for browser automation, along with the AWS SDK for Go.&lt;/p>
+&lt;p>Like the API Gateway, it initializes connections to DynamoDB, SQS, and SNS via an &lt;code>init&lt;/code> function before the main logic runs.&lt;/p>
+&lt;p>The &lt;code>main&lt;/code> function defines a concurrent processing strategy with five workers:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">messageChan&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nb">make&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">chan&lt;/span> &lt;span class="nx">types&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Message&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="nx">w&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">w&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">w&lt;/span>&lt;span class="o">++&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">go&lt;/span> &lt;span class="nf">worker&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">w&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">messageChan&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">output&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SQS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ReceiveMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">TODO&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">sqs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ReceiveMessageInput&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">QueueUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">aws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;SQS_QUEUE_URL&amp;#34;&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">MaxNumberOfMessages&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">WaitTimeSeconds&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">m&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">range&lt;/span> &lt;span class="nx">output&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Messages&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">messageChan&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="nx">m&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">worker&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span> &lt;span class="kt">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">messages&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span>&lt;span class="kd">chan&lt;/span> &lt;span class="nx">types&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Message&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="nx">m&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">range&lt;/span> &lt;span class="nx">messages&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">setJobStatus&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;processing&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">handlers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ProcessMessageHandler&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">m&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SQS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">DeleteMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">TODO&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">sqs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DeleteMessageInput&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">QueueUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">aws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;SQS_QUEUE_URL&amp;#34;&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ReceiptHandle&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">m&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ReceiptHandle&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Each worker sets the job status to &lt;code>processing&lt;/code> before handling it, preventing the re-scheduler from re-enqueuing it prematurely. Extraction is done by launching a headless Firefox browser:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">pw&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">playwright&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Run&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">browser&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">pw&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Firefox&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Launch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">playwright&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">BrowserTypeLaunchOptions&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Headless&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">playwright&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Bool&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">page&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">browser&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewPage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">playwright&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">BrowserNewPageOptions&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Locale&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">playwright&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;es-ES&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">UserAgent&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">playwright&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Firefox/122.0&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once the page is loaded, the service navigates to the job URL and locates the title and price selectors based on the domain (Amazon, PCComponentes). If the current price is at or below the target, the job moves to &lt;code>notified&lt;/code> and an SNS notification is sent. Otherwise, the status is updated to &lt;code>active&lt;/code> and the last observed price is stored for the next cycle.&lt;/p>
+&lt;h4 class="heading-element" id="lambda-re-scheduler">&lt;span>2.1.3 Lambda Re-Scheduler&lt;/span>
+ &lt;a href="#lambda-re-scheduler" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>The re-scheduler is an AWS Lambda function responsible for re-enqueuing jobs that remain in &lt;code>active&lt;/code> state after being processed by the scraper. It scans DynamoDB, identifies jobs that have not yet reached their target price, and sends a new message to SQS.&lt;/p>
+&lt;p>Its value is not in algorithmic complexity but in the architectural decision to decouple re-scheduling logic from the main scraping process, taking advantage of the serverless model.&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="infrastructure-as-code-iac">&lt;span>2.2 Infrastructure as Code (IaC)&lt;/span>
+ &lt;a href="#infrastructure-as-code-iac" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Infrastructure provisioning is automated with &lt;strong>Terraform&lt;/strong>. A key motivation was staying within the AWS Academy Learner Lab budget ($50 limit): with IaC, the entire infrastructure can be spun up and torn down in minutes.&lt;/p>
+&lt;p>The source code is available in the &lt;a href="https://github.com/azuar4e/terraform-tfg"target="_blank" rel="external nofollow noopener noreferrer">GitHub repository&lt;/a>.&lt;/p>
+&lt;p>Resources are organized into modules:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plaintext" data-lang="plaintext">&lt;span class="line">&lt;span class="cl">terraform/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> environments/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> modules/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cloudwatch/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dynamo/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> eks/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> networking/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rds/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> route53/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>These modules provision the resources shown in the diagram below:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/terraform.png" title="Terraform Infrastructure Diagram" data-thumbnail="/en/posts/tfg/images/terraform.png" data-sub-html="&lt;h2>Terraform Infrastructure Diagram&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/terraform.png' alt="Terraform Infrastructure Diagram" height="331" width="551">&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong> Due to scope constraints, the SNS topic, SQS queue, and Lambda re-scheduler were deployed manually. The Learner Lab environment regenerates ARNs each session, making Terraform management of those resources impractical without added complexity.&lt;/p>&lt;/blockquote>
+&lt;p>For the Lambda function, a new instance is created with Amazon Linux 2023 as the runtime and the existing &lt;code>LabRole&lt;/code> as the execution role. The function code needs to be compiled first:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:GOOS&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;linux&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:GOARCH&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;amd64&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env&lt;/span>:CGO_ENABLED&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go build -o bootstrap ./cmd/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">aws lambda update-function-code --function-name microservice-scheduler --zip-file fileb://lambda.zip&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The trigger is configured via &lt;strong>Amazon EventBridge&lt;/strong> with a rule that fires every minute, and the required environment variables are added to the function.&lt;/p>
+&lt;p>For SQS, two parameters are configured: maximum message size (256 KB) and &lt;code>Receive message wait time&lt;/code> (20 seconds), to reduce the number of empty responses from the scraper&amp;rsquo;s continuous polling.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/sqs-config.png" title="SQS Configuration" data-thumbnail="/en/posts/tfg/images/sqs-config.png" data-sub-html="&lt;h2>SQS Configuration&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/sqs-config.png' alt="SQS Configuration" height="416" width="1246">&lt;/a>&lt;/p>
+&lt;p>For the SNS topic, a name (&lt;code>PricesNotification&lt;/code>) is assigned and encryption is enabled; everything else stays at default.&lt;/p>
+&lt;p>For the &lt;code>tfstate&lt;/code>, in a real environment it would be stored in an S3 bucket with state locking via DynamoDB, using the Cloud Posse &lt;code>tfstate-backend&lt;/code> public module:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-hcl" data-lang="hcl">&lt;span class="line">&lt;span class="cl">&lt;span class="k">module&lt;/span> &lt;span class="s2">&amp;#34;terraform_state_backend&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> source&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;cloudposse/tfstate-backend/aws&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> namespace&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;tfg&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> stage&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;dev&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;azuar4e&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> attributes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;state&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> terraform_backend_config_file_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> terraform_backend_config_file_name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;backend.tf&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> force_destroy&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kt">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The VPC is configured with two public and two private subnets across availability zones:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-hcl" data-lang="hcl">&lt;span class="line">&lt;span class="cl">&lt;span class="k">resource&lt;/span> &lt;span class="s2">&amp;#34;aws_subnet&amp;#34; &amp;#34;public-1a&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> vpc_id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">aws_vpc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">tfg&lt;/span>&lt;span class="err">-&lt;/span>&lt;span class="k">vpc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">id&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> cidr_block&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;10.0.1.0/24&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> availability_zone&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;us-east-1a&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> tags&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="n"> { Name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;public-1a&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">resource&lt;/span> &lt;span class="s2">&amp;#34;aws_subnet&amp;#34; &amp;#34;private-1a&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> vpc_id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">aws_vpc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">tfg&lt;/span>&lt;span class="err">-&lt;/span>&lt;span class="k">vpc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">id&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> cidr_block&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;10.0.2.0/24&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> availability_zone&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;us-east-1a&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> tags&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="n"> { Name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;private-1a&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">#&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">same&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="m">1&lt;/span>&lt;span class="err">b&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>EKS is configured with secrets encryption via AWS KMS:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-hcl" data-lang="hcl">&lt;span class="line">&lt;span class="cl">&lt;span class="k">resource&lt;/span> &lt;span class="s2">&amp;#34;aws_eks_cluster&amp;#34; &amp;#34;main&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;eks-cluster&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> role_arn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">var&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">cluster_role_arn&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">vpc_config&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> subnet_ids&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">var&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">private_subnet_ids&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> endpoint_public_access&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kt">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> endpoint_private_access&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kt">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">encryption_config&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">provider&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> key_arn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;arn:aws:kms:REGION:ACCOUNT_ID:alias/aws/eks&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> resources&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;secrets&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>RDS is configured as not publicly accessible, with a Security Group restricting access to EKS cluster traffic only:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-hcl" data-lang="hcl">&lt;span class="line">&lt;span class="cl">&lt;span class="k">ingress&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> from_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> to_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> protocol&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;tcp&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> security_groups&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">eks_cluster_security_group_id&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>CloudWatch alarms are configured for Lambda errors, RDS/EKS CPU usage, and SQS queue depth, notifying a KMS-encrypted SNS topic:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-hcl" data-lang="hcl">&lt;span class="line">&lt;span class="cl">&lt;span class="k">resource&lt;/span> &lt;span class="s2">&amp;#34;aws_sns_topic&amp;#34; &amp;#34;alarms&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;cloudwatch-alarms&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> kms_master_key_id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;alias/aws/sns&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">resource&lt;/span> &lt;span class="s2">&amp;#34;aws_cloudwatch_metric_alarm&amp;#34; &amp;#34;lambda-errors&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> alarm_name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;lambda-errors-alarm&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> comparison_operator&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;GreaterThanOrEqualToThreshold&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> evaluation_periods&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> metric_name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Errors&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> namespace&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;AWS/Lambda&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> period&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">120&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> statistic&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Sum&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> threshold&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> alarm_actions&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="k">aws_sns_topic&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">alarms&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">arn&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> dimensions&lt;/span> &lt;span class="o">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> FunctionName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">var&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">lambda_function_name&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Route53 exposes a stable alias for RDS (&lt;code>db.dev.internal&lt;/code>), so microservice configuration does not need to change when the instance is recreated:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-hcl" data-lang="hcl">&lt;span class="line">&lt;span class="cl">&lt;span class="k">resource&lt;/span> &lt;span class="s2">&amp;#34;aws_route53_record&amp;#34; &amp;#34;db_record&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> zone_id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">aws_route53_zone&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">dev_internal&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">zone_id&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;db.dev.internal&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> type&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;CNAME&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> ttl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">60&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> records&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">rds_endpoint&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The infrastructure cost estimate, calculated with &lt;a href="https://www.infracost.io/"target="_blank" rel="external nofollow noopener noreferrer">Infracost&lt;/a>, comes to &lt;strong>$187/month&lt;/strong> with all resources running 24/7. In practice, only $19 was spent during development thanks to spinning the infrastructure up and down as needed.&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Module&lt;/th>
+ &lt;th>Resource&lt;/th>
+ &lt;th>Monthly cost (USD)&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>eks&lt;/td>
+ &lt;td>EKS Cluster&lt;/td>
+ &lt;td>$73.00&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>eks&lt;/td>
+ &lt;td>Node Group (2x t3.medium + 40GB gp2)&lt;/td>
+ &lt;td>$64.74&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>networks&lt;/td>
+ &lt;td>NAT Gateway&lt;/td>
+ &lt;td>$32.85&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>rds&lt;/td>
+ &lt;td>RDS PostgreSQL db.t3.micro + 20GB gp2&lt;/td>
+ &lt;td>$15.44&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>cloudwatch&lt;/td>
+ &lt;td>CloudWatch Alarms (4x standard)&lt;/td>
+ &lt;td>$0.40&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>route53&lt;/td>
+ &lt;td>Hosted Zone&lt;/td>
+ &lt;td>$0.50&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>terraform_state_backend&lt;/td>
+ &lt;td>S3 + DynamoDB (Terraform state)&lt;/td>
+ &lt;td>variable&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>dynamo&lt;/td>
+ &lt;td>DynamoDB jobs table&lt;/td>
+ &lt;td>variable&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>cloudwatch&lt;/td>
+ &lt;td>SNS Topic Alarms&lt;/td>
+ &lt;td>variable&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>Monthly base total&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>&lt;strong>$186.93&lt;/strong>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>Resources marked as variable depend on usage (requests, storage, notifications) and have zero or minimal cost in the development environment. The base total corresponds to resources with a fixed price regardless of traffic.&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h3 class="heading-element" id="kubernetes-orchestration">&lt;span>2.3 Kubernetes Orchestration&lt;/span>
+ &lt;a href="#kubernetes-orchestration" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Kubernetes orchestration relies on Ingress, Services, Deployments, ConfigMaps, Secrets, metrics-server, and HPA, all deployed via FluxCD (see the &lt;a href="#cicd-pipeline-and-automation">CI/CD Pipeline&lt;/a> section).&lt;/p>
+&lt;p>The API listens on port &lt;code>9090&lt;/code>, exposed via a ClusterIP Service:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">spec&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ports&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">port&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">80&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">protocol&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TCP&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">targetPort&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">9090&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">selector&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">app&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">api-gateway&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">type&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ClusterIP&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Traffic ingress is managed by the &lt;a href="https://github.com/kubernetes/ingress-nginx"target="_blank" rel="external nofollow noopener noreferrer">NGINX Ingress Controller&lt;/a>, installed via HelmRelease and HelmRepository. The Ingress routes all incoming requests to the API Service:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">spec&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ingressClassName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">nginx&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">rules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">http&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">paths&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">backend&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">service&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">api-svc&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">port&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">number&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">80&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">pathType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Prefix&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>In &lt;code>values.yaml&lt;/code>, the Ingress Controller is configured with a LoadBalancer Service, which triggers automatic ELB creation in AWS:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">values&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">controller&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">admissionWebhooks&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">enabled&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">replicaCount&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">service&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">type&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">LoadBalancer&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>ConfigMaps are used for non-sensitive configuration variables; Secrets handle sensitive data like AWS credentials or external webhooks.&lt;/p>
+&lt;p>Secrets are created manually in the cluster and are not committed to the repository:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubectl create secret generic discord-url -n flux-system &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --from-literal&lt;span class="o">=&lt;/span>&lt;span class="nv">address&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&amp;lt;DISCORD_WEBHOOK_URL&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl create secret generic aws-creds &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --from-literal&lt;span class="o">=&lt;/span>&lt;span class="nv">AWS_ACCESS_KEY_ID&lt;/span>&lt;span class="o">=&lt;/span>&amp;lt;AWS_ACCESS_KEY_ID&amp;gt; &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --from-literal&lt;span class="o">=&lt;/span>&lt;span class="nv">AWS_SECRET_ACCESS_KEY&lt;/span>&lt;span class="o">=&lt;/span>&amp;lt;AWS_SECRET_ACCESS_KEY&amp;gt; &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --from-literal&lt;span class="o">=&lt;/span>&lt;span class="nv">AWS_SESSION_TOKEN&lt;/span>&lt;span class="o">=&lt;/span>&amp;lt;AWS_SESSION_TOKEN&amp;gt; &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --from-literal&lt;span class="o">=&lt;/span>&lt;span class="nv">AWS_DEFAULT_REGION&lt;/span>&lt;span class="o">=&lt;/span>us-east-1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl create secret generic db-credentials &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --from-literal&lt;span class="o">=&lt;/span>&lt;span class="nv">DB&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;host=db.dev.internal user=dbadmin password=&amp;lt;PASSWORD&amp;gt; dbname=mydb port=5432 sslmode=require&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Three secrets in total: one for the Discord webhook, one for AWS credentials so the microservices can interact with AWS services, and one for the RDS PostgreSQL connection.&lt;/p>
+&lt;p>A metrics-server is also configured to expose CPU and memory metrics for pods to the Kubernetes API, which is a prerequisite for HPA to function.&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="cicd-pipeline-and-automation">&lt;span>2.4 CI/CD Pipeline and Automation&lt;/span>
+ &lt;a href="#cicd-pipeline-and-automation" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>The software lifecycle relies on two complementary mechanisms: &lt;strong>GitHub Actions&lt;/strong> for continuous integration and &lt;strong>FluxCD&lt;/strong> for continuous delivery. GitHub Actions validates code, runs tests, and builds container images; FluxCD implements the GitOps approach on EKS using a Git repository as the single source of truth.&lt;/p>
+&lt;p>The FluxCD configuration is available in the public &lt;a href="https://github.com/azuar4e/flux-repo-tfg"target="_blank" rel="external nofollow noopener noreferrer">flux-repo-tfg&lt;/a> repository.&lt;/p>
+&lt;p>FluxCD is bootstrapped with:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">flux bootstrap github &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --owner&lt;span class="o">=&lt;/span>azuar4e &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --repository&lt;span class="o">=&lt;/span>flux-repo-tfg &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --branch&lt;span class="o">=&lt;/span>master &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --path&lt;span class="o">=&lt;/span>./clusters/home &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --token-auth &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --components-extra&lt;span class="o">=&lt;/span>image-reflector-controller,image-automation-controller&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once bootstrapped, FluxCD deploys and keeps in sync all resources defined in the repository: microservice manifests, internal services, ingress rules, metrics-server, image registry configs, and the objects needed to automate version updates. Some of the deployed components are shown in the &lt;a href="#micros-diagram">microservices diagram&lt;/a>.&lt;/p>
+&lt;p>The image auto-update policy:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># In the Deployment manifest:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ghcr.io/azuar4e/scraper-tfg:22&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># {&amp;#34;$imagepolicy&amp;#34;: &amp;#34;flux-system:scraper-tfg&amp;#34;}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">apiVersion&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">image.toolkit.fluxcd.io/v1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ImagePolicy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">metadata&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">scraper-tfg&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">namespace&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">flux-system&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">spec&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">imageRepositoryRef&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">scraper-tfg&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">filterTags&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">pattern&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;^\d+$&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">policy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">numerical&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">order&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">asc&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>An &lt;code>ImageUpdateAutomation&lt;/code> resource then commits the manifest changes back to the GitOps repository whenever a new valid image version is detected.&lt;/p>
+&lt;p>With this setup, pushing to a microservice repository triggers GitHub Actions to build and publish the new image to GHCR; FluxCD detects the new version, auto-commits the updated manifest, reconciles the cluster, and sends a Discord notification.&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="service-communication">&lt;span>2.5 Service Communication&lt;/span>
+ &lt;a href="#service-communication" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Inter-service communication follows an asynchronous, decoupled model. Instead of direct calls between microservices, SQS acts as the intermediary and SNS is the outbound notification channel.&lt;/p>
+&lt;p>The full flow:&lt;/p>
+&lt;ol>
+&lt;li>The user calls the API Gateway, which enqueues the message in SQS.&lt;/li>
+&lt;li>The scraper reads from the queue and processes the message.&lt;/li>
+&lt;li>If the price target is met, the user is notified via SNS.&lt;/li>
+&lt;li>If not, the Lambda scans DynamoDB for &lt;code>active&lt;/code> jobs and re-inserts them into SQS for the next cycle.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/comunicacion.png" title="Service Communication Diagram" data-thumbnail="/en/posts/tfg/images/comunicacion.png" data-sub-html="&lt;h2>Service Communication Diagram&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/comunicacion.png' alt="Service Communication Diagram" height="353" width="720">&lt;/a>&lt;/p>
+&lt;p>A &lt;code>visibility timeout&lt;/code> of 30 seconds is configured in SQS to ensure a message is not consumed by multiple workers simultaneously. The scraper also sets the job status to &lt;code>processing&lt;/code> in DynamoDB before handling it, preventing the re-scheduler from re-enqueuing it prematurely.&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="security">&lt;span>2.6 Security&lt;/span>
+ &lt;a href="#security" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Security is split between &lt;code>security-of-the-cloud&lt;/code> (AWS&amp;rsquo;s responsibility: hardware, physical network, hypervisors&amp;hellip;) and &lt;code>security-in-the-cloud&lt;/code> (the developer&amp;rsquo;s responsibility):&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>At-rest:&lt;/strong> encryption enabled on RDS PostgreSQL and the DynamoDB table.&lt;/li>
+&lt;li>&lt;strong>In-transit:&lt;/strong> as a known limitation, TLS was not configured, so external communications happen over HTTP. Internal pod-to-pod communication also lacks TLS since no service mesh was implemented.&lt;/li>
+&lt;/ul>
+&lt;p>For &lt;strong>network filtering&lt;/strong>, Security Groups on RDS restrict access to traffic coming from the EKS cluster Security Group only:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-hcl" data-lang="hcl">&lt;span class="line">&lt;span class="cl">&lt;span class="k">ingress&lt;/span> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> from_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> to_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="m">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> protocol&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;tcp&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n"> security_groups&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">eks_cluster_security_group_id&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Application access is controlled through the API Gateway with JWT authentication. At the infrastructure level, the public/private subnet separation ensures only components that need external exposure are reachable from the Internet. All inbound traffic is centralized through the Ingress Controller and ELB, reducing the attack surface.&lt;/p>
+&lt;p>Kubernetes configuration is managed through ConfigMaps and Secrets, keeping a clean separation between non-sensitive configuration parameters and sensitive credentials.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/seguridad.png" title="Perimeter Security, Network Isolation and Encryption Diagram" data-thumbnail="/en/posts/tfg/images/seguridad.png" data-sub-html="&lt;h2>Perimeter Security, Network Isolation and Encryption Diagram&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/seguridad.png' alt="Perimeter Security, Network Isolation and Encryption Diagram" height="341" width="677">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="scalability-and-resources">&lt;span>2.7 Scalability and Resources&lt;/span>
+ &lt;a href="#scalability-and-resources" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>The system was designed with scalability and efficient resource usage in mind. Two main mechanisms were applied:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Resource requests and limits&lt;/strong> on Deployments to prevent a single pod from consuming all node resources.&lt;/li>
+&lt;li>&lt;strong>HPA&lt;/strong> for the scraper and the API, dynamically adjusting the number of replicas based on load.&lt;/li>
+&lt;/ol>
+&lt;p>Limits defined for the API:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">resources&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">requests&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">cpu&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;50m&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">memory&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;32Mi&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">limits&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">cpu&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;200m&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">memory&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;128Mi&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And for the scraper (adjusted after an &lt;code>OOMKilled&lt;/code> during testing):&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">resources&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">requests&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">cpu&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;300m&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">memory&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;256Mi&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">limits&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">cpu&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;900m&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">memory&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;1Gi&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The HPA was configured with a 50% CPU threshold and a range of 1 to 10 replicas for the API, and 1 to 4 for the scraper. The EKS node group was designed with a minimum of 1 node, a desired count of 2, and a maximum of 3 &lt;code>t3.medium&lt;/code> instances (2 vCPUs, 4 GB RAM), with the ability to scale up to 6 cores and 12 GB via the Cluster Autoscaler.&lt;/p>
+&lt;blockquote>
+&lt;p>Scaling the scraper by CPU is not ideal since it is an asynchronous service whose load depends on the number of messages in the SQS queue, not HTTP traffic. CPU is used as a proxy metric given the lack of a custom-metrics-based HPA. A future improvement would be adopting &lt;a href="https://keda.sh/"target="_blank" rel="external nofollow noopener noreferrer">KEDA&lt;/a> to scale based on &lt;a href="https://keda.sh/docs/2.19/scalers/aws-sqs/"target="_blank" rel="external nofollow noopener noreferrer">SQS queue depth&lt;/a>.&lt;/p>&lt;/blockquote>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/escalado.png" title="Resource Scaling Diagram" data-thumbnail="/en/posts/tfg/images/escalado.png" data-sub-html="&lt;h2>Resource Scaling Diagram&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/escalado.png' alt="Resource Scaling Diagram" height="379" width="614">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h2 class="heading-element" id="validation-and-testing">&lt;span>3 Validation and Testing&lt;/span>
+ &lt;a href="#validation-and-testing" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>This section validates the correct behavior of the system, both at the functional level and from an infrastructure and deployment automation perspective.&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="api-functional-validation">&lt;span>3.1 API Functional Validation&lt;/span>
+ &lt;a href="#api-functional-validation" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;h4 class="heading-element" id="endpoint-signup">&lt;span>3.1.1 Endpoint /signup&lt;/span>
+ &lt;a href="#endpoint-signup" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>The API correctly registers a new user.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/signup.png" title="POST /signup" data-thumbnail="/en/posts/tfg/images/signup.png" data-sub-html="&lt;h2>POST /signup&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/signup.png' alt="POST /signup" height="481" width="1630">&lt;/a>&lt;/p>
+&lt;p>After registration, the API automatically subscribes the user to an SNS topic, triggering a confirmation email.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/sns-notification.png" title="AWS SNS Notification" data-thumbnail="/en/posts/tfg/images/sns-notification.png" data-sub-html="&lt;h2>AWS SNS Notification&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/sns-notification.png' alt="AWS SNS Notification" height="908" width="2557">&lt;/a>&lt;/p>
+&lt;p>The user is listed as a subscriber once the invitation is accepted.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/sns-subscribers.png" title="AWS SNS Subscribers" data-thumbnail="/en/posts/tfg/images/sns-subscribers.png" data-sub-html="&lt;h2>AWS SNS Subscribers&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/sns-subscribers.png' alt="AWS SNS Subscribers" height="794" width="2124">&lt;/a>&lt;/p>
+&lt;p>Error handling was also validated, such as a missing password field.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/signup-error.png" title="POST /signup missing password field" data-thumbnail="/en/posts/tfg/images/signup-error.png" data-sub-html="&lt;h2>POST /signup missing password field&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/signup-error.png' alt="POST /signup missing password field" height="472" width="1627">&lt;/a>&lt;/p>
+&lt;h4 class="heading-element" id="endpoint-signin">&lt;span>3.1.2 Endpoint /signin&lt;/span>
+ &lt;a href="#endpoint-signin" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>The API correctly authenticates a user with valid credentials, generating a cookie containing the JWT token.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/signin.png" title="POST /signin" data-thumbnail="/en/posts/tfg/images/signin.png" data-sub-html="&lt;h2>POST /signin&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/signin.png' alt="POST /signin" height="435" width="1632">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/cookie-sesion.png" title="Session cookie" data-thumbnail="/en/posts/tfg/images/cookie-sesion.png" data-sub-html="&lt;h2>Session cookie&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/cookie-sesion.png' alt="Session cookie" height="140" width="1638">&lt;/a>&lt;/p>
+&lt;p>With incorrect credentials it returns an auth error, and without an active session it returns 401 Unauthorized.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/signin-error.png" title="POST /signin with wrong password" data-thumbnail="/en/posts/tfg/images/signin-error.png" data-sub-html="&lt;h2>POST /signin with wrong password&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/signin-error.png' alt="POST /signin with wrong password" height="478" width="1630">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/unauthorized.png" title="Unauthorized operation" data-thumbnail="/en/posts/tfg/images/unauthorized.png" data-sub-html="&lt;h2>Unauthorized operation&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/unauthorized.png' alt="Unauthorized operation" height="478" width="2560">&lt;/a>&lt;/p>
+&lt;h4 class="heading-element" id="endpoint-validate">&lt;span>3.1.3 Endpoint /validate&lt;/span>
+ &lt;a href="#endpoint-validate" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>Checks whether the user is authenticated via the session cookie.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/validate.png" title="GET /validate" data-thumbnail="/en/posts/tfg/images/validate.png" data-sub-html="&lt;h2>GET /validate&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/validate.png' alt="GET /validate" height="477" width="1625">&lt;/a>&lt;/p>
+&lt;h4 class="heading-element" id="endpoint-jobs">&lt;span>3.1.4 Endpoint /jobs&lt;/span>
+ &lt;a href="#endpoint-jobs" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>Allows creating, listing, and deleting jobs for the authenticated user.&lt;/p>
+&lt;p>When a job is created with a target price above the current product price, the system sends an email with the subject &lt;em>Price Alert&lt;/em>, confirming the notification flow works correctly.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/post-jobs.png" title="POST /jobs" data-thumbnail="/en/posts/tfg/images/post-jobs.png" data-sub-html="&lt;h2>POST /jobs&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/post-jobs.png' alt="POST /jobs" height="769" width="2557">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/price-alert.png" title="Price Alert Notification" data-thumbnail="/en/posts/tfg/images/price-alert.png" data-sub-html="&lt;h2>Price Alert Notification&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/price-alert.png' alt="Price Alert Notification" height="1074" width="2560">&lt;/a>&lt;/p>
+&lt;p>Missing parameters return a &lt;code>400 Bad Request&lt;/code>:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/post-jobs-400.png" title="POST /jobs Bad Request" data-thumbnail="/en/posts/tfg/images/post-jobs-400.png" data-sub-html="&lt;h2>POST /jobs Bad Request&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/post-jobs-400.png' alt="POST /jobs Bad Request" height="712" width="2560">&lt;/a>&lt;/p>
+&lt;p>Listing jobs:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/get-jobs.png" title="GET /jobs with registered jobs" data-thumbnail="/en/posts/tfg/images/get-jobs.png" data-sub-html="&lt;h2>GET /jobs with registered jobs&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/get-jobs.png' alt="GET /jobs with registered jobs" height="863" width="2560">&lt;/a>&lt;/p>
+&lt;p>Deleting jobs:&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/delete-jobs.png" title="DELETE /jobs" data-thumbnail="/en/posts/tfg/images/delete-jobs.png" data-sub-html="&lt;h2>DELETE /jobs&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/delete-jobs.png' alt="DELETE /jobs" height="352" width="2560">&lt;/a>&lt;/p>
+&lt;h4 class="heading-element" id="endpoint-jobsid">&lt;span>3.1.5 Endpoint /jobs/:id&lt;/span>
+ &lt;a href="#endpoint-jobsid" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>Retrieves or deletes a specific job by its identifier. Returns 404 Not Found if it does not exist.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/get-job-id.png" title="GET /jobs/:id for an existing job" data-thumbnail="/en/posts/tfg/images/get-job-id.png" data-sub-html="&lt;h2>GET /jobs/:id for an existing job&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/get-job-id.png' alt="GET /jobs/:id for an existing job" height="475" width="1636">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/delete-job-id.png" title="DELETE /jobs/:id" data-thumbnail="/en/posts/tfg/images/delete-job-id.png" data-sub-html="&lt;h2>DELETE /jobs/:id&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/delete-job-id.png' alt="DELETE /jobs/:id" height="356" width="2560">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="asynchronous-job-processing">&lt;span>3.2 Asynchronous Job Processing&lt;/span>
+ &lt;a href="#asynchronous-job-processing" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>When a job is created, it is stored with &lt;code>pending&lt;/code> status. Once processed by the scraper, the status changes to &lt;code>active&lt;/code> and the last price is updated. At some point in between, &lt;code>processing&lt;/code> status can be observed, indicating the scraper has read the job from the SQS queue.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/job-processing.png" title="Job in processing state" data-thumbnail="/en/posts/tfg/images/job-processing.png" data-sub-html="&lt;h2>Job in processing state&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/job-processing.png' alt="Job in processing state" height="455" width="2095">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="system-monitoring">&lt;span>3.3 System Monitoring&lt;/span>
+ &lt;a href="#system-monitoring" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>AWS monitoring tools were used to validate the behavior of the asynchronous components.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/monitoreo-sqs.png" title="SQS Monitoring" data-thumbnail="/en/posts/tfg/images/monitoreo-sqs.png" data-sub-html="&lt;h2>SQS Monitoring&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/monitoreo-sqs.png' alt="SQS Monitoring" height="1260" width="2411">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/monitoreo-lambda.png" title="Lambda Monitoring" data-thumbnail="/en/posts/tfg/images/monitoreo-lambda.png" data-sub-html="&lt;h2>Lambda Monitoring&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/monitoreo-lambda.png' alt="Lambda Monitoring" height="670" width="1976">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="infrastructure-validation">&lt;span>3.4 Infrastructure Validation&lt;/span>
+ &lt;a href="#infrastructure-validation" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>CloudWatch alarms were configured to monitor the state of the deployed resources.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/cloudwatch-alarmas.png" title="CloudWatch Alarms" data-thumbnail="/en/posts/tfg/images/cloudwatch-alarmas.png" data-sub-html="&lt;h2>CloudWatch Alarms&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/cloudwatch-alarmas.png' alt="CloudWatch Alarms" height="799" width="1832">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="deployment-automation">&lt;span>3.5 Deployment Automation&lt;/span>
+ &lt;a href="#deployment-automation" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Pushing a commit to the repository triggers GitHub Actions to build and publish the new image. FluxCD detects the new version, updates the manifest (auto-commit from the Flux bot), and sends a Discord notification confirming cluster reconciliation.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/pre-img.png" title="Image tag before pushing a new version" data-thumbnail="/en/posts/tfg/images/pre-img.png" data-sub-html="&lt;h2>Image tag before pushing a new version&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/pre-img.png' alt="Image tag before pushing a new version" height="1407" width="2560">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/github-actions.png" title="GitHub Actions pipeline running" data-thumbnail="/en/posts/tfg/images/github-actions.png" data-sub-html="&lt;h2>GitHub Actions pipeline running&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/github-actions.png' alt="GitHub Actions pipeline running" height="1359" width="2550">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/flux-commit.png" title="Manifest commit with new detected version" data-thumbnail="/en/posts/tfg/images/flux-commit.png" data-sub-html="&lt;h2>Manifest commit with new detected version&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/flux-commit.png' alt="Manifest commit with new detected version" height="1234" width="2560">&lt;/a>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/discord.png" title="Discord notification from the controller" data-thumbnail="/en/posts/tfg/images/discord.png" data-sub-html="&lt;h2>Discord notification from the controller&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/discord.png' alt="Discord notification from the controller" height="677" width="1278">&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 class="heading-element" id="load-and-performance-testing">&lt;span>3.6 Load and Performance Testing&lt;/span>
+ &lt;a href="#load-and-performance-testing" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Once the system was functionally validated, load tests were run with &lt;strong>k6&lt;/strong> to analyze behavior under different demand levels.&lt;/p>
+&lt;p>As mentioned in the &lt;a href="#scalability-and-resources">Scalability and Resources&lt;/a> section, the scraper should ideally scale based on queue depth rather than CPU usage. These tests therefore primarily evaluate the API&amp;rsquo;s response capacity.&lt;/p>
+&lt;h4 class="heading-element" id="load-test">&lt;span>3.6.1 Load Test&lt;/span>
+ &lt;a href="#load-test" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>50 concurrent virtual users for 4 minutes sending &lt;code>HTTP GET&lt;/code> requests to &lt;code>/jobs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">options&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">stages&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;30s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">50&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;3m&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">50&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;30s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Result:&lt;/strong> 100% successful checks across 6,837 requests, mean latency 541ms, median 114ms, p(95) 2.26s.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/k6-carga.png" title="Load test output" data-thumbnail="/en/posts/tfg/images/k6-carga.png" data-sub-html="&lt;h2>Load test output&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/k6-carga.png' alt="Load test output" height="1170" width="1241">&lt;/a>&lt;/p>
+&lt;h4 class="heading-element" id="stress-test">&lt;span>3.6.2 Stress Test&lt;/span>
+ &lt;a href="#stress-test" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>Progressive load scaling from 100 to 1,000 virtual users:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">options&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">stages&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;30s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">100&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;1m&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;1m&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">500&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;1m&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">1000&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;30s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Result:&lt;/strong> 80,145 requests at 333 req/s, mean latency 147ms, median 110ms. Only 0.61% failures (491 requests) at peak load with 1,000 concurrent VUs.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/k6-estres.png" title="Stress test output" data-thumbnail="/en/posts/tfg/images/k6-estres.png" data-sub-html="&lt;h2>Stress test output&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/k6-estres.png' alt="Stress test output" height="1234" width="1302">&lt;/a>&lt;/p>
+&lt;h4 class="heading-element" id="spike-test">&lt;span>3.6.3 Spike Test&lt;/span>
+ &lt;a href="#spike-test" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;p>Sudden transition from 50 to 2,000 virtual users in 10 seconds:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">options&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">stages&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;30s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">50&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;10s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">2000&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;1m&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">2000&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;10s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">50&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;30s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">target&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Result:&lt;/strong> 71.54% failure rate, all timeouts, mean latency 18.5s. The HPA does not have enough time to react to such an abrupt spike — the expected behavior for this type of test.&lt;/p>
+&lt;p>&lt;a class="lightgallery" href="https://azuar4e.github.io/en/posts/tfg/images/k6-pico.png" title="Spike test output" data-thumbnail="/en/posts/tfg/images/k6-pico.png" data-sub-html="&lt;h2>Spike test output&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/en/posts/tfg/images/k6-pico.png' alt="Spike test output" height="1003" width="1811">&lt;/a>&lt;/p>
+&lt;h4 class="heading-element" id="summary">&lt;span>3.6.4 Summary&lt;/span>
+ &lt;a href="#summary" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h4>&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Scenario&lt;/th>
+ &lt;th>VUs&lt;/th>
+ &lt;th>Requests&lt;/th>
+ &lt;th>Error rate&lt;/th>
+ &lt;th>Mean latency&lt;/th>
+ &lt;th>P95&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>Load (sustained)&lt;/td>
+ &lt;td>50&lt;/td>
+ &lt;td>6,837&lt;/td>
+ &lt;td>0.00%&lt;/td>
+ &lt;td>541ms&lt;/td>
+ &lt;td>2,260ms&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Stress (progressive)&lt;/td>
+ &lt;td>1,000&lt;/td>
+ &lt;td>80,145&lt;/td>
+ &lt;td>0.61%&lt;/td>
+ &lt;td>147ms&lt;/td>
+ &lt;td>151ms&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Spike (avalanche)&lt;/td>
+ &lt;td>2,000&lt;/td>
+ &lt;td>8,518&lt;/td>
+ &lt;td>71.54%&lt;/td>
+ &lt;td>18,510ms&lt;/td>
+ &lt;td>&amp;gt;60,000ms&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 class="heading-element" id="conclusions">&lt;span>4 Conclusions&lt;/span>
+ &lt;a href="#conclusions" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>This project illustrates the importance of microservices-based architectures and the cloud-native approach in modern software development.&lt;/p>
+&lt;p>The entire application lifecycle was covered end-to-end: from technology stack selection, containerization, and service validation automated via GitHub Actions, through to deployment on an EKS cluster using a GitOps tool like FluxCD, where a repository serves as the single source of truth for the desired cluster state.&lt;/p>
+&lt;p>Infrastructure provisioning was also automated using Infrastructure as Code, allowing the environment to be declared, spun up, and torn down reproducibly, with state stored in an S3 backend.&lt;/p>
+&lt;p>All the code is available in the GitHub repositories:&lt;/p>
+&lt;blockquote>
+&lt;p>👉 &lt;a href="https://github.com/azuar4e/api-gateway-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/api-gateway-tfg&lt;/a>
+👉 &lt;a href="https://github.com/azuar4e/scraper-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/scraper-tfg&lt;/a>
+👉 &lt;a href="https://github.com/azuar4e/flux-repo-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/flux-repo-tfg&lt;/a>
+👉 &lt;a href="https://github.com/azuar4e/terraform-tfg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/azuar4e/terraform-tfg&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>Thanks for reading, see you next time. Take care! 👋&lt;/p>
+&lt;hr>
+&lt;h2 class="heading-element" id="appendix">&lt;span>5 Appendix&lt;/span>
+ &lt;a href="#appendix" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;encoding/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;os&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/aws/aws-lambda-go/lambda&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/aws/aws-sdk-go-v2/aws&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/aws/aws-sdk-go-v2/service/dynamodb&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/aws/aws-sdk-go-v2/service/dynamodb/types&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/aws/aws-sdk-go-v2/service/sqs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/azuar4e/lambda-scheduler-tfg/internal/initializers&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/azuar4e/lambda-scheduler-tfg/internal/models&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">init&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">LoadEnvVariables&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ConnectToDynamo&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ConnectToSQS&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">lambda&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kt">error&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">result&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DY&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Scan&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">TODO&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">dynamodb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ScanInput&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">TableName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">aws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;PriceAlerts&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">FilterExpression&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">aws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;#s = :s&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ExpressionAttributeNames&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kd">map&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;#s&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;status&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ExpressionAttributeValues&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kd">map&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="nx">types&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">AttributeValue&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;:s&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">types&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">AttributeValueMemberS&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">Value&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;active&amp;#34;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">err&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">item&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">range&lt;/span> &lt;span class="nx">result&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Items&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">jobItem&lt;/span> &lt;span class="nx">models&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">JobDynamoItem&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">attributevalue&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">UnmarshalMap&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">jobItem&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">job&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">jobItem&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ToJob&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">body&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">json&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Marshal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">job&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Error generating the json&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nx">initializers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SQS&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SendMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">TODO&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">sqs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SendMessageInput&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">QueueUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">aws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;SQS_QUEUE_URL&amp;#34;&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">MessageBody&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">aws&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">String&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">string&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Error queueing the job %s in SQS: %v\n&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">job&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ID&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Language Translator</title><link>https://azuar4e.github.io/en/posts/tdl/</link><pubDate>Tue, 17 Jun 2025 12:30:24 +0200</pubDate><author>azuar4e@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/en/posts/tdl/</guid><category domain="https://azuar4e.github.io/en/categories/university/">University</category><category domain="https://azuar4e.github.io/en/categories/personal-projects/">Personal Projects</category><description>&lt;h2 class="heading-element" id="introduction">&lt;span>1 Introduction&lt;/span>
  &lt;a href="#introduction" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>
