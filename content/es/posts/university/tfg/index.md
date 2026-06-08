@@ -1,7 +1,7 @@
 ---
 title: Diseño e Implementación de una Arquitectura Cloud-Native Basada en Microservicios Desplegados en Kubernetes
 description: El presente trabajo corresponde a mi trabajo de fin de grado (TFG).
-date: 2025-06-17T12:30:24+02:00
+date: 2026-06-08T20:43:48+02:00
 tags:
     - Go
     - Microservicios
