@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
 
     steps:
       - name: Checkout source
@@ -24,6 +26,14 @@ jobs:
 
       - name: Build site
         run: hugo --minify --environment production
+
+      - name: Update Algolia search indices
+        if: env.ALGOLIA_ADMIN_KEY != ''
+        env:
+          ALGOLIA_APP_ID: L5YIFQ7E5O
+        run: |
+          npm install algoliasearch@4 --no-save
+          node scripts/sync-algolia.mjs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

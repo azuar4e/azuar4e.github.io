@@ -231,7 +231,7 @@ class FixIt {
                 const results = {};
                 hits.forEach((hit) => {
                   // Usamos url como identificador único
-                  const url = hit.url || hit.permalink;
+                  const url = hit.uri || hit.url || hit.permalink;
                   
                   // Solo procesamos si tenemos una URL válida
                   if (!url) return;
