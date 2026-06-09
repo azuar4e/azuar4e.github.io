@@ -1,0 +1,19 @@
+{{- $params := .Page.Params | merge site.Params.page -}}
+{{- $class := .Attributes.class -}}
+{{- $optim := slice
+  (dict "Process" "resize 800x webp q75" "descriptor" "800w")
+  (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
+  (dict "Process" "resize 1600x webp q75" "descriptor" "1600w")
+-}}
+{{- if .Title | and .Text -}}
+  {{- $linked := ne $params.lightgallery false -}}
+  <figure{{ with $class }} class="{{ . }}"{{ end }}>
+    {{- dict "Src" .Destination "Alt" .PlainText "Title" .Title "Caption" .Text "Class" $class "Linked" $linked "Loading" "lazy" "Resources" .Page.Resources "OptimConfig" $optim | partial "plugin/image.html" -}}
+    <figcaption class="image-caption">
+      {{- .Title | safeHTML -}}
+    </figcaption>
+  </figure>
+{{- else -}}
+  {{- $linked := (eq $params.lightgallery "force") | or ($params.lightgallery | and (ne .Title "")) -}}
+  {{- dict "Src" .Destination "Alt" .PlainText "Title" .Title "Class" $class "Linked" $linked "Loading" "lazy" "Resources" .Page.Resources "OptimConfig" $optim | partial "plugin/image.html" -}}
+{{- end -}}

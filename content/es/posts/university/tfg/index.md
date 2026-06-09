@@ -14,6 +14,8 @@ draft: false
 categories:
     - Universidad
     - Proyectos Personales
+featuredimage: images/arquitfg.png
+featuredimagepreview: images/arquitfg.png
 
 ---
 
@@ -65,6 +67,7 @@ Mediante un enfoque GitOps, este se encarga de aplicar los manifiestos definidos
 En la siguiente figura se muestra el diagrama de la arquitectura de la infraestructura desplegada, proporcionando una visión global de los componentes descritos.
 
 ![Diagrama de la Arquitectura del Sistema](images/arquitfg.png)
+{.drawio-diagram}
 
 **¿Por qué este stack y no otro?**
 
@@ -83,11 +86,11 @@ Finalmente, se escogió **Terraform** sobre CloudFormation por ser agnóstico al
 ### Microservicios
 
 Los microservicios de la arquitectura, desarrollados en Go, desplegados en los worker nodes del clúster de EKS mediante FluxCD, tal y como se describe en la sección de [Automatización y Pipeline CI/CD](#automatización-y-pipeline-cicd).
-
+<a id="micros-diagram"></a>
 El funcionamiento de estos microservicios queda ilustrado en la siguiente figura:
 
-<a id="micros-diagram"></a>
 ![Diagrama de los Microservicios del Sistema](images/flujomicroservicio.png)
+{.drawio-diagram}
 
 El usuario se registra e inicia sesión en la aplicación a través del API Gateway. Una vez autenticado, recibe en una cookie el token JWT con el que puede acceder a los endpoints `/validate`, `/jobs` (GET, POST, DELETE) y `/jobs/:id`.
 
@@ -286,6 +289,7 @@ terraform/
 Estos módulos nos sirven para levantar los recursos mostrados en la siguiente imagen:
 
 ![Diagrama de la infraestructura levantada por Terraform](images/terraform.png)
+{.drawio-diagram}
 
 > **Nota:** por cuestiones de alcance, el topic de SNS, la cola SQS y la función Lambda del re-scheduler se desplegaron manualmente. El entorno Learner Lab regenera ARNs en cada sesión, lo que hacía inviable gestionarlos desde Terraform sin complejidad añadida.
 
@@ -566,6 +570,7 @@ El flujo completo:
 Este flujo queda ilustrado en la siguiente imagen:
 
 ![Diagrama de la comunicación entre servicios](images/comunicacion.png)
+{.drawio-diagram}
 
 Se configura un `visibility timeout` de 30 segundos en SQS para garantizar que un mensaje no sea consumido por múltiples workers simultáneamente. Además, el scraper actualiza el estado del job a `processing` en DynamoDB antes de procesarlo, evitando que el re-scheduler lo reencole de forma prematura.
 
@@ -594,6 +599,7 @@ El acceso a la aplicación se controla a través del API Gateway con autenticaci
 Por último, la configuración de los servicios desplegados en Kubernetes se gestiona mediante ConfigMaps y recursos de tipo Secret. Esta separación permite distinguir entre parámetros de configuración no sensibles y credenciales o valores confidenciales, manteniendo una separación entre configuración general y credenciales sensibles dentro de los manifiestos del clúster.
 
 ![Diagrama de seguridad perimetral, aislamiento de red y cifrado](images/seguridad.png)
+{.drawio-diagram}
 
 ---
 
@@ -633,6 +639,7 @@ El HPA se configuró con un umbral del 50% de CPU y un rango de 1 a 10 réplicas
 > Escalar el scraper por CPU no es lo ideal, ya que es un servicio asíncrono cuya carga depende del número de mensajes en la cola SQS, no del tráfico HTTP. Se usa la CPU como métrica proxy dada la ausencia de un HPA basado en métricas personalizadas. Una mejora futura sería adoptar [KEDA](https://keda.sh/) para escalar en base al número de mensajes en [SQS](https://keda.sh/docs/2.19/scalers/aws-sqs/).
 
 ![Diagrama de escalado de recursos del sistema](images/escalado.png)
+{.drawio-diagram}
 
 ---
 

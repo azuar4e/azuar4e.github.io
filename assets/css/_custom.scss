@@ -102,16 +102,6 @@ $blog-bg-color: #fafaf8 !default;
     color: #57606a;
   }
 
-  .content {
-    background-image: linear-gradient(90deg, var(--grid-line-color) 3%, transparent 0), linear-gradient(1turn, var(--grid-line-color) 3%, transparent 0);
-    background-size: 20px 20px;
-    background-position: center;
-  
-    [data-theme='dark'] & {
-      background-image: linear-gradient(90deg, rgba(195, 245, 215, .04) 3%, transparent 0), linear-gradient(1turn, rgba(195, 245, 215, .04) 3%, transparent 0);
-    }
-  }
-
   // Content adapter generated posts style
   // &[data-adapters='projects'] {
   //   // write here
@@ -217,5 +207,18 @@ $blog-bg-color: #fafaf8 !default;
     .single-subtitle {
       color: inherit;
     }
+  }
+
+  // Draw.io PNGs: light card so diagrams stay readable on dark backgrounds
+  .content img.drawio-diagram,
+  .content .drawio-diagram img,
+  .featured-image img[src*='arquitfg'],
+  .featured-image-preview img.drawio-diagram,
+  .featured-image-preview img[src*='arquitfg'] {
+    background-color: #f4f4f4;
+    padding: 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+    filter: contrast(1.08) saturate(1.05);
   }
 }

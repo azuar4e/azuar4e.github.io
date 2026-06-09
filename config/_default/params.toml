@@ -8,7 +8,7 @@
   # FixIt 0.2.15 | CHANGED FixIt theme version
   version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
   # site description
-  description = ""
+  description = "Personal blog on cloud computing, infrastructure, and software engineering projects."
   # site keywords
   keywords = []
   # site default theme ["light", "dark", "auto"]
@@ -252,7 +252,7 @@
 
       title = "Angel Azuara Eizaguirre"
 
-      subtitle = "4th Year Computer Science Student"
+      subtitle = "Computer Science Graduate | Cloud & DevOps Enthusiast"
 
       typeit = true
 
@@ -687,15 +687,15 @@
     # license info (HTML format is supported)
     license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
     # whether to show link to Raw Markdown content of the post
-    linkToMarkdown = true
+    linkToMarkdown = false
     # FixIt 0.3.0 | NEW whether to show link to view source code of the post
     linkToSource = true
     # FixIt 0.3.0 | NEW whether to show link to edit the post
-    linkToEdit = true
+    linkToEdit = false
     # FixIt 0.3.0 | NEW whether to show link to report issue for the post
-    linkToReport = true
+    linkToReport = false
     # FixIt 0.3.20 | NEW whether to show link to view the post in VSCode
-    linkToVscode = true
+    linkToVscode = false
     # FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
     pageStyle = "normal"
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support

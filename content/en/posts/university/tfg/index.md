@@ -14,6 +14,8 @@ draft: false
 categories:
     - University
     - Personal Projects
+featuredimage: images/arquitfg.png
+featuredimagepreview: images/arquitfg.png
 
 ---
 
@@ -58,6 +60,7 @@ The following AWS resources were deployed to support the services:
 The diagram below shows the full infrastructure architecture.
 
 ![System Architecture Diagram](images/arquitfg.png)
+{.drawio-diagram}
 
 **Why this stack?**
 
@@ -76,11 +79,11 @@ Finally, **Terraform** was preferred over CloudFormation for being provider-agno
 ### Microservices
 
 The microservices are developed in Go and deployed on the EKS cluster worker nodes via FluxCD, as described in the [CI/CD Pipeline](#cicd-pipeline-and-automation) section.
-
+<a id="micros-diagram"></a>
 The following diagram illustrates how they interact:
 
-<a id="micros-diagram"></a>
 ![Microservices Diagram](images/flujomicroservicio.png)
+{.drawio-diagram}
 
 The user registers and logs in through the API Gateway. Once authenticated, they receive a JWT in a cookie granting access to the `/validate`, `/jobs` (GET, POST, DELETE), and `/jobs/:id` endpoints.
 
@@ -277,6 +280,7 @@ terraform/
 These modules provision the resources shown in the diagram below:
 
 ![Terraform Infrastructure Diagram](images/terraform.png)
+{.drawio-diagram}
 
 > **Note:** Due to scope constraints, the SNS topic, SQS queue, and Lambda re-scheduler were deployed manually. The Learner Lab environment regenerates ARNs each session, making Terraform management of those resources impractical without added complexity.
 
@@ -553,6 +557,7 @@ The full flow:
 4. If not, the Lambda scans DynamoDB for `active` jobs and re-inserts them into SQS for the next cycle.
 
 ![Service Communication Diagram](images/comunicacion.png)
+{.drawio-diagram}
 
 A `visibility timeout` of 30 seconds is configured in SQS to ensure a message is not consumed by multiple workers simultaneously. The scraper also sets the job status to `processing` in DynamoDB before handling it, preventing the re-scheduler from re-enqueuing it prematurely.
 
@@ -581,6 +586,7 @@ Application access is controlled through the API Gateway with JWT authentication
 Kubernetes configuration is managed through ConfigMaps and Secrets, keeping a clean separation between non-sensitive configuration parameters and sensitive credentials.
 
 ![Perimeter Security, Network Isolation and Encryption Diagram](images/seguridad.png)
+{.drawio-diagram}
 
 ---
 
@@ -620,6 +626,7 @@ The HPA was configured with a 50% CPU threshold and a range of 1 to 10 replicas 
 > Scaling the scraper by CPU is not ideal since it is an asynchronous service whose load depends on the number of messages in the SQS queue, not HTTP traffic. CPU is used as a proxy metric given the lack of a custom-metrics-based HPA. A future improvement would be adopting [KEDA](https://keda.sh/) to scale based on [SQS queue depth](https://keda.sh/docs/2.19/scalers/aws-sqs/).
 
 ![Resource Scaling Diagram](images/escalado.png)
+{.drawio-diagram}
 
 ---
 
