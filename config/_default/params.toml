@@ -25,7 +25,7 @@
   # FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
   externalIcon = false
   # FixIt 0.3.13 | NEW whether to capitalize titles
-  capitalizeTitles = true
+  capitalizeTitles = false
   # FixIt 0.3.0 | NEW whether to add site title to the title of every page
   # remember to set up your site title in `hugo.toml` (e.g. title = "title")
   withSiteTitle = true
