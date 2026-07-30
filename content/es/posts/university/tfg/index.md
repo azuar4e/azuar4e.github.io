@@ -14,7 +14,7 @@ draft: false
 categories:
     - Universidad
     - Proyectos Personales
-featuredimage: images/arquitfg.png
+#featuredimage: images/arquitfg.png
 featuredimagepreview: images/arquitfg.png
 
 ---

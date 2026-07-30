@@ -12,7 +12,7 @@ tags:
 draft: false
 categories:
     - Proyectos Personales
-featuredimage: images/traffic.png
+#featuredimage: images/traffic.png
 featuredimagepreview: images/traffic.png
 
 ---
