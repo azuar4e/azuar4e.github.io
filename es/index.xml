@@ -1286,7 +1286,718 @@ El funcionamiento de estos microservicios queda ilustrado en la siguiente figura
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>Servicio RESTful</title><link>https://azuar4e.github.io/es/posts/sos/</link><pubDate>Fri, 25 Jul 2025 15:00:00 +0200</pubDate><author>azuar4e@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/sos/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>1 Introducción&lt;/span>
+&lt;/div></description></item><item><title>Zero Trust en Kubernetes: asegurando microservicios con Istio mTLS y Keycloak</title><link>https://azuar4e.github.io/es/posts/micros-sec-istio/</link><pubDate>Mon, 08 Jun 2026 20:43:48 +0200</pubDate><author>azuar4e@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/micros-sec-istio/</guid><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;img src="https://azuar4e.github.io/es/posts/micros-sec-istio/images/traffic.png" alt="featured image" referrerpolicy="no-referrer">&lt;p>¿Alguna vez te has preguntado cómo gestionar la autenticación de usuarios delegándola en un &lt;em>Identity Provider&lt;/em> (IdP), y cómo asegurar la comunicación entre tus microservicios sin tener que implementar esa lógica tú mismo? Esto es justo lo que vamos a ver en este artículo.&lt;/p>
+&lt;p>La motivación para esta publicación surge de la necesidad de dar solución a algunas de las limitaciones de mi &lt;a href="https://azuar4e.github.io/es/posts/tfg/"target="_blank" rel="external nofollow noopener noreferrer">trabajo de fin de grado&lt;/a>. Las dos principales carencias eran la autenticación de usuarios, que se hacía manualmente generando un JWT, y la ausencia de HTTPS en la comunicación entre microservicios. En este nuevo proyecto resolvemos ambas: delegamos la autenticación en un IdP real, y aseguramos las comunicaciones internas con mTLS de forma transparente a nivel de aplicación.&lt;/p>
+&lt;p>Para ello utilizamos un IdP gratuito, &lt;strong>Keycloak&lt;/strong>, para gestionar el acceso de los usuarios, e &lt;strong>Istio&lt;/strong> como &lt;em>malla de servicios&lt;/em> (o &lt;em>service mesh&lt;/em>). A alto nivel, Istio despliega un proxy Envoy como &lt;em>sidecar&lt;/em> en cada pod, que intercepta el tráfico entrante y saliente y lo cifra automáticamente vía mTLS, sin que el código de tus microservicios tenga que saber nada de eso.&lt;/p>
+&lt;h2 class="heading-element" id="descripción-general">&lt;span>1 Descripción General&lt;/span>
+ &lt;a href="#descripci%c3%b3n-general" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>Para llevar a cabo este trabajo, se ha diseñado como caso de uso un pequeño e-commerce basado en microservicios. La aplicación no utiliza persistencia de datos y la lógica de la misma es deliberadamente sencilla, ya que el objetivo principal del proyecto no es construir una aplicación de comercio electrónico completa, sino utilizar un ejemplo sencillo para centrarnos en los mecanismos de autenticación y comunicación segura entre servicios.&lt;/p>
+&lt;p>La aplicación está compuesta por tres microservicios principales: un API Gateway, un servicio de productos (&lt;code>products&lt;/code>) y un servicio de pedidos (&lt;code>orders&lt;/code>). El API Gateway actúa como punto de entrada a la aplicación y se encarga de redirigir las peticiones hacia los microservicios correspondientes. Además, es el responsable de gestionar el flujo de autenticación de los usuarios, como veremos más adelante en la sección dedicada al &lt;a href="#flujo-oauth-authorization-code">flujo OAuth&lt;/a>.&lt;/p>
+&lt;p>El microservicio &lt;code>products&lt;/code> mantiene en memoria un catálogo sencillo de productos y permite consultar los productos disponibles. Por su parte, el microservicio &lt;code>orders&lt;/code> permite crear y consultar pedidos.&lt;/p>
+&lt;p>Una vez autenticado el usuario, el API Gateway valida sus credenciales y reenvía las peticiones al microservicio correspondiente. La comunicación entre estos se realiza a través de la malla de servicios de Istio, que proporciona autenticación mutua mediante mTLS entre los diferentes componentes de la aplicación. De esta forma, la seguridad de las comunicaciones queda desacoplada de la lógica de negocio de los microservicios.&lt;/p>
+&lt;p>Por parte de los microservicios, únicamente nos detendremos a analizar el flujo de código relacionado con la autenticación y la interacción con el IdP. El resto de la implementación puede consultarse en el &lt;a href="https://github.com/azuar4e/micros-sample"target="_blank" rel="external nofollow noopener noreferrer">repositorio de GitHub&lt;/a>.&lt;/p>
+&lt;p>La infraestructura utilizada para soportar el despliegue consiste en un clúster local de Kubernetes creado mediante Kind. Aunque el proyecto podría desplegarse en un entorno cloud realizando algunas modificaciones en la infraestructura, para los objetivos de este artículo no resulta relevante utilizar un proveedor concreto. El uso de un clúster local permite centrarnos en los conceptos fundamentales de Keycloak, OAuth 2.0, Istio y mTLS sin introducir complejidad adicional relacionada con un proveedor cloud.&lt;/p>
+&lt;p>A lo largo del artículo veremos cómo se integran estos componentes, desde el flujo de autenticación del usuario hasta la comunicación interna entre los microservicios, y cómo estas responsabilidades pueden delegarse en componentes especializados sin tener que implementar manualmente la seguridad dentro de cada servicio.&lt;/p>
+&lt;h2 class="heading-element" id="flujo-oauth-authorization-code">&lt;span>2 Flujo OAuth: Authorization Code&lt;/span>
+ &lt;a href="#flujo-oauth-authorization-code" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>&lt;a href="https://auth0.com/es/intro-to-iam/what-is-oauth-2"target="_blank" rel="external nofollow noopener noreferrer">OAuth 2.0&lt;/a> es un estándar diseñado para que las aplicaciones obtengan acceso autorizado a recursos protegidos en nombre de un usuario o servicio. Existen varios flujos como las credenciales de cliente (&lt;em>client credentials&lt;/em>) o el código de autorización (con y sin PKCE), que es en el que nos centraremos en este artículo.&lt;/p>
+&lt;p>En el flujo de concesión del código de autorización, el servidor de autorización devuelve un código de un solo uso, que es intercambiado por un token de acceso. Al implementar PKCE al flujo, añadimos una serie de pasos para la obtención del token, de modo que nos aseguramos de que, aunque el código de autorización sea interceptado por un atacante, este no pueda intercambiarlo por un token de acceso en lugar del usuario que lo solicitó.&lt;/p>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/oauth.png" title="Flujo de Autorización" data-thumbnail="/es/posts/micros-sec-istio/images/oauth.png" data-sub-html="&lt;h2>Flujo de Autorización&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/oauth.png' alt="Flujo de Autorización" height="599" width="859">&lt;/a>&lt;p>Como se ilustra en la imagen, el flujo funciona de la siguiente manera:&lt;/p>
+&lt;ol>
+&lt;li>El usuario hace &lt;em>login&lt;/em> en la aplicacion (que es cliente del IdP).&lt;/li>
+&lt;li>La aplicación redirige al usuario al IdP, en este caso Keycloak, donde deberá poner sus credenciales.&lt;/li>
+&lt;li>El usuario pone sus credenciales en el IdP.&lt;/li>
+&lt;li>El IdP redirige al usuario a un endpoint de la aplicación cliente como por ejemplo &lt;code>/callback&lt;/code>, dejando en la URI el código y el estado bajo las claves &lt;code>code&lt;/code> y &lt;code>state&lt;/code>.&lt;/li>
+&lt;li>La aplicación cliente extrae de la URI ese código y lo utiliza para solicitar un token.&lt;/li>
+&lt;li>Si todo ha ido bien, el IdP responde con el token de acceso para el usuario.&lt;/li>
+&lt;/ol>
+&lt;p>Al implementar PKCE a este flujo, lo que se hace es que antes de redirigir al usuario al IdP para hacer el login, se genera un &lt;em>state&lt;/em>, un &lt;em>code verifier&lt;/em> y un &lt;em>code challenge&lt;/em>. Básicamente, el state y el code verifier son cadenas de bytes aleatorias, mientras que el code challenge es el hash del verifier. Junto a la URL de autorización mandamos el code challenge y el algoritmo de hash empleado, de modo que si alguien capturase el código de autorización, no pudiese canjearlo.&lt;/p>
+&lt;h3 class="heading-element" id="keycloak">&lt;span>2.1 Keycloak&lt;/span>
+ &lt;a href="#keycloak" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Como hemos comentado al inicio de esta publicación, Keycloak es un Identity Provider de código abierto, que nos permite centralizar la autenticación, autorización y gestión de usuarios de nuestra aplicación, de modo que queda desacoplada la seguridad de la lógica.&lt;/p>
+&lt;p>Su papel en el flujo OAuth lo acabamos de ver en la anterior sección, pero hay más. Dentro de un &lt;strong>realm&lt;/strong> (un espacio aislado de gestión, útil para separar distintos entornos o aplicaciones), podemos definir clientes (la aplicación), los usuarios que pueden autenticarse, los roles asignados a esos usuarios, así como opciones de inicio de sesión, verificación de email, restauración de contraseña, entre otros.&lt;/p>
+&lt;h3 class="heading-element" id="implementación">&lt;span>2.2 Implementación&lt;/span>
+ &lt;a href="#implementaci%c3%b3n" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Ahora os estaréis preguntando: ¿cómo se implementa todo esto? Pues bien, primero de todo, desde la API exponemos los siguientes endpoints:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Go" data-lang="Go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">GET&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/authentication&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Login&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">GET&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/callback&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Callback&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AuthMiddleware&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AuthzMiddleware&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;customer&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">GET&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/me&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">userID&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">_&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;userID&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">email&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">_&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;userEmail&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">roles&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">_&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;roles&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">JSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusOK&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;message&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;I&amp;#39;m logged in!&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;userID&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">userID&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;email&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">email&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;roles&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">roles&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>El primero es el que vamos a usar para loguearnos, el segundo es donde el IdP nos redirige una vez hemos insertado las credenciales de usuario y donde nos dejará el código de autorización y el state, y el tercero es donde la aplicación nos deja, una vez ha canjeado el código por un token y lo ha colocado como cookie. Además, en este tercer endpoint mostramos información relevante del usuario para verificar que ha funcionado.&lt;/p>
+&lt;p>Ahora que tenemos esto vamos a la interfaz de Keycloak; en mi caso, como está todo desplegado en un clúster local, hago un port-forward del service para poder acceder.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubectl port-forward svc/keycloak-svc 8080:8080&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>Todos los manifiestos se pueden encontrar en el repositorio de GitHub.
+Para el despliegue de Keycloak hemos usado una base de datos de Postgres con un volumen persistente para almacenar la información.&lt;/p>&lt;/blockquote>
+&lt;p>Una vez hemos iniciado sesión vamos a crear un realm; para ello vamos a la pestaña que dice &lt;code>Manage realms&lt;/code> y le damos a create. Una vez creado, lo seleccionamos y creamos un cliente. Para ello vamos a la pestaña que dice &lt;code>Clients&lt;/code> y le damos a create, le ponemos el nombre que queramos en &lt;code>Client ID&lt;/code>, en este caso &lt;code>oidc-client&lt;/code>, y marcamos las siguientes opciones:&lt;/p>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/opt.png" title="Opciones Cliente Keycloak" data-thumbnail="/es/posts/micros-sec-istio/images/opt.png" data-sub-html="&lt;h2>Opciones Cliente Keycloak&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/opt.png' alt="Opciones Cliente Keycloak" height="814" width="1307">&lt;/a>&lt;blockquote>
+&lt;p>La casilla de PKCE se podría dejar sin marcar, pero de este modo forzamos a que, si no se reciben los parámetros, dé error.&lt;/p>&lt;/blockquote>
+&lt;p>Por último, ponemos el endpoint de callback como URL de redirección:&lt;/p>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/redir.png" title="URL Redirección" data-thumbnail="/es/posts/micros-sec-istio/images/redir.png" data-sub-html="&lt;h2>URL Redirección&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/redir.png' alt="URL Redirección" height="869" width="1476">&lt;/a>&lt;blockquote>
+&lt;p>Aún no tenemos implementado el gateway de Istio para HTTPS, por lo que deberíamos poner el puerto &lt;code>9090&lt;/code>, que es en el que corre la API, en lugar del puerto &lt;code>8443&lt;/code>.&lt;/p>&lt;/blockquote>
+&lt;p>Ahora vamos a crear el usuario para el testeo (también se puede crear el usuario registrándose directamente). Para ello, vamos a Users y le damos a &lt;code>Add User&lt;/code>; le ponemos un nombre y, una vez creado, en la pestaña de &lt;code>Credentials&lt;/code>, le ponemos una contraseña (desmarcando la casilla &lt;code>Temporary&lt;/code>).&lt;/p>
+&lt;p>Adicionalmente podemos activar algunas opciones de inicio de sesión como las siguientes:&lt;/p>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/logopt.png" title="Login Options" data-thumbnail="/es/posts/micros-sec-istio/images/logopt.png" data-sub-html="&lt;h2>Login Options&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/logopt.png' alt="Login Options" height="1200" width="1772">&lt;/a>&lt;p>Por último, he creado un rol para mostrar su funcionalidad. Esto se puede hacer desde &lt;code>Realm roles&lt;/code>, donde se le pone un nombre; en este caso, se lo asignamos al usuario que hemos creado.&lt;/p>
+&lt;p>Con esto hecho, ya hemos terminado con Keycloak. Ahora toca configurar la API: para eso creamos los handlers de los endpoints mostrados anteriormente, y el middleware para verificar que el usuario está autenticado y autorizado.&lt;/p>
+&lt;p>En cuanto a los handlers, primero creamos la estructura con la información del cliente.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Go" data-lang="Go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">oauthConfig&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">oauth2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Config&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">oauth2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Config&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ClientID&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;oidc-client&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ClientSecret&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;CLIENT_SECRET&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Endpoint&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">oauth2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Endpoint&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">AuthURL&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;http://localhost:8080/realms/mini-e-commerce/protocol/openid-connect/auth&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">TokenURL&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;http://keycloak-svc:8080/realms/mini-e-commerce/protocol/openid-connect/token&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">RedirectURL&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;https://localhost:8443/api/v1/callback&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Scopes&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;openid&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;profile&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;email&amp;#34;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>El &lt;code>AuthURL&lt;/code> usa &lt;code>localhost&lt;/code> porque quien lo visita es el navegador del usuario, que no puede resolver el DNS interno de Kubernetes (&lt;code>keycloak-svc&lt;/code>). El &lt;code>TokenURL&lt;/code>, en cambio, usa &lt;code>keycloak-svc&lt;/code> porque esa llamada la realiza directamente el propio &lt;code>api-gateway&lt;/code>, corriendo dentro del clúster, que sí resuelve ese nombre como DNS interno.
+Nuevamente, aquí aun no tenemos implementado istio así que deberíamos sustituir el puerto &lt;code>8443&lt;/code> por el &lt;code>9090&lt;/code>.&lt;/p>&lt;/blockquote>
+&lt;p>Luego declaramos las siguientes funciones auxiliares que usaremos para el PKCE:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Go" data-lang="Go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">randomBytesInHex&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">count&lt;/span> &lt;span class="kt">int&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">error&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">buf&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nb">make&lt;/span>&lt;span class="p">([]&lt;/span>&lt;span class="kt">byte&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">count&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">io&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ReadFull&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rand&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Reader&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">buf&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Errorf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Could not generate %d random bytes: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">count&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">hex&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">EncodeToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">buf&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="kc">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">AuthorizationURL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">config&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">oauth2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Config&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="nx">AuthURL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">error&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">codeVerifier&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">verifierErr&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nf">randomBytesInHex&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">32&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// 64 character string here&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">verifierErr&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">nil&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Errorf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Could not create a code verifier: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">verifierErr&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sha2&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">sha256&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">New&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">io&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">WriteString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sha2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">codeVerifier&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">codeChallenge&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">base64&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">RawURLEncoding&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">EncodeToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sha2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Sum&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">nil&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">state&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">stateErr&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nf">randomBytesInHex&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">24&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">stateErr&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">nil&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Errorf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Could not generate random state: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">stateErr&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">authUrl&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">config&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AuthCodeURL&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">state&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">oauth2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SetAuthURLParam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;code_challenge_method&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;S256&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">oauth2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SetAuthURLParam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;code_challenge&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">codeChallenge&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">AuthURL&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">URL&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">authUrl&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">State&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">state&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">CodeVerifier&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">codeVerifier&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="kc">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>La primera es la encargada de generar la cadena de bytes aleatorios en hexadecimal, mientras que la segunda crea el &lt;code>AuthURL&lt;/code>, con el &lt;code>state&lt;/code>, el &lt;code>codeVerifier&lt;/code> y el &lt;code>codeChallenge&lt;/code> hasheado usando &lt;code>S256&lt;/code>, como le hemos especificado antes a Keycloak.&lt;/p>
+&lt;p>Ahora, desde el handler del login, guardamos esta estructura usando un mutex (para comprobar los valores devueltos más adelante), y redirigimos al usuario al &lt;code>AuthURL&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Go" data-lang="Go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">Login&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cfg&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nf">oauthConfig&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">auth&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nf">AuthorizationURL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cfg&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">JSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusInternalServerError&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Error&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">pendingAuths&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Lock&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">pendingAuths&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">m&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">State&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nx">auth&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">pendingAuths&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Unlock&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Redirect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusTemporaryRedirect&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">URL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Y en el handler del callback sacamos de la URL el estado y el código, los validamos (verificamos que el código no está vacío y que los estados coinciden) y canjeamos el código por un token de acceso, que colocaremos como cookie, haciendo redirect al endpoint &lt;code>/me&lt;/code> mostrado antes.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Go" data-lang="Go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">Callback&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">state&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;state&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">code&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;code&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">code&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">JSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusBadRequest&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;error&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;Missing Code&amp;#34;&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">pendingAuths&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Lock&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">auth&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ok&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">pendingAuths&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">m&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">state&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">ok&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">delete&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">pendingAuths&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">pendingAuths&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Unlock&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">!&lt;/span>&lt;span class="nx">ok&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="nx">subtle&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ConstantTimeCompare&lt;/span>&lt;span class="p">([]&lt;/span>&lt;span class="nb">byte&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">State&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="nb">byte&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">JSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusBadRequest&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;error&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;Invalid State&amp;#34;&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">cfg&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nf">oauthConfig&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">token&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">cfg&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Exchange&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Request&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Context&lt;/span>&lt;span class="p">(),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">code&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">oauth2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SetAuthURLParam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;code_verifier&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">CodeVerifier&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">JSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusInternalServerError&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Error&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">SetCookie&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;AccessToken&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">token&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">AccessToken&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3600&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;localhost&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Redirect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusFound&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;/api/v1/me&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>En cuanto al middleware, tenemos dos funciones que se ejecutan antes de acceder a los endpoints protegidos. La primera se encarga de extraer de la cookie el token de acceso, validarlo, y añadir al contexto las claims del mismo:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Go" data-lang="Go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">type&lt;/span> &lt;span class="nx">Claims&lt;/span> &lt;span class="kd">struct&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Sub&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`json:&amp;#34;sub&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Email&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`json:&amp;#34;email&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">RealmAccess&lt;/span> &lt;span class="kd">struct&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Roles&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="kt">string&lt;/span> &lt;span class="s">`json:&amp;#34;roles&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="s">`json:&amp;#34;realm_access&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">oidcVerifier&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">oidc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">IDTokenVerifier&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">InitAuth&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kt">error&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ctx&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nx">oidc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">InsecureIssuerURLContext&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;http://localhost:8080/realms/mini-e-commerce&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">provider&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">oidc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewProvider&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;http://keycloak-svc:8080/realms/mini-e-commerce&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Errorf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;could not init oidc provider: %w&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">oidcVerifier&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nx">provider&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Verifier&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">oidc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Config&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">SkipClientIDCheck&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">AuthMiddleware&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">HandlerFunc&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rawToken&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Cookie&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;AccessToken&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="nx">rawToken&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AbortWithStatusJSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusUnauthorized&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;error&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;No authorization cookie found&amp;#34;&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">idToken&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">oidcVerifier&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Verify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Request&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Context&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="nx">rawToken&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// reutiliza el verifier ya creado&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AbortWithStatusJSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusUnauthorized&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;error&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;invalid token&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;details&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Error&lt;/span>&lt;span class="p">()})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">claims&lt;/span> &lt;span class="nx">Claims&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">idToken&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Claims&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">claims&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AbortWithStatusJSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusInternalServerError&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;error&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;could not parse claims&amp;#34;&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;userID&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">claims&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Sub&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;userEmail&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">claims&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Email&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;roles&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">claims&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">RealmAccess&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Roles&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Next&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>La segunda se encarga de validar los roles. A modo de ejemplo ilustrativo se creó un rol llamado &lt;code>customer&lt;/code> y se asignó al usuario, y con esta función simplemente verificamos si este se encuentra entre los roles del usuario. Es una lógica muy sencilla, pero que nos permite ver cómo se puede trabajar con roles.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Go" data-lang="Go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">AuthzMiddleware&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">role&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">HandlerFunc&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">c&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">roles&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">_&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;roles&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rolesArr&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">roles&lt;/span>&lt;span class="p">.([]&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">r&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">range&lt;/span> &lt;span class="nx">rolesArr&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">r&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nx">role&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Next&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AbortWithStatusJSON&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">StatusForbidden&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">H&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;error&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;insufficient permissions&amp;#34;&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Con esto ya estaría implementada la capa de seguridad de la aplicación. Como podemos ver, solo se requiere un par de funciones para poder aplicar el flujo OAuth, y a cambio nos proporciona grandes ventajas.&lt;/p>
+&lt;h2 class="heading-element" id="malla-de-servicios-service-mesh">&lt;span>3 Malla de Servicios (Service Mesh)&lt;/span>
+ &lt;a href="#malla-de-servicios-service-mesh" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>Según &lt;a href="https://www.redhat.com/es/topics/microservices/what-is-a-service-mesh"target="_blank" rel="external nofollow noopener noreferrer">Red Hat&lt;/a>, la malla de servicios es una capa de infraestructura que, dentro de una aplicación, se encarga de la comunicación entre servicios. Algunas de sus funciones son el enrutamiento de tráfico y la seguridad.&lt;/p>
+&lt;p>Puede considerarse un patrón de arquitectura de microservicios. A medida que crece el número de micros, la comunicación se vuelve más difícil de gestionar mediante código; aquí es donde la malla de servicios entra en acción. Esta se integra en la aplicación como un conjunto de proxies de red que actúan como intermediarios en la comunicación entre servicios. En este contexto, cada servicio tiene su propio proxy, que se ejecuta como un &lt;em>sidecar&lt;/em> dentro del mismo pod, interceptando todo el tráfico entrante y saliente para aplicar de forma transparente políticas de seguridad (como mTLS), enrutamiento y observabilidad, sin que el código de la aplicación tenga que implementarlas. En nuestro caso, usaremos &lt;strong>Istio&lt;/strong> como implementación de malla de servicios, y &lt;strong>Envoy&lt;/strong> como proxy que se despliega en cada &lt;em>sidecar&lt;/em>.&lt;/p>
+&lt;h3 class="heading-element" id="istio-y-envoy">&lt;span>3.1 Istio y Envoy&lt;/span>
+ &lt;a href="#istio-y-envoy" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>Como acabamos de mencionar, &lt;a href="https://istio.io/latest/docs/ops/deployment/architecture/"target="_blank" rel="external nofollow noopener noreferrer">Istio y Envoy&lt;/a> son las soluciones que vamos a implementar. Istio es la malla de servicios en sí; en su arquitectura cuenta con un &lt;em>control plane&lt;/em> (llamado &lt;code>istiod&lt;/code>) que maneja y configura los proxies para enrutar el tráfico, y un &lt;em>data plane&lt;/em>, que está compuesto por un conjunto de Envoys, que es el proxy que se despliega como &lt;em>sidecar&lt;/em> en cada pod, que controla toda la comunicación red entre micros, y que además recopilan y reportan datos de telemetría sobre todo el tráfico de la red.&lt;/p>
+&lt;p>Para que un pod reciba su sidecar de Envoy automáticamente, basta con etiquetar el namespace donde vive con &lt;code>istio-injection=enabled&lt;/code>, y a partir de ese momento, cualquier pod nuevo que se despliegue ahí recibirá el proxy inyectado junto a su contenedor principal.&lt;/p>
+&lt;p>En este proyecto usaremos dos piezas concretas de Istio para reforzar la seguridad entre microservicios: &lt;code>PeerAuthentication&lt;/code>, que fuerza que todo el tráfico interno vaya cifrado con mTLS, y &lt;code>AuthorizationPolicy&lt;/code>, que nos permite restringir qué servicios pueden comunicarse entre sí (por ejemplo, que solo &lt;code>apigw&lt;/code> pueda llamar a &lt;code>order-service&lt;/code>), basándose en la identidad criptográfica de cada servicio, no en su dirección IP.&lt;/p>
+&lt;h2 class="heading-element" id="despliegue-y-configuración">&lt;span>4 Despliegue y Configuración&lt;/span>
+ &lt;a href="#despliegue-y-configuraci%c3%b3n" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>Dicho todo esto, pasamos a la implementación de la malla de servicios para la seguridad de la comunicación entre micros. Primero de todo tenemos que instalar istio, para ello podemos seguir los pasos que vienen en la &lt;a href="https://istio.io/latest/docs/setup/additional-setup/download-istio-release/"target="_blank" rel="external nofollow noopener noreferrer">documentación&lt;/a>. Una vez tenemos instalado &lt;code>istioctl&lt;/code>, lo instalamos en el clúster. Para ello hacemos:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">istioctl install --set &lt;span class="nv">profile&lt;/span>&lt;span class="o">=&lt;/span>demo -y&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>&lt;code>demo&lt;/code> es uno de los perfiles predefinidos de &lt;code>istioctl&lt;/code>.&lt;/p>&lt;/blockquote>
+&lt;p>Y como hemos mencionado antes, para que se despliegue el sidecar en los pods de la aplicación, aplicamos la etiqueta &lt;code>istio-injection=enabled&lt;/code> al namespace y reiniciamos los deployments:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">kubectl label namespace default istio-injection&lt;span class="o">=&lt;/span>enabled
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl rollout restart deployment -n default&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Como podemos ver en la siguiente imagen, ahora tendremos 2 contenedores por pod, uno que corre la imagen del microservicio, y otro que es el sidecar con el Envoy proxy.&lt;/p>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721132104.png" title="Terminal" data-thumbnail="/es/posts/micros-sec-istio/images/Pasted%20image%2020260721132104.png" data-sub-html="&lt;h2>Terminal&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721132104.png' alt="Terminal" height="541" width="817">&lt;/a>&lt;p>Con esto ya tendríamos mTLS &amp;ldquo;disponible&amp;rdquo; en modo &lt;em>PERMISSIVE&lt;/em>, pero para forzar que todo el tráfico vaya cifrado, desplegamos el manifiesto de tipo &lt;code>PeerAuthentication&lt;/code> que lo que hace es que en la comunicación, mTLS sea estricto:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">apiVersion&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">security.istio.io/v1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PeerAuthentication&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">metadata&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">default&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">namespace&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">default&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">spec&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mtls&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mode&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">STRICT&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Podemos aprovechar para instalar los addons de Istio que vienen en la carpeta de la instalación y que veremos a continuación, en la sección de &lt;a href="#addons">Addons&lt;/a>. Para ello hacemos:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">kubectl apply -f ..&lt;span class="se">\.&lt;/span>.&lt;span class="se">\i&lt;/span>stio-installation&lt;span class="se">\i&lt;/span>stio-1.30.2-win-amd64&lt;span class="se">\i&lt;/span>stio-1.30.2&lt;span class="se">\s&lt;/span>amples&lt;span class="se">\a&lt;/span>ddons&lt;span class="err">\&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Por último, quedaría implementar TLS desde el exterior, y aquí es donde usamos el gateway de Istio. Para ello, tenemos que configurarlo:&lt;/p>
+&lt;p>Primero de todo vamos a crear un certificado autofirmado, esto se debe a que en este escenario de desarrollo no necesitamos de una autoridad que lo valide. También generamos la clave privada sin contraseña.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days &lt;span class="m">365&lt;/span> -nodes -subj &lt;span class="s2">&amp;#34;/CN=localhost&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Una vez obtenemos estos dos archivos, creamos un secreto de tipo TLS con ellos, que se le pasará al gateway de Istio.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">kubectl create secret tls api-gateway-tls-secret --key&lt;span class="o">=&lt;/span>key.pem --cert&lt;span class="o">=&lt;/span>cert.pem -n istio-system&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Ahora necesitamos de dos manifiestos: el primero para configurar el &lt;em>Gateway&lt;/em>, y el segundo, un &lt;em>VirtualService&lt;/em> que redirige el tráfico recibido hacia nuestra API.&lt;/p>
+&lt;p>Es importante entender que el recurso &lt;code>Gateway&lt;/code> no despliega ningún proxy nuevo — es configuración declarativa que se aplica sobre el proxy Envoy del &lt;em>Ingress Gateway&lt;/em> que ya se instaló junto con Istio (identificado mediante el &lt;code>selector&lt;/code>). En él especificamos el puerto y protocolo que queremos exponer (HTTPS en el puerto 443), y el secreto TLS de donde Envoy debe leer el certificado.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">apiVersion&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">networking.istio.io/v1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Gateway&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">metadata&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">api-gateway-ingress&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">spec&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">selector&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">istio&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ingressgateway&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">servers&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">port&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">number&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">443&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">protocol&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">HTTPS&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">tls&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mode&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">SIMPLE&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">credentialName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">api-gateway-tls-secret&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">hosts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="s2">&amp;#34;*&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>El campo &lt;code>hosts&lt;/code> acepta un comodín (&lt;code>*&lt;/code>) en desarrollo, ya que no contamos con un dominio real; en producción, se especificaría el dominio concreto de la aplicación.&lt;/p>&lt;/blockquote>
+&lt;p>Por sí solo, el &lt;code>Gateway&lt;/code> no sabe a dónde enviar el tráfico que acepta; eso lo define el &lt;code>VirtualService&lt;/code>, que enruta las peticiones entrantes hacia el &lt;code>Service&lt;/code> de nuestra API dentro del clúster.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">apiVersion&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">networking.istio.io/v1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">VirtualService&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">metadata&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">api-gateway-vs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">spec&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">hosts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="s2">&amp;#34;*&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">gateways&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">api-gateway-ingress&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">http&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">route&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">destination&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">host&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">apigw-svc&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">port&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">number&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">9090&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Ahora para probar que todo funciona vamos a iniciar sesión con el usuario que hemos creado y vamos a extraer la cookie (el token de acceso).&lt;/p>
+&lt;p>Para ello, exponemos el Gateway de Istio:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">kubectl port-forward -n istio-system svc/istio-ingressgateway 8443:443&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Y ahora en el navegador directamente ponemos el endpoint de autenticación, esto es, el &lt;code>https://localhost:8443/api/v1/authentication&lt;/code>.&lt;/p>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721134029.png" title="Login Keycloak" data-thumbnail="/es/posts/micros-sec-istio/images/Pasted%20image%2020260721134029.png" data-sub-html="&lt;h2>Login Keycloak&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721134029.png' alt="Login Keycloak" height="1440" width="2560">&lt;/a>&lt;blockquote>
+&lt;p>Nótese que Keycloak sigue expuesto con port-forward.&lt;/p>&lt;/blockquote>
+&lt;p>Esto nos redirige a la pestaña de inicio de sesión.&lt;/p>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145115.png" title="Cookie" data-thumbnail="/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145115.png" data-sub-html="&lt;h2>Cookie&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145115.png' alt="Cookie" height="1440" width="2560">&lt;/a>&lt;p>Una vez introducidas las credenciales, nos redirige al callback, que a su vez nos redirige a &lt;code>https://localhost:8443/api/v1/me&lt;/code>, donde mostramos información del usuario. Si abrimos las herramientas de desarrollador, podremos ver la cookie con el token de acceso en la pestaña &lt;code>Application&lt;/code>, y podremos extraerla para hacer las demás peticiones desde una herramienta como Postman o Bruno.&lt;/p>
+&lt;h2 class="heading-element" id="addons">&lt;span>5 Addons&lt;/span>
+ &lt;a href="#addons" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>Antes de pasar a las pruebas de los endpoints, merece la pena detenerse a ver a alto nivel los &lt;em>addons&lt;/em> que Istio nos proporciona. Esta sección da para un post aparte, por eso haremos un repaso de los más destacados.&lt;/p>
+&lt;blockquote>
+&lt;p>En este escenario local, para probarlos, además de tenerlos desplegados (recuerda que el perfil &lt;code>demo&lt;/code> de Istio los instala automáticamente), tenemos que exponer con &lt;code>port-forward&lt;/code> el &lt;em>Service&lt;/em> de cada recurso.&lt;/p>&lt;/blockquote>
+&lt;h3 class="heading-element" id="kiali">&lt;span>5.1 Kiali&lt;/span>
+ &lt;a href="#kiali" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>&lt;a href="https://kiali.io/"target="_blank" rel="external nofollow noopener noreferrer">Kiali&lt;/a> es la consola para la malla de servicios de Istio. Nos permite configurar, visualizar y solucionar problemas.&lt;/p>
+&lt;p>Algunas de sus funciones son las siguientes:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Primero de todo, nos proporciona una vista general de los clústeres donde Istio se está ejecutando.
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/kiali.png" title="Kiali" data-thumbnail="/es/posts/micros-sec-istio/images/kiali.png" data-sub-html="&lt;h2>Kiali&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/kiali.png' alt="Kiali" height="1041" width="1920">&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Si nos vamos a la pestaña de &lt;code>Traffic Graph&lt;/code>, nos mostrará un gráfico de cómo fluye el tráfico dentro de nuestra aplicación en tiempo real (para que un servicio aparezca aquí, su Deployment necesita la etiqueta &lt;code>app: &amp;lt;nombre&amp;gt;&lt;/code>).
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/traffic.png" title="Traffic" data-thumbnail="/es/posts/micros-sec-istio/images/traffic.png" data-sub-html="&lt;h2>Traffic&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/traffic.png' alt="Traffic" height="1402" width="2560">&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>También tenemos una pestaña para la malla, que, a diferencia de la anterior, nos da una vista más de infraestructura, mostrando los componentes que forman la malla de servicios. Útil para verificar que la infraestructura está sana.
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/mesh.png" title="Mesh" data-thumbnail="/es/posts/micros-sec-istio/images/mesh.png" data-sub-html="&lt;h2>Mesh&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/mesh.png' alt="Mesh" height="1402" width="2560">&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 class="heading-element" id="prometheus--grafana">&lt;span>5.2 Prometheus + Grafana&lt;/span>
+ &lt;a href="#prometheus--grafana" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>&lt;a href="https://prometheus.io/"target="_blank" rel="external nofollow noopener noreferrer">Prometheus&lt;/a> es un sistema de monitorización que recolecta y almacena métricas numéricas a lo largo del tiempo. En el contexto de Istio, cada sidecar Envoy expone automáticamente métricas (latencia, número de peticiones, tasa de errores, bytes transferidos) que Prometheus recoge periódicamente sin que tengas que instrumentar tu código Go para nada de esto.&lt;/p>
+&lt;p>Por otro lado, &lt;a href="https://grafana.com/"target="_blank" rel="external nofollow noopener noreferrer">Grafana&lt;/a> es la capa de visualización, que se conecta con Prometheus como fuente de datos y permite construir dashboards sobre las métricas recolectadas. En este caso, como hemos instalado Istio con el perfil demo, ya trae dashboards preconfigurados.&lt;/p>
+&lt;p>Merece la pena mencionar que Kiali, por debajo, también se apoya en Prometheus para mostrar parte de la información que hemos visto en la sección anterior (como los datos de tráfico del &lt;em>Traffic Graph&lt;/em>). Así que, aunque no lo veamos directamente, ya estábamos usando Prometheus de forma indirecta.&lt;/p>
+&lt;p>En cuanto a los dashboards preconfigurados, podemos verlos en la pestaña &lt;code>Dashboards&lt;/code>.
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/image.png" title="Grafana Dashboards" data-thumbnail="/es/posts/micros-sec-istio/images/image.png" data-sub-html="&lt;h2>Grafana Dashboards&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/image.png' alt="Grafana Dashboards" height="778" width="1915">&lt;/a>&lt;/p>
+&lt;p>Si abrimos uno, por ejemplo el del Control Plane, podemos ver datos como el uso de CPU, el número de Goroutines, asignaciones de memoria, entre otros.
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/image-1.png" title="Control Plane" data-thumbnail="/es/posts/micros-sec-istio/images/image-1.png" data-sub-html="&lt;h2>Control Plane&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/image-1.png' alt="Control Plane" height="1040" width="1920">&lt;/a>&lt;/p>
+&lt;h2 class="heading-element" id="pruebas">&lt;span>6 Pruebas&lt;/span>
+ &lt;a href="#pruebas" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>Para finalizar, ponemos a prueba el flujo completo: autenticación contra Keycloak, y las llamadas a los distintos endpoints de la API a través del Ingress Gateway de Istio con HTTPS.&lt;/p>
+&lt;blockquote>
+&lt;p>El &lt;em>Access Token&lt;/em> que extrajimos del navegador lo introducimos manualmente como cabecera &lt;code>Cookie&lt;/code>, con el mismo nombre (&lt;code>AccessToken&lt;/code>) que usa nuestra API al establecerla tras el login.&lt;/p>&lt;/blockquote>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145659.png" title="Get /products" data-thumbnail="/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145659.png" data-sub-html="&lt;h2>Get /products&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145659.png' alt="Get /products" height="1177" width="2095">&lt;/a>&lt;blockquote>
+&lt;p>&lt;em>GET del listado de productos (&lt;code>/products&lt;/code>).&lt;/em>&lt;/p>&lt;/blockquote>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145753.png" title="Post /orders" data-thumbnail="/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145753.png" data-sub-html="&lt;h2>Post /orders&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145753.png' alt="Post /orders" height="750" width="2102">&lt;/a>&lt;blockquote>
+&lt;p>&lt;em>POST de un order (&lt;code>/orders&lt;/code>).&lt;/em>&lt;/p>&lt;/blockquote>
+&lt;a class="lightgallery" href="https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145815.png" title="Get /orders/:id" data-thumbnail="/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145815.png" data-sub-html="&lt;h2>Get /orders/:id&lt;/h2>">&lt;img loading="lazy" src='https://azuar4e.github.io/es/posts/micros-sec-istio/images/Pasted%20image%2020260721145815.png' alt="Get /orders/:id" height="555" width="2096">&lt;/a>&lt;blockquote>
+&lt;p>&lt;em>GET de un order por id (&lt;code>/orders/:id&lt;/code>).&lt;/em>&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 class="heading-element" id="conclusiones">&lt;span>7 Conclusiones&lt;/span>
+ &lt;a href="#conclusiones" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>En este artículo hemos aprendido cómo podemos implementar HTTPS y mTLS para la comunicación dentro de una infraestructura cloud basada en microservicios, utilizando una malla de servicios y desacoplando la autenticación de usuarios de la lógica de negocio de nuestra aplicación.&lt;/p>
+&lt;p>Con esto, resolvemos las dos limitaciones de mi TFG que mencionábamos al principio: ya no gestionamos manualmente la generación de JWTs, sino que delegamos esa responsabilidad en un IdP real, y la comunicación entre microservicios ya no viaja en texto plano, sino cifrada y autenticada automáticamente gracias a Istio.&lt;/p>
+&lt;p>Quedan fuera del alcance de este proyecto algunos aspectos que darían para futuras iteraciones, como el uso de certificados emitidos por una autoridad real (en lugar de autofirmados), o persistencia real de los datos. También sería interesante extrapolar todo este despliegue a un entorno de producción real, como un clúster gestionado en la nube (EKS, GKE), con un dominio propio y certificados válidos.&lt;/p>
+&lt;p>Recordad que todo el código y manifiestos usados los teneís disponibles en el &lt;a href="https://github.com/azuar4e/micros-sample"target="_blank" rel="external nofollow noopener noreferrer">repositorio de GitHub&lt;/a>.&lt;/p>
+&lt;p>Gracias por leer, nos vemos en la próxima, ¡Cuidaos! 👋&lt;/p></description></item><item><title>Servicio RESTful</title><link>https://azuar4e.github.io/es/posts/sos/</link><pubDate>Fri, 25 Jul 2025 15:00:00 +0200</pubDate><author>azuar4e@gmail.com (Angel Azuara Eizaguirre)</author><guid>https://azuar4e.github.io/es/posts/sos/</guid><category domain="https://azuar4e.github.io/es/categories/universidad/">Universidad</category><category domain="https://azuar4e.github.io/es/categories/proyectos-personales/">Proyectos Personales</category><description>&lt;h2 class="heading-element" id="introducción">&lt;span>1 Introducción&lt;/span>
  &lt;a href="#introducci%c3%b3n" class="heading-mark">
  &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
  &lt;/a>

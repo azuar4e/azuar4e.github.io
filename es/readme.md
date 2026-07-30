@@ -1,11 +1,12 @@
 # azuar4e
 
-Total 3 artículos
+Total 4 artículos
 
 ## 2026
 
-Solo un artículo
+Total 2 artículos
 
+- 06-08 [Zero Trust en Kubernetes: asegurando microservicios con Istio mTLS y Keycloak](https://azuar4e.github.io/es/posts/micros-sec-istio/ "2026-06-08 20:43:48")
 - 06-08 [Diseño e Implementación de una Arquitectura Cloud-Native Basada en Microservicios Desplegados en Kubernetes](https://azuar4e.github.io/es/posts/tfg/ "2026-06-08 20:43:48")
 
 ## 2025
