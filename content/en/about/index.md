@@ -19,11 +19,17 @@ My name is Ángel, and I'm a Computer Science Graduated focused on software deve
 - ☁️ Passionate about Cloud Computing and Infrastructure
 - :(fa-brands fa-github): My GitHub: [azuar4e](https://github.com/azuar4e)
 
-In my free time, aside from learning new things, I enjoy working out, reading, and discovering music.
+In my free time, besides continuing to learn, I enjoy working out, reading, watching films, and discovering new music.
+
+If you're interested, you can check out my [Spotify](https://open.spotify.com/user/angelazuara444?si=ce1ed5f9f35942ae) profile, where I regularly create playlists featuring the genres I discover along the way.
+
+Here's one of my all-time favorite albums:
+
+{{< spotify album 6MH3CAXp8AN8ELrbex18dM >}}
 
 ## About This Blog
 
-The purpose of this blog is to document my learning journey in tech by explaining concepts clearly and accessibly—for both beginners and experienced readers.
+The goal of this blog is to document my learning journey in technology by explaining concepts in a clear and accessible way, whether you're just getting started or already have experience with the topics covered here. I may also publish occasional articles outside the blog's usual technical focus whenever I find it interesting or worth sharing.
 
 ### Topics Covered
 
