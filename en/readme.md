@@ -1,17 +1,25 @@
 # azuar4e
 
-4 articles in total
+> 
+
+4 articles in total by [Angel Azuara Eizaguirre](https://www.linkedin.com/in/angel-azuara/).
 
 ## 2026
 
-2 articles in total
+<details>
+<summary>2 articles in total</summary>
 
 - 06-08 [Zero Trust on Kubernetes: Securing Microservices with Istio mTLS and Keycloak](https://azuar4e.github.io/en/posts/micros-sec-istio/ "2026-06-08 20:43:48")
 - 06-08 [Design and Implementation of a Cloud-Native Architecture Based on Microservices Deployed on Kubernetes](https://azuar4e.github.io/en/posts/tfg/ "2026-06-08 20:43:48")
 
+</details>
+
 ## 2025
 
-2 articles in total
+<details>
+<summary>2 articles in total</summary>
 
 - 07-25 [RESTful Service](https://azuar4e.github.io/en/posts/sos/ "2025-07-25 15:00:00")
 - 06-17 [Language Translator](https://azuar4e.github.io/en/posts/tdl/ "2025-06-17 12:30:24")
+
+</details>

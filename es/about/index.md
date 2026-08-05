@@ -12,11 +12,18 @@ Mi nombre es Ángel y soy licenciado en Ingeniería Informática, centrado en el
 - :(fa-brands fa-github):  Mi GitHub: [azuar4e](https://github.com/azuar4e)
 
 
-En mi tiempo libre, además de seguir aprendiendo, me gusta entrenar, leer y descubrir música.
+En mi tiempo libre, además de seguir aprendiendo, me gusta entrenar, leer, consumir cine y descubrir música.
+
+Si te interesa, aquí tienes mi perfil de [Spotify](https://open.spotify.com/user/angelazuara444?si=ce1ed5f9f35942ae), donde suelo crear listas con los géneros que voy descubriendo.
+
+Aquí dejo uno de mis discos favoritos:
+
+{{< spotify album 6MH3CAXp8AN8ELrbex18dM >}}
+
 
 ## Sobre este blog
 
-La idea de este blog es documentar mi camino de aprendizaje en tecnología, explicando los conceptos de forma clara y accesible, tanto para quienes están empezando como para quienes ya tienen experiencia.
+La idea de este blog es documentar mi camino de aprendizaje en el mundo tecnológico, explicando los conceptos de forma clara y accesible, tanto para quienes están empezando como para quienes ya tienen experiencia con los conceptos tratados. No descarto en algún futuro publicar algún artículo que se salga de la tónica habitual de este espacio.
 
 ### Temas tratados
 
@@ -55,6 +62,6 @@ Para cualquier consulta, propuesta o asunto relacionado con el contenido del blo
 
 ---
 
-> Autor: <no value>  
+> Autor: [Angel Azuara Eizaguirre](https://www.linkedin.com/in/angel-azuara/)  
 > URL: https://azuar4e.github.io/es/about/  
 
