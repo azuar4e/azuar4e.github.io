@@ -438,6 +438,59 @@ spec:
               number: 9090
 ```
 
+Como capa adicional de seguridad, creamos un `ServiceAccount` por cada microservicio. Sobre esa identidad definimos `AuthorizationPolicy` que declaran qué servicio puede llamar a cuál. Así, aunque un pod del cluster quede comprometido, no puede hablar con servicios a los que no tiene acceso explícito.
+
+```yaml
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: products-policy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: products
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals:
+              - "cluster.local/ns/default/sa/orders-sa"
+              - "cluster.local/ns/default/sa/apigw-sa"
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: orders-policy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: orders
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/default/sa/apigw-sa"]
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: apigw-policy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: apigw
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account"]
+```
+
+Como se muestra, products puede recibir peticiones de ambos micros, orders solo del apigw y el apigw solo de la identidad del gateway de Istio.
+
 Ahora para probar que todo funciona vamos a iniciar sesión con el usuario que hemos creado y vamos a extraer la cookie (el token de acceso).
 
 Para ello, exponemos el Gateway de Istio:
