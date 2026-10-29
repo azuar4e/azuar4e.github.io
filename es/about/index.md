@@ -62,6 +62,6 @@ Para cualquier consulta, propuesta o asunto relacionado con el contenido del blo
 
 ---
 
-> Autor: [Angel Azuara Eizaguirre](https://www.linkedin.com/in/angel-azuara/)  
+> Autor: <no value>  
 > URL: https://azuar4e.github.io/es/about/  
 

@@ -53,6 +53,6 @@ For any inquiries, ideas, or anything related to the blog, feel free to reach ou
 
 ---
 
-> Author: [Angel Azuara Eizaguirre](https://www.linkedin.com/in/angel-azuara/)  
+> Author: <no value>  
 > URL: https://azuar4e.github.io/en/about/  
 
