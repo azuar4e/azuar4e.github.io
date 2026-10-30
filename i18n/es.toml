@@ -20,7 +20,7 @@ noscript = "Este sitio web funciona mejor con JavaScript habilitado."
 
 # === Taxonomy ===
 [archives]
-other = "Total {{ .Count }} artículos"
+other = "Archivos"
 
 [allSome]
 other = "Todo {{ .Some }}"
