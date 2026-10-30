@@ -1,7 +1,7 @@
 ---
 title: "Zero Trust on Kubernetes: Securing Microservices with Istio mTLS and Keycloak"
 description:
-date: 2026-06-08T20:43:48+02:00
+date: 2026-07-30T20:43:48+02:00
 tags:
     - Go
     - Microservices
